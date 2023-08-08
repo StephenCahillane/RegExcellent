@@ -11,12 +11,8 @@ function Layout() {
         <>
             <nav>
                 <Link to="/">Main</Link>
-
-                <Link to="About">About</Link>
-                <Link to="Maze">Maze</Link>
-
-                <Link to="/question">Questions</Link>
-
+                <Link to="/About">About</Link>
+                <Link to="/Maze">Maze</Link>
             </nav>
             <Outlet />
         </>

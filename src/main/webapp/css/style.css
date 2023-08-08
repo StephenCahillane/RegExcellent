@@ -1,5 +1,33 @@
 nav {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: rgb(14, 224, 228);
-} 
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgb(14, 224, 228);
+}
+.social {
+  height: 100px;
+  width: auto;
+}
+.container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: ridge;
+  background-color: #a0aecd;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+h1 {
+  color: #000000;
+}
+p {
+  color: #000000;
+
+  font-size: large;
+}
+h2{
+    color: #000000;
+    font-weight: bold;
+}
