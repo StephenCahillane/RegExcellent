@@ -1,0 +1,5 @@
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(14, 224, 228);
+} 
