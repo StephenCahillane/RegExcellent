@@ -22,8 +22,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.wcci.adjrvirtualpet.entities.Question;
-import org.wcci.adjrvirtualpet.restControllers.ShelterRestController;
+import org.wcci.regexcellent.entities.Question;
+import org.wcci.regexcellent.restControllers.QuestionRestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 
@@ -31,7 +31,7 @@ import com.jayway.jsonpath.JsonPath;
 @AutoConfigureMockMvc
 @ActiveProfiles(value = "test")
 @Transactional()
-public class ShelterRestControllerTest extends HateoasHelper {
+public class QuestionRestControllerTest extends HateoasHelper {
         private static final String QUESTION_LIST = "questionList";
 
         final private static Logger logger = LoggerFactory.getLogger(QuestionRestControllerTest.class);
@@ -60,7 +60,7 @@ public class ShelterRestControllerTest extends HateoasHelper {
 
         @Test
         public void testCreateNewQuestion() throws Exception {
-                OrganicDog dog = new Question("Spikes");
+                Question question = new Question("Spikes");
 
                 final MvcResult postResult = this.mvc
                                 .perform(MockMvcRequestBuilders.post("/api/questions")
@@ -93,7 +93,7 @@ public class ShelterRestControllerTest extends HateoasHelper {
 
                 createdQuestion.setName("ModifiedName");
                 final MvcResult updateResult = this.mvc
-                                .perform(MockMvcRequestBuilders.put("/api/organicDogs/" + createdQuestion.getQuestionId())
+                                .perform(MockMvcRequestBuilders.put("/api/questions/" + createdQuestion.getQuestionId())
                                                 .contentType(MediaType.APPLICATION_JSON) 
                                                 .content(new ObjectMapper().writeValueAsString(createdQuestion))
                                                 .accept(MediaTypes.HAL_JSON))
