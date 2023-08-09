@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
 import '../css/style.css';
@@ -15,7 +15,7 @@ function Layout() {
                 <Link to="/Maze">Maze</Link>
                 <Link to="/form">Form</Link>
             </nav>
-            <Outlet />
+            <Question />
         </>
     );
 }
@@ -47,27 +47,30 @@ function Question() {
 
     const [answer, setAnswer] = useState("");
     const [trapID, setTrapID] = useState(0);
-
-    const endpoint = `/api/questions/1`;
+    const [entityData, setEntityData] = useState("");
+    const endpoint = `/api/questions/152`;
 
   
-    fetch(endpoint)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(entityData => {
-        // Handle the received entity data
-        console.log('Fetched entity:', entityData);
-        // Update component state or perform other actions
-      })
-      .catch(error => {
-        // Handle errors
-        console.error('Error fetching entity:', error);
-      });
-  
+    useEffect(() => {
+        // Define an async function to fetch the data
+        const fetchData = async () => {
+          try {
+            const response = await fetch(endpoint);
+    
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            setEntityData(data);
+          } catch (error) {
+            console.error('Error fetching entity:', error);
+          }
+        };
+    
+        
+        fetchData();
+      }, []);
 
 
 
@@ -75,8 +78,13 @@ function Question() {
         const candidate = new RegExp(answer);
         console.log(candidate);
 
-        const passwords = ["rope", "flashlight"];//column
-
+        const passwords = entityData.matchWordsString;
+        console.log(JSON.stringify(entityData));
+        
+        
+        //column
+        console.log(passwords);
+        
         const isMatching = candidate.test(passwords);
         console.log("Answer matches:", isMatching);
         
@@ -85,8 +93,9 @@ function Question() {
 
     return (
         <><div>
-            <h3>Question 1</h3>
-            <p>pulled from db</p>
+            <h3>{entityData.name}</h3>
+            <p>{entityData.description}</p>
+            <p>{entityData.hint}</p>
         </div>
             <div>
                 

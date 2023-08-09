@@ -88,7 +88,7 @@ public class Question {
         this.hint = hint;
     }
 
-    public List<String> getMatchWords() {
+    public List<String> getMatchWords(List<String> matchWords) {
         return parseMatchWords();
     }
 

@@ -8,7 +8,7 @@ export default function Form() {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [matchWordsString, setMatchWordsString] = useState("");
+    const [matchWords, setMatchWords] = useState("");
     const [exclusionWordsString, setExclusionWordsString] = useState("");
     const [hint, setHint] = useState("");
 
@@ -19,7 +19,7 @@ export default function Form() {
         const data = {
             name: name,
             description: description,
-            matchWordsString: matchWordsString,
+            matchWords: matchWords,
             exclusionWordsString: exclusionWordsString,
             hint: hint,
         };
@@ -67,12 +67,12 @@ export default function Form() {
                 ></input>
 
                 <input
-                    value={matchWordsString}
-                    onChange={(e) => setMatchWordsString(e.target.value)}
-                    name="matchWordsString"
-                    id="matchWordsString"
-                    type="matchWordsString"
-                    placeholder="matchWordsString"
+                    value={matchWords}
+                    onChange={(e) => setMatchWords(e.target.value)}
+                    name="matchWords"
+                    id="matchWords"
+                    type="matchWords"
+                    placeholder="matchWords"
                 ></input>
 
                 <input
