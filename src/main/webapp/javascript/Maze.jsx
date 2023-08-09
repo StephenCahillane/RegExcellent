@@ -1,7 +1,14 @@
 import React from "react";
 import { createRoot }  from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
+import Canvas from './Canvas.jsx';
 
 export default function Maze(){
-    return <h1></h1>
+    return (
+        <div>
+            <h1>Game</h1>
+            <div>
+                <Canvas width={500} height={500}/>
+            </div>
+        </div>
+    );
 }
