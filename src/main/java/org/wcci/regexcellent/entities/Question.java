@@ -31,19 +31,19 @@ public class Question {
     private String exclusionWordsString;
     private String hint;
 
-    public String getHint() {
-        return hint;
-    }
-
-    public void setHint(String hint) {
-        this.hint = hint;
-    }
-
     public Question(){
     }
 
     public Question(String name){
         this.name = name;
+    }
+
+    public Question(String name, String description, String matchWordsString, String exclusionWordsString, String hint){
+        this.name = name;
+        this.description = description;
+        this.matchWordsString = matchWordsString;
+        this.exclusionWordsString = exclusionWordsString;
+        this.hint = hint;
     }
 
     public long getQuestionId() {
@@ -68,6 +68,14 @@ public class Question {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 
     public List<String> getMatchWords() {
