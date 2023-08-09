@@ -29,6 +29,15 @@ public class Question {
     private String description;
     private String matchWordsString;
     private String exclusionWordsString;
+    private String hint;
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
 
     public Question(){
     }

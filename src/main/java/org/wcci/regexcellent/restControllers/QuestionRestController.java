@@ -50,7 +50,7 @@ public class QuestionRestController {
     }
 
     @PostMapping("/api/questions")
-    public EntityModel<Question> newOrganicDog(@RequestBody final Question question) {
+    public EntityModel<Question> newQuestion(@RequestBody final Question question) {
         return EntityModel.of(questionService.writeToDatabase(question),
                 linkTo(methodOn(QuestionRestController.class).getQuestion(question.getQuestionId())).withSelfRel(),
                 linkTo(methodOn(QuestionRestController.class).getQuestions()).withRel(LIST_ALL_QUESTIONS));
