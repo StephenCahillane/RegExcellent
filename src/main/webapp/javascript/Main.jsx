@@ -28,9 +28,7 @@ function Main(){
 
                         <Route path="About" element={<About />} />
                         <Route path="Maze" element={<Maze />} />
-
-                        <Route path="/" element={<Main />} />
-                        <Route path="/question" element={<Question />} />
+                        <Route path="Question" element={<Question />} />
 
                     </Route>
                 </Routes>
