@@ -31,3 +31,10 @@ h2{
     color: #000000;
     font-weight: bold;
 }
+.question-text-box{
+  background-color: #d2b48c;
+  border-radius: 20px;
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 2em;
+}
