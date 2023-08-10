@@ -75,7 +75,7 @@ function Question() {
 
 
     const handleSubmit = () => {
-        const candidate = new RegExp(answer);
+        const candidate = new RegExp("^(" + answer + ")$");
         console.log(candidate);
 
         const passwords = entityData.matchWords;
