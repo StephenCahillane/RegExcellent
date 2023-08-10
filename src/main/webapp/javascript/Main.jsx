@@ -48,7 +48,7 @@ function Question() {
     const [answer, setAnswer] = useState("");
     const [trapID, setTrapID] = useState(0);
     const [entityData, setEntityData] = useState("");
-    const endpoint = `/api/questions/152`;
+    const endpoint = `/api/questions/252`;
 
   
     useEffect(() => {
@@ -78,14 +78,14 @@ function Question() {
         const candidate = new RegExp(answer);
         console.log(candidate);
 
-        const passwords = entityData.matchWordsString;
+        const passwords = entityData.matchWords;
         console.log(JSON.stringify(entityData));
         
         
         //column
         console.log(passwords);
         
-        const isMatching = candidate.test(passwords);
+        const isMatching = passwords.every((password) => candidate.test(password));
         console.log("Answer matches:", isMatching);
         
     }

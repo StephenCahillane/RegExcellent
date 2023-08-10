@@ -8,8 +8,8 @@ export default function Form() {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [matchWords, setMatchWords] = useState("");
-    const [exclusionWordsString, setExclusionWordsString] = useState("");
+    const [matchWords, setMatchWords] = useState([]);
+    const [exclusionWords, setExclusionWords] = useState([]);
     const [hint, setHint] = useState("");
 
     const handleSubmit = async (event) => {
@@ -20,7 +20,7 @@ export default function Form() {
             name: name,
             description: description,
             matchWords: matchWords,
-            exclusionWordsString: exclusionWordsString,
+            exclusionWords: exclusionWords,
             hint: hint,
         };
 
@@ -62,26 +62,26 @@ export default function Form() {
                     onChange={(e) => setDescription(e.target.value)}
                     name="description"
                     id="description"
-                    type="description"
+                    type="text"
                     placeholder="description"
                 ></input>
 
                 <input
                     value={matchWords}
-                    onChange={(e) => setMatchWords(e.target.value)}
+                    onChange={(e) => setMatchWords(e.target.value.split(","))}
                     name="matchWords"
                     id="matchWords"
-                    type="matchWords"
+                    type="text"
                     placeholder="matchWords"
                 ></input>
 
                 <input
-                    value={exclusionWordsString}
-                    onChange={(e) => setExclusionWordsString(e.target.value)}
-                    name="exclusionWordsString"
-                    id="exclusionWordsString"
-                    type="exclusionWordsString"
-                    placeholder="exclusionWordsString"
+                    value={exclusionWords}
+                    onChange={(e) => setExclusionWords(e.target.value.split(","))}
+                    name="exclusionWords"
+                    id="exclusionWords"
+                    type="text"
+                    placeholder="exclusionWords"
                 ></input>
 
                 <input
@@ -89,7 +89,7 @@ export default function Form() {
                     onChange={(e) => setHint(e.target.value)}
                     name="hint"
                     id="hint"
-                    type="hint"
+                    type="text"
                     placeholder="hint"
                 ></input>
 
