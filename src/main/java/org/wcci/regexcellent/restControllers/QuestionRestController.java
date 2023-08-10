@@ -49,7 +49,7 @@ public class QuestionRestController {
                 linkTo(methodOn(QuestionRestController.class).getQuestion(question_id)).withSelfRel());
     }
 
-    @PostMapping("/api/questions")
+    @PostMapping("/api/saveQuestions")
     public EntityModel<Question> newQuestion(@RequestBody final Question question) {
         return EntityModel.of(questionService.writeToDatabase(question),
                 linkTo(methodOn(QuestionRestController.class).getQuestion(question.getQuestionId())).withSelfRel(),
