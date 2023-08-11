@@ -64,7 +64,7 @@ export default function Sliding() {
             <tr key={`Row${bottom + rowIdx}`}>
               {dataRow.slice(left, left + width).map((cell, columnIdx) => (
                 <td key={`Col${left + columnIdx}`}>
-                  {JSON.stringify(cell)}{/*component*/}
+                  <Cell cellData={cell} />
                 </td>
               ))}
             </tr>
@@ -84,4 +84,11 @@ function Knob({ getter, setter, text }) {
       <br />
     </>
   );
+}
+
+
+function Cell ({cellData}){
+  return (
+    <div>{JSON.stringify(cellData)}</div>
+  )
 }
