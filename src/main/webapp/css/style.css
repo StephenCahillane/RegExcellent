@@ -1,7 +1,11 @@
 nav {
   display: flex;
   justify-content: space-evenly;
-  background-color: rgb(14, 224, 228);
+  
+}
+
+body{
+  background-image: url(images/background.png);
 }
 .social {
   height: 100px;
@@ -37,4 +41,42 @@ h2{
   margin-left: 15%;
   margin-right: 15%;
   padding: 2em;
+}
+
+.menu-header{
+  font-size: 4em;
+  font-family: 'Bungee Spice', cursive;
+  text-align: center;
+  animation-name: float;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes float{
+  0% {transform: translate(0, 0px);}
+  50% {transform: translate(0, 15px);}
+  100% {transform: translate(0, -0px);}
+}
+
+.btn-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menu-btn{
+  min-width: 5em;
+  border-radius: 20px;
+  padding: 1em;
+  font-family: 'Bungee Spice', cursive;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  font-size: 1.25em;
+  background-color: #e4d3b5;
+}
+
+.menu-btn:hover{
+  background-color: #cbb38a;
 }
