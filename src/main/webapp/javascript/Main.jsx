@@ -4,7 +4,8 @@ import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
 import '../css/style.css';
 import About from "./About";
 import Maze from "./Maze";
-import Form from './form';
+import Menu from "./Menu";
+import Form from './Form';
 
 function Layout() {
     return (
@@ -15,7 +16,7 @@ function Layout() {
                 <Link to="/Maze">Maze</Link>
                 <Link to="/form">Form</Link>
             </nav>
-            <Question />
+            <Menu />
         </>
     );
 }
