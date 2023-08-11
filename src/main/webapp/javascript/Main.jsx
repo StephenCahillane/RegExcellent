@@ -6,6 +6,7 @@ import About from "./About";
 import Maze from "./Maze";
 import Menu from "./Menu";
 import Form from './form';
+import Sliding from './Slider';
 
 function Layout() {
     return (
@@ -16,8 +17,8 @@ function Layout() {
                 <Link to="/Maze">Maze</Link>
                 <Link to="/form">Form</Link>
             </nav>
-            <Sliding />
-            <Menu />
+            { <Sliding /> }
+            
         </>
     );
 }
