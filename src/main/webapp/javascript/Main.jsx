@@ -4,9 +4,8 @@ import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
 import '../css/style.css';
 import About from "./About";
 import Maze from "./Maze";
+import Menu from "./Menu";
 import Form from './form';
-import Sliding from './Slider';
-
 
 function Layout() {
     return (
@@ -18,6 +17,7 @@ function Layout() {
                 <Link to="/form">Form</Link>
             </nav>
             <Sliding />
+            <Menu />
         </>
     );
 }
