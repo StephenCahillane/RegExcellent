@@ -83,6 +83,15 @@ h2{
 
 
 td {
-  height: 325px;
+  height: 700px;
   width: 1000px;
+  vertical-align: bottom;
+  
+}
+
+img {
+  width: 350px;
+  height: 500px;
+  margin: 0;
+  vertical-align: bottom;
 }

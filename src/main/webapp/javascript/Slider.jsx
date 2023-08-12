@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import '../css/style.css';
+
+
+
 
 export default function Sliding() {
 
@@ -21,18 +25,14 @@ export default function Sliding() {
     // }, [rows, columns]);
     function cell(row, col) {
       let trap = undefined;
-      if (col % 3 === 0) {
-        trap = "trap1";
+      if (col % 3 === 0 && col != 0) {
+        trap = "trap" + Math.ceil(col / 3);
       }
       return { row: row, col: col, trap: trap };
     }
-    setData(new Array(10).fill(undefined).map((_, row) => new Array(5).fill(undefined).map((_, col) => cell(row, col)
+    setData(new Array(1).fill(undefined).map((_, row) => new Array(31).fill(undefined).map((_, col) => cell(row, col)
     )))
   }, [rows, columns])
-
-
-
-
 
 
 
@@ -67,6 +67,7 @@ export default function Sliding() {
                   <Cell cellData={cell} />
                 </td>
               ))}
+              
             </tr>
           ))}
         </tbody>
@@ -87,8 +88,14 @@ function Knob({ getter, setter, text }) {
 }
 
 
-function Cell ({cellData}){
+ export function Cell({ cellData }) {
   return (
-    <div>{JSON.stringify(cellData)}</div>
-  )
+    <div>
+      {cellData.trap ? (
+        <img src="door.png"></img>
+      ) : (
+        JSON.stringify(cellData)
+      )}
+    </div>
+  );
 }

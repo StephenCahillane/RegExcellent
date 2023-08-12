@@ -7,6 +7,8 @@ import Maze from "./Maze";
 import Menu from "./Menu";
 import Form from './form';
 import Sliding from './Slider';
+import { Cell } from './Slider';
+
 
 function Layout() {
     return (
