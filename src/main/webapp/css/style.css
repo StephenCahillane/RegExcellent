@@ -90,8 +90,14 @@ td {
 }
 
 img {
-  width: 350px;
-  height: 500px;
+  width: 250px;
+  height: 300px;
   margin: 0;
   vertical-align: bottom;
+}
+
+table {
+  background-image: url("bg.png");
+  background-size: cover;
+  margin-left: 100px;
 }

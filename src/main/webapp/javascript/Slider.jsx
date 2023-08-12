@@ -58,7 +58,7 @@ export default function Sliding() {
       <Knob getter={height} setter={setHeight} text="Height" />
       <Knob getter={width} setter={setWidth} text="Width" />
       <button onClick={handleManualSlide}>Slide Manually</button>
-      <table border={1}>
+      <table border={0}>
         <tbody>
           {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
             <tr key={`Row${bottom + rowIdx}`}>
@@ -88,14 +88,21 @@ function Knob({ getter, setter, text }) {
 }
 
 
- export function Cell({ cellData }) {
+export function Cell({ cellData }) {
+  const isFirstCell = cellData.row === 0 && cellData.col === 0;
+
   return (
     <div>
-      {cellData.trap ? (
-        <img src="door.png"></img>
+      {isFirstCell ? (
+        <img src="knight.png" alt="Character" />
+      ) : cellData.trap ? (
+        <img src="goblin.png" alt="Goblin Trap" />
       ) : (
-        JSON.stringify(cellData)
+        "" // Display empty space for cells without trap
       )}
     </div>
   );
 }
+
+
+
