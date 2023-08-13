@@ -80,3 +80,9 @@ h2{
 .menu-btn:hover{
   background-color: #cbb38a;
 }
+
+.menu-container{
+  display: flex;
+  justify-content: space-around;
+  
+}
