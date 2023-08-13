@@ -5,7 +5,10 @@ import '../css/style.css';
 import About from "./About";
 import Maze from "./Maze";
 import Menu from "./Menu";
-import Form from './Form';
+import Form from './form';
+import Sliding from './Slider';
+import { Cell } from './Slider';
+
 
 function Layout() {
     return (
@@ -16,7 +19,8 @@ function Layout() {
                 <Link to="/Maze">Maze</Link>
                 <Link to="/form">Form</Link>
             </nav>
-            <Menu />
+            { <Sliding /> }
+            
         </>
     );
 }
@@ -33,6 +37,7 @@ function Main() {
                         <Route path="/form" element={<Form />} />
                         <Route path="/" element={<Main />} />
                         <Route path="/question" element={<Question />} />
+                        <Route path="/Slider" element={<Sliding />}/>
 
                     
                 </Routes>

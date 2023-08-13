@@ -80,3 +80,24 @@ h2{
 .menu-btn:hover{
   background-color: #cbb38a;
 }
+
+
+td {
+  height: 700px;
+  width: 1000px;
+  vertical-align: bottom;
+  
+}
+
+img {
+  width: 250px;
+  height: 300px;
+  margin: 0;
+  vertical-align: bottom;
+}
+
+table {
+  background-image: url("bg.png");
+  background-size: cover;
+  margin-left: 100px;
+}
