@@ -53,6 +53,15 @@ export default function Canvas({width, height}){
 
     //     draw(context);
 
+    function cell(row, col){
+        let trap = undefined;
+        if(row % 3 === 0){
+            trap = "trap1";
+        }
+
+        return {row: row, col: col, trap: trap};
+    }
+
         return(
             <div>
                 <></>

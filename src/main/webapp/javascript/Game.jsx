@@ -1,8 +1,7 @@
 import React from "react";
-import { createRoot }  from 'react-dom/client';
-import Canvas from './Canvas.jsx';
+import Sliding from './Slider.jsx'
 
-export default function Maze(){
+export default function Game(){
 
     const sampleData = {
         name: "Spikes",
@@ -13,9 +12,8 @@ export default function Maze(){
     return (
         <div>
             <h1>Game</h1>
-            <div>
-                <Canvas width={500} height={500}/>
-            </div>
+
+            <Sliding />
 
             <div className="question-text-box">
                 <h4>Trap Encountered!</h4>
