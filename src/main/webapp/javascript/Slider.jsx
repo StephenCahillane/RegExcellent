@@ -32,18 +32,29 @@ export default function Sliding() {
 
   const handlePlayerMove = (e) => {
     if(e.key === "ArrowRight" && playerCol < columns){
-      setPlayerCol(playerCol + 1);
+      if(data[playerRow][playerCol + 1].trap){
+        alert("You've triggered a trap!");
+      } else {
+        setPlayerCol(playerCol + 1);
+      }
+      
+      //Check if camera needs to move forward
       if(playerCol == (left + width - 1)){
         setLeft(playerCol + 1);
       }
-      console.log(playerCol);
     }
+
     if(e.key === "ArrowLeft" && playerCol > 0){
-      setPlayerCol(playerCol - 1);
+      if(data[playerRow][playerCol - 1].trap){
+        alert("You've triggered a trap!");
+      } else {
+        setPlayerCol(playerCol - 1);
+      }
+      
+      //Check if camera needs to move backward
       if(playerCol <= left){
         setLeft(playerCol - width);
       }
-      console.log(playerCol);
     }
   }
 
