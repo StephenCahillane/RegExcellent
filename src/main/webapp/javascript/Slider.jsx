@@ -13,6 +13,8 @@ export default function Sliding() {
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
   const [width, setWidth] = useState(5);
+  const [playerRow, setPlayerRow] = useState(0);
+  const [playerCol, setPlayerCol] = useState(0);
 
 
 
@@ -57,6 +59,8 @@ export default function Sliding() {
       <Knob getter={left} setter={setLeft} text="Left" />
       <Knob getter={height} setter={setHeight} text="Height" />
       <Knob getter={width} setter={setWidth} text="Width" />
+      <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
+      <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
       <button onClick={handleManualSlide}>Slide Manually</button>
       <table border={0}>
         <tbody>
@@ -64,7 +68,7 @@ export default function Sliding() {
             <tr key={`Row${bottom + rowIdx}`}>
               {dataRow.slice(left, left + width).map((cell, columnIdx) => (
                 <td key={`Col${left + columnIdx}`}>
-                  <Cell cellData={cell} />
+                  <Cell cellData={cell} playerRow={playerRow} playerCol={playerCol} />
                 </td>
               ))}
               
@@ -88,12 +92,12 @@ function Knob({ getter, setter, text }) {
 }
 
 
-export function Cell({ cellData }) {
-  const isFirstCell = cellData.row === 0 && cellData.col === 0;
+export function Cell({ cellData, playerCol, playerRow }) {
+  const isPlayerCell = cellData.row === playerRow && cellData.col === playerCol;
 
   return (
     <div>
-      {isFirstCell ? (
+      {isPlayerCell ? (
         <img src="knight.png" alt="Character" />
       ) : cellData.trap ? (
         <img src="goblin.png" alt="Goblin Trap" />
