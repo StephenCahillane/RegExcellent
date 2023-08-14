@@ -6,9 +6,10 @@ export default function Question() {
 
     const [answer, setAnswer] = useState("");
     const [trapID, setTrapID] = useState(0);
-    const [entityData, setEntityData] = useState("");
-    const endpoint = `/api/questions/252`;
-
+    const [entityData, setEntityData] = useState([]);
+    const endpoint = "/api/questions";
+    
+    const [index, setIndex] = useState(0);
 
     useEffect(() => {
         // Define an async function to fetch the data
@@ -21,7 +22,9 @@ export default function Question() {
             }
     
             const data = await response.json();
-            setEntityData(data);
+            setEntityData(data._embedded.questionList);
+
+            
             } catch (error) {
             console.error('Error fetching entity:', error);
             }
@@ -52,9 +55,9 @@ export default function Question() {
 
     return (
         <><div className="scroll">
-            <h3>{entityData.name}</h3>
-            <p>{entityData.description}</p>
-            <p>{entityData.hint}</p>
+            <h3>{entityData[index]?.name}</h3>
+            <p>{entityData[index]?.description}</p>
+            <p>{entityData[index]?.hint}</p>
         </div>
             <div>
                 
