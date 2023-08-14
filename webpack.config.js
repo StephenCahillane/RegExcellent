@@ -14,7 +14,14 @@ module.exports = {
         }, {
             test: /\.css$/i,
             use: ["style-loader", "css-loader"],
-	}]
+	    },
+        {
+            test: /\.mp3$/,
+            loader: 'file-loader',
+            options: {
+                name: 'static/sounds/[name].[hash:8].[ext]'
+            }
+        }]
     },
     resolve: {
         extensions: ['.js', '.jsx']
