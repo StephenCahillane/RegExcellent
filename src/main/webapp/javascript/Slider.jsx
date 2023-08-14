@@ -33,10 +33,16 @@ export default function Sliding() {
   const handlePlayerMove = (e) => {
     if(e.key === "ArrowRight" && playerCol < columns){
       setPlayerCol(playerCol + 1);
+      if(playerCol == (left + width - 1)){
+        setLeft(playerCol + 1);
+      }
       console.log(playerCol);
     }
     if(e.key === "ArrowLeft" && playerCol > 0){
       setPlayerCol(playerCol - 1);
+      if(playerCol <= left){
+        setLeft(playerCol - width);
+      }
       console.log(playerCol);
     }
   }
