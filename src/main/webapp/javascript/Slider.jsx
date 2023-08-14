@@ -15,7 +15,6 @@ export default function Sliding() {
   //Player coordinates and input
   const [playerRow, setPlayerRow] = useState(0);
   const [playerCol, setPlayerCol] = useState(0);
-  const [playerInput, setPlayerInput] = useState([]);
 
 
   useEffect(() => {
@@ -31,40 +30,14 @@ export default function Sliding() {
     )))
   }, [rows, columns])
 
-  useEffect(() => {
-
-    const keyDownHandler = (e) => {
-      if((e.key == "ArrowDown" || e.key == "ArrowUp" || e.key == "ArrowLeft" ||  e.key == "ArrowRight") && playerInput.indexOf(e.key) === -1)
-      {
-          playerInput.push(e.key);
-          console.log(playerInput);
-          handlePlayerMove();
-      }
-    }
-
-    const keyUpHandler = (e) => {
-      if((e.key == "ArrowDown" || e.key == "ArrowUp" || e.key == "ArrowLeft" || e.key == "ArrowRight"))
-      {
-          playerInput.splice(playerInput.indexOf(e.key), 1);
-          console.log(playerInput);
-      }
-    }
-
-    window.addEventListener("keydown", keyDownHandler);
-    window.addEventListener("keyup", keyUpHandler);
-
-    return () => {
-      window.removeEventListener("keydown", keyDownHandler);
-      window.removeEventListener("keyup", keyUpHandler);
-    };
-  }, [playerInput])
-
-  const handlePlayerMove = () => {
-    if(playerInput.includes("ArrowRight") && playerCol < columns){
+  const handlePlayerMove = (e) => {
+    if(e.key === "ArrowRight" && playerCol < columns){
       setPlayerCol(playerCol + 1);
+      console.log(playerCol);
     }
-    if(playerInput.includes("ArrowLeft") && playerCol > 0){
+    if(e.key === "ArrowLeft" && playerCol > 0){
       setPlayerCol(playerCol - 1);
+      console.log(playerCol);
     }
   }
 
@@ -92,20 +65,22 @@ export default function Sliding() {
       <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
       <button onClick={handleManualSlide}>Slide Manually</button>
-      <table border={0}>
-        <tbody>
-          {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
-            <tr key={`Row${bottom + rowIdx}`}>
-              {dataRow.slice(left, left + width).map((cell, columnIdx) => (
-                <td key={`Col${left + columnIdx}`}>
-                  <Cell cellData={cell} playerRow={playerRow} playerCol={playerCol} />
-                </td>
-              ))}
-              
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div onKeyDown={handlePlayerMove} tabIndex={0}>
+        <table border={0}>
+          <tbody>
+            {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
+              <tr key={`Row${bottom + rowIdx}`}>
+                {dataRow.slice(left, left + width).map((cell, columnIdx) => (
+                  <td key={`Col${left + columnIdx}`}>
+                    <Cell cellData={cell} playerRow={playerRow} playerCol={playerCol} />
+                  </td>
+                ))}
+                
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
