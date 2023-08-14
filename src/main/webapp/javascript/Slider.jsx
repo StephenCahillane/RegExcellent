@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import '../css/style.css';
 
 
@@ -11,8 +11,11 @@ export default function Sliding() {
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
   const [width, setWidth] = useState(5);
+
+  //Player coordinates and input
   const [playerRow, setPlayerRow] = useState(0);
   const [playerCol, setPlayerCol] = useState(0);
+  const [playerInput, setPlayerInput] = useState([]);
 
 
   useEffect(() => {
@@ -28,7 +31,44 @@ export default function Sliding() {
     )))
   }, [rows, columns])
 
+  useEffect(() => {
+    const tableRef = useRef(null);
+    const table = tableRef.current;
 
+    const keyDownHandler = (e) => {
+      if((e.key == "ArrowDown" || e.key == "ArrowUp" || e.key == "ArrowLeft" ||  e.key == "ArrowRight") && playerInput.indexOf(e.key) === -1)
+      {
+          playerInput.push(e.key);
+          console.log(playerInput);
+          handlePlayerMove();
+      }
+    }
+
+    const keyUpHandler = (e) => {
+      if((e.key == "ArrowDown" || e.key == "ArrowUp" || e.key == "ArrowLeft" || e.key == "ArrowRight"))
+      {
+          playerInput.splice(playerInput.indexOf(e.key), 1);
+          console.log(playerInput);
+      }
+    }
+
+    table.addEventListener("keydown", keyDownHandler);
+    table.addEventListener("keyup", keyUpHandler);
+
+    return () => {
+      table.removeEventListener("keydown", keyDownHandler);
+      table.removeEventListener("keyup", keyUpHandler);
+    };
+  }, [])
+
+  const handlePlayerMove = () => {
+    if(playerInput.includes("ArrowRight") && playerCol < columns){
+      setPlayerCol(playerCol++);
+    }
+    if(playerInput.includes("ArrowLeft") && playerCol > 0){
+      setPlayerCol(playerCol--);
+    }
+  }
 
   const handleManualSlide = () => {
     if (left + width < columns) {
@@ -54,7 +94,7 @@ export default function Sliding() {
       <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
       <button onClick={handleManualSlide}>Slide Manually</button>
-      <table border={0}>
+      <table border={0} ref={tableRef}>
         <tbody>
           {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
             <tr key={`Row${bottom + rowIdx}`}>
@@ -73,6 +113,7 @@ export default function Sliding() {
 }
 
 function Knob({ getter, setter, text }) {
+  
   return (
     <>
       <button onClick={() => setter((n) => (n > 0 ? n - 1 : 0))}>--</button>
@@ -84,8 +125,8 @@ function Knob({ getter, setter, text }) {
 }
 
 
-export function Cell({ cellData }) {
-  const isFirstCell = cellData.row === 0 && cellData.col === 0;
+export function Cell({ cellData, playerRow, playerCol }) {
+  const isPlayerCell = cellData.row === playerRow && cellData.col === playerCol;
 
   return (
     <div>
