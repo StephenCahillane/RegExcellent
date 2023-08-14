@@ -28,8 +28,8 @@ export default function About() {
           <a href="http://mckeon-campbell.github.io/">
             <img className="social" src="/images/unnamed.jpg"></img>
           </a>
-        <h2>Jonah Young</h2>
         </p>
+        <h2>Jonah Young</h2>
         <p>
           <a href="https://jyoung128.github.io/">
             <img className="social" src="/images/headshot.jpg"></img>
