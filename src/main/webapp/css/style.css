@@ -154,6 +154,17 @@ table {
   margin: auto;
 }
 
+.scroll button{
+  width: 150px;
+  height: 50px;
+  background-color: red;
+  font-family: fantasy;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+}
+
+
 .scroll p {
   width: 50%;
   align-items: center;
