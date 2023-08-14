@@ -23,8 +23,7 @@ export default function Canvas({width, height}){
     //             console.log(input);
     //         }
     //     }
-        
-
+    
     //     canvas.addEventListener("keydown", keyDownHandler);
     //     canvas.addEventListener("keyup", keyUpHandler);
 
