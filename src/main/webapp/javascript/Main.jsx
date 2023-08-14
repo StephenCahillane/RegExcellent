@@ -1,28 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, Link, useLocation } from "react-router-dom";
 import '../css/style.css';
 import About from "./About";
-import Maze from "./Maze";
+import Game from "./Game";
 import Menu from "./Menu";
-import Form from './form';
+import Form from './Form';
 import Sliding from './Slider';
+import Question from './Question';
 import { Cell } from './Slider';
 
 
 function Layout() {
-    return (
-        <>
-            <nav>
-                <Link to="/">Main</Link>
-                <Link to="/About">About</Link>
-                <Link to="/Maze">Maze</Link>
-                <Link to="/form">Form</Link>
-            </nav>
-            { <Sliding /> }
-            
-        </>
-    );
+    const [menuIsActive, setMenuIsActive] = useState(true);
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if(location.pathname == "/"){
+            setMenuIsActive(true);
+        } else {
+            setMenuIsActive(false);
+        }
+    }, [location])
+
+    if(menuIsActive){
+        return (
+            <>
+                <Menu isActive={menuIsActive} />
+            </>
+        );
+    } else {
+        return (
+            <>
+                <nav>
+                    <Link to="/">Main</Link>
+                    <Link to="/About">About</Link>
+                    <Link to="/Game">Game</Link>
+                    <Link to="/Form">Form</Link>
+                    <Link to="/Question">Question</Link>
+                </nav>
+                <Menu isActive={menuIsActive} />
+                <Outlet />
+            </>
+        );
+    }
+    
 }
 
 function Main() {
@@ -30,16 +53,14 @@ function Main() {
         <React.StrictMode>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/app4?/src?/main?/resources?/static?/index.html?" element={<Layout />}></Route>
+                    <Route path="/app4?/src?/main?/resources?/static?/index.html?" element={<Layout />}>
 
                         <Route path="About" element={<About />} />
-                        <Route path="Maze" element={<Maze />} />
-                        <Route path="/form" element={<Form />} />
-                        <Route path="/" element={<Main />} />
-                        <Route path="/question" element={<Question />} />
-                        <Route path="/Slider" element={<Sliding />}/>
-
-                    
+                        <Route path="Game" element={<Game />} />
+                        <Route path="Form" element={<Form />} />
+                        <Route path="Question" element={<Question />} />
+                        <Route path="Slider" element={<Sliding />}/>
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </React.StrictMode>
@@ -47,69 +68,6 @@ function Main() {
 }
 
 
-function Question() {
 
-
-
-    const [answer, setAnswer] = useState("");
-    const [trapID, setTrapID] = useState(0);
-    const [entityData, setEntityData] = useState("");
-    const endpoint = `/api/questions/252`;
-
-  
-    useEffect(() => {
-        // Define an async function to fetch the data
-        const fetchData = async () => {
-          try {
-            const response = await fetch(endpoint);
-    
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-    
-            const data = await response.json();
-            setEntityData(data);
-          } catch (error) {
-            console.error('Error fetching entity:', error);
-          }
-        };
-    
-        
-        fetchData();
-      }, []);
-
-
-
-    const handleSubmit = () => {
-        const candidate = new RegExp("^(" + answer + ")$");
-        console.log(candidate);
-
-        const passwords = entityData.matchWords;
-        console.log(JSON.stringify(entityData));
-        
-        
-        //column
-        console.log(passwords);
-        
-        const isMatching = passwords.every((password) => candidate.test(password));
-        console.log("Answer matches:", isMatching);
-        
-    }
-
-
-    return (
-        <><div>
-            <h3>{entityData.name}</h3>
-            <p>{entityData.description}</p>
-            <p>{entityData.hint}</p>
-        </div>
-            <div>
-                
-                <input name="answer" type="text" placeholder="Answer" onChange={(event) => setAnswer(event.target.value)}></input>
-                <button onClick={handleSubmit}>Submit Answer</button>
-                
-            </div></>
-    )
-}
 
 createRoot(document.getElementById('react-mountpoint')).render(<Main />);
