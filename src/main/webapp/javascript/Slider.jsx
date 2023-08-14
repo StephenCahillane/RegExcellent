@@ -32,8 +32,6 @@ export default function Sliding() {
   }, [rows, columns])
 
   useEffect(() => {
-    const tableRef = useRef(null);
-    const table = tableRef.current;
 
     const keyDownHandler = (e) => {
       if((e.key == "ArrowDown" || e.key == "ArrowUp" || e.key == "ArrowLeft" ||  e.key == "ArrowRight") && playerInput.indexOf(e.key) === -1)
@@ -52,21 +50,21 @@ export default function Sliding() {
       }
     }
 
-    table.addEventListener("keydown", keyDownHandler);
-    table.addEventListener("keyup", keyUpHandler);
+    window.addEventListener("keydown", keyDownHandler);
+    window.addEventListener("keyup", keyUpHandler);
 
     return () => {
-      table.removeEventListener("keydown", keyDownHandler);
-      table.removeEventListener("keyup", keyUpHandler);
+      window.removeEventListener("keydown", keyDownHandler);
+      window.removeEventListener("keyup", keyUpHandler);
     };
-  }, [])
+  }, [playerInput])
 
   const handlePlayerMove = () => {
     if(playerInput.includes("ArrowRight") && playerCol < columns){
-      setPlayerCol(playerCol++);
+      setPlayerCol(playerCol + 1);
     }
     if(playerInput.includes("ArrowLeft") && playerCol > 0){
-      setPlayerCol(playerCol--);
+      setPlayerCol(playerCol - 1);
     }
   }
 
@@ -94,7 +92,7 @@ export default function Sliding() {
       <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
       <button onClick={handleManualSlide}>Slide Manually</button>
-      <table border={0} ref={tableRef}>
+      <table border={0}>
         <tbody>
           {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
             <tr key={`Row${bottom + rowIdx}`}>
