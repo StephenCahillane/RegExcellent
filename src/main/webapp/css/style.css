@@ -135,5 +135,51 @@ table {
   background-image: url("bg.png");
   background-size: cover;
   margin-left: 100px;
+  margin-right: 100px;
+  border: solid black 5px;
 }
 
+.scroll {
+  height: 800px;
+  background-image: url(scroll2.png);
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 1000px;
+  /* max-height: 50%; */
+  /* border: solid black 2px; */
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.scroll button{
+  width: 150px;
+  height: 50px;
+  background-color: red;
+  font-family: fantasy;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+}
+
+
+.scroll p {
+  width: 50%;
+  align-items: center;
+  /* margin: auto; */
+  /* margin-top: 10%; */
+  /* margin-top: 10%; */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  font-family: fantasy;
+  /* height: 100%; */
+}
+
+.scroll h3 {
+  /* padding: 20px; */
+  margin-top: 125px;
+  font-family: fantasy;
+}
