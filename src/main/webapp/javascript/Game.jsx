@@ -1,6 +1,9 @@
 import React from "react";
 import Sliding from './Slider.jsx'
 
+import Question from "./Question.jsx";
+
+
 export default function Game(){
 
     const sampleData = {
@@ -14,13 +17,8 @@ export default function Game(){
             <h1>Game</h1>
 
             <Sliding />
-
-            <div className="question-text-box">
-                <h4>Trap Encountered!</h4>
-                <p>{sampleData.name}</p>
-                <p>{sampleData.description}</p>
-                <p>Hint: {sampleData.hint}</p>
-            </div>
+            <br></br>
+            <Question />
         </div>
     );
 }

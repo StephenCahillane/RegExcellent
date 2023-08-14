@@ -51,7 +51,7 @@ export default function Question() {
 
 
     return (
-        <><div>
+        <><div className="scroll">
             <h3>{entityData.name}</h3>
             <p>{entityData.description}</p>
             <p>{entityData.hint}</p>
