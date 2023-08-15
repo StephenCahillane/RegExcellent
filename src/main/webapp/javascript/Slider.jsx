@@ -82,7 +82,6 @@ export default function Sliding() {
     if (e.key === "ArrowRight" && playerCol < columns) {
       if (data[playerRow][playerCol + 1].trap) {
         alert("You've triggered a trap!");
-        forward();
       } else {
         forward();
       }
@@ -206,9 +205,9 @@ function GridComponent({
             ))}
           </tbody>
         </table>
-      </div>
+      </div></div></div>
   )
-}
+
 
 function CellComponent({
   cell,
@@ -272,4 +271,4 @@ function Knob({ getter, setter, text }) {
 // }
 
 
-
+}
