@@ -1,6 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
+import styled from 'styled-components';
 import '../css/style.css';
+
+const PlayerImage = styled img<{ $direction?: boolean; }>`
+  animation: moveSpriteSheet 2s steps(9) infinite;
+  width: calc(576px * var(--pixel-size));
+  position: absolute;
+`;
 
 
 export default function Sliding() {
