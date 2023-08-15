@@ -137,8 +137,15 @@ table {
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 20px;
-  border: solid black 5px;
+  /* border-image: url("border.png");
+  border-image-width: auto; */
+  
 }
+
+/* .border{
+  background-image: url("border.png");
+  background-size: cover;
+} */
 
 .scroll {
   height: 500px;

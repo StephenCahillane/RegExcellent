@@ -4,7 +4,6 @@ import '../css/style.css';
 
 
 export default function Sliding() {
-
   const [data, setData] = useState([[]]);
   const [rows, setRows] = useState(10);
   const [columns, setColumns] = useState(10);
@@ -63,7 +62,6 @@ export default function Sliding() {
   };
 
   useEffect(() => {
-    
     function cell(row, col) {
       let trap = undefined;
       if (col % 3 === 0 && col != 0) {
@@ -71,46 +69,51 @@ export default function Sliding() {
       }
       return { row: row, col: col, trap: trap };
     }
-    setData(new Array(1).fill(undefined).map((_, row) => new Array(31).fill(undefined).map((_, col) => cell(row, col)
-    )))
-  }, [rows, columns])
+    setData(
+      new Array(1)
+        .fill(undefined)
+        .map((_, row) =>
+          new Array(31).fill(undefined).map((_, col) => cell(row, col))
+        )
+    );
+  }, [rows, columns]);
 
   const handlePlayerMove = (e) => {
-    if(e.key === "ArrowRight" && playerCol < columns){
-      if(data[playerRow][playerCol + 1].trap){
+    if (e.key === "ArrowRight" && playerCol < columns) {
+      if (data[playerRow][playerCol + 1].trap) {
         alert("You've triggered a trap!");
       } else {
         forward();
       }
-      
+
       //Check if camera needs to move forward
-      if(playerCol == (left + width - 1)){
+      if (playerCol == left + width - 1) {
         setLeft(playerCol + 1);
       }
     }
 
-    if(e.key === "ArrowLeft" && playerCol > 0){
-      if(data[playerRow][playerCol - 1].trap){
+    if (e.key === "ArrowLeft" && playerCol > 0) {
+      if (data[playerRow][playerCol - 1].trap) {
         alert("You've triggered a trap!");
         backward();
       } else {
         backward();
       }
-      
+
       //Check if camera needs to move backward
-      if(playerCol <= left){
+      if (playerCol <= left) {
         setLeft(playerCol - width);
       }
     }
-  }
+  };
 
   const handleManualSlide = () => {
     if (left + width < columns) {
-      setLeft(left => left + 1);
+      setLeft((left) => left + 1);
     } else {
       setLeft(0);
       if (bottom + height < rows) {
-        setBottom(bottom => bottom + 1);
+        setBottom((bottom) => bottom + 1);
       } else {
         setBottom(0);
       }
@@ -131,9 +134,55 @@ export default function Sliding() {
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
       <div onKeyDown={handlePlayerMove} tabIndex={0}>
 
-      {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
-      {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
-      <div onKeyDown={handlePlayerMove} tabIndex={0}>
+      <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
+      <button onClick={handleManualSlide}>Slide Manually</button>
+      <Animate
+        play={animate}
+        duration={animateDuration}
+        start={animateStart}
+        end={animateEnd}
+        complete={animateStart}
+        easeType={animateEaseType}
+        onComplete={animationCallback}
+      >
+        <GridComponent
+          data={data}
+          bottom={bottom}
+          left={left}
+          height={height}
+          width={width}
+          playerRow={playerRow}
+          playerCol={playerCol}
+          animate={animate}
+          animateDuration={animateDuration}
+          animateEaseType={animateEaseType}
+          subAnimateStart={subAnimateStart}
+          subAnimateEnd={subAnimateEnd}
+          handlePlayerMove={handlePlayerMove}
+        />
+      </Animate>
+    </div></div>
+  );
+}
+
+function GridComponent({
+  data,
+  bottom,
+  left,
+  height,
+  width,
+  playerRow,
+  playerCol,
+  animate,
+  animateDuration,
+  animateEaseType,
+  subAnimateStart,
+  subAnimateEnd,
+  handlePlayerMove
+}) {
+  return (
+    <div onKeyDown={handlePlayerMove} tabIndex={0}>
+      main
         <table border={0}>
           <tbody>
             {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
@@ -195,7 +244,6 @@ function CellComponent({
 }
 
 function Knob({ getter, setter, text }) {
-  
   return (
     <>
       <button onClick={() => setter((n) => (n > 0 ? n - 1 : 0))}>--</button>
@@ -205,7 +253,6 @@ function Knob({ getter, setter, text }) {
     </>
   );
 }
-
 
 // export function Cell({ cellData, playerRow, playerCol }) {
 //   const isPlayerCell = cellData.row === playerRow && cellData.col === playerCol;
