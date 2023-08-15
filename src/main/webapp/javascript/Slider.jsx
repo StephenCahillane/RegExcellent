@@ -34,6 +34,7 @@ export default function Sliding() {
     if(e.key === "ArrowRight" && playerCol < columns){
       if(data[playerRow][playerCol + 1].trap){
         alert("You've triggered a trap!");
+        
       } else {
         setPlayerCol(playerCol + 1);
       }
@@ -73,7 +74,7 @@ export default function Sliding() {
 
   return (
     <div>
-      <Knob getter={rows} setter={setRows} text="Row" />
+      {/* <Knob getter={rows} setter={setRows} text="Row" />
       <Knob getter={columns} setter={setColumns} text="Columns" />
       <Knob getter={bottom} setter={setBottom} text="Bottom" />
       <Knob getter={left} setter={setLeft} text="Left" />
@@ -81,7 +82,7 @@ export default function Sliding() {
       <Knob getter={width} setter={setWidth} text="Width" />
       <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
-      <button onClick={handleManualSlide}>Slide Manually</button>
+      <button onClick={handleManualSlide}>Slide Manually</button> */}
       <div onKeyDown={handlePlayerMove} tabIndex={0}>
         <table border={0}>
           <tbody>
