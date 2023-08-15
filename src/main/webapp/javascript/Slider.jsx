@@ -120,13 +120,18 @@ export default function Sliding() {
 
   return (
     <div>
-      <Knob getter={rows} setter={setRows} text="Row" />
+      {/* <Knob getter={rows} setter={setRows} text="Row" />
       <Knob getter={columns} setter={setColumns} text="Columns" />
       <Knob getter={bottom} setter={setBottom} text="Bottom" />
       <Knob getter={left} setter={setLeft} text="Left" />
       <Knob getter={height} setter={setHeight} text="Height" />
       <Knob getter={width} setter={setWidth} text="Width" />
       <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
+
+      <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
+      {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
+      <div onKeyDown={handlePlayerMove} tabIndex={0}>
+
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
       <button onClick={handleManualSlide}>Slide Manually</button>
       <Animate
@@ -175,6 +180,7 @@ function GridComponent({
 }) {
   return (
     <div onKeyDown={handlePlayerMove} tabIndex={0}>
+      main
         <table border={0}>
           <tbody>
             {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
