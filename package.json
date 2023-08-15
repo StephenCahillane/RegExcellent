@@ -8,6 +8,7 @@
       "babel-loader": "^9.1.2",
       "css-loader": "^6.7.3",
       "react": "^18.2.0",
+      "react-simple-animate": "^3.5.2",
       "react-dom": "^18.2.0",
       "react-router-dom": "^6.9.0",
       "style-loader": "^3.3.1",
