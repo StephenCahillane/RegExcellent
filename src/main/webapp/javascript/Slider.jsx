@@ -78,7 +78,7 @@ export default function Sliding() {
   const handlePlayerMove = (e) => {
     if(e.key === "ArrowRight" && playerCol < columns){
       if(data[playerRow][playerCol + 1].trap){
-        alert("You've triggered a trap!");
+        //alert("You've triggered a trap!");
         forward();
       } else {
         forward();
@@ -92,7 +92,7 @@ export default function Sliding() {
 
     if(e.key === "ArrowLeft" && playerCol > 0){
       if(data[playerRow][playerCol - 1].trap){
-        alert("You've triggered a trap!");
+        //alert("You've triggered a trap!");
         backward();
       } else {
         backward();
@@ -130,35 +130,36 @@ export default function Sliding() {
 
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
-      <div onKeyDown={handlePlayerMove} tabIndex={0}>
+        <div onKeyDown={handlePlayerMove} tabIndex={0}>
 
-      <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
-      <button onClick={handleManualSlide}>Slide Manually</button>
-      <Animate
-        play={animate}
-        duration={animateDuration}
-        start={animateStart}
-        end={animateEnd}
-        complete={animateStart}
-        easeType={animateEaseType}
-        onComplete={animationCallback}
-      >
-        <GridComponent
-          data={data}
-          bottom={bottom}
-          left={left}
-          height={height}
-          width={width}
-          playerRow={playerRow}
-          playerCol={playerCol}
-          animate={animate}
-          animateDuration={animateDuration}
-          animateEaseType={animateEaseType}
-          subAnimateStart={subAnimateStart}
-          subAnimateEnd={subAnimateEnd}
-          handlePlayerMove={handlePlayerMove}
-        />
-      </Animate>
+        <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
+        <button onClick={handleManualSlide}>Slide Manually</button>
+        <Animate
+          play={animate}
+          duration={animateDuration}
+          start={animateStart}
+          end={animateEnd}
+          complete={animateStart}
+          easeType={animateEaseType}
+          onComplete={animationCallback}
+        >
+          <GridComponent
+            data={data}
+            bottom={bottom}
+            left={left}
+            height={height}
+            width={width}
+            playerRow={playerRow}
+            playerCol={playerCol}
+            animate={animate}
+            animateDuration={animateDuration}
+            animateEaseType={animateEaseType}
+            subAnimateStart={subAnimateStart}
+            subAnimateEnd={subAnimateEnd}
+            handlePlayerMove={handlePlayerMove}
+          />
+        </Animate>
+      </div>
     </div>
   );
 }
