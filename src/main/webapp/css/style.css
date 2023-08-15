@@ -142,10 +142,10 @@ table {
   
 }
 
-.border{
+/* .border{
   background-image: url("border.png");
   background-size: cover;
-}
+} */
 
 .scroll {
   height: 500px;
