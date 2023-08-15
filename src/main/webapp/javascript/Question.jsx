@@ -35,7 +35,7 @@ export default function Question() {
     }, []);
 
     const next = () => {
-        setIndex((idx) => idx+1);
+        setIndex((idx) => idx + 1);
     }
 
     const handleSubmit = () => {
@@ -56,17 +56,22 @@ export default function Question() {
 
 
     return (
-        <><div className="scroll">
-            <h3>{entityData[index]?.name}</h3>
-            <p>{entityData[index]?.description}</p>
-            <p>{entityData[index]?.hint}</p>
-            
-            <div>
-                <input name="answer" type="text" placeholder="Answer" onChange={(event) => setAnswer(event.target.value)}></input>
-                <button onClick={handleSubmit}>Submit Answer</button>
+        <><div className='backgroundBottom'>
+            <div className='quill'></div>
+            <div className="scroll">
+                <h3>{entityData[index]?.name}</h3>
+                <p>{entityData[index]?.description}</p>
+                <p>{entityData[index]?.hint}</p>
+
+                <div>
+                    <input name="answer" type="text" placeholder="Answer" onChange={(event) => setAnswer(event.target.value)}></input>
+                    <button onClick={handleSubmit}>Submit Answer</button>
+                </div>
+                <button onClick={next}>Next</button>
+                
             </div>
-            <button onClick={next}>Next</button>
-        </div>
-            </>
+                <div className='ink'></div>
+            </div>
+        </>
     )
 }

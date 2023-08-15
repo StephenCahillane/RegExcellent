@@ -137,8 +137,9 @@ table {
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 20px;
-  /* border-image: url("border.png");
-  border-image-width: auto; */
+
+  border: solid black 5px;
+
   
 }
 
@@ -174,7 +175,7 @@ table {
 
 
 .scroll p {
-  width: 50%;
+  width: 80%;
   align-items: center;
   /* margin: auto; */
   /* margin-top: 10%; */
@@ -190,4 +191,46 @@ table {
   /* padding: 20px; */
   margin-top: 125px;
   font-family: fantasy;
+}
+
+.border {
+  background-size: cover;
+  height: 650px;
+  width: 1100px;
+  background-image: url(frame.png);
+  margin-top: 15px;
+  margin-left: 95px;
+  margin-right: 95px;
+  
+
+}
+
+.backgroundBottom {
+  width: 90%;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url(wood2.png);
+  background-size: cover;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid black 4px;
+}
+
+.quill {
+  width: 170px;
+  height: 275px;
+  background-image: url(quill.png);
+  background-size: cover;
+  margin-left: 10%;
+}
+.ink {
+  width: 300px;
+  height: 275px;
+  background-image: url(ink.png);
+  background-size: cover;
+  margin-right: 10%;
 }

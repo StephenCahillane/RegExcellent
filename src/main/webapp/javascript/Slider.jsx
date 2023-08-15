@@ -3,6 +3,7 @@ import { Animate, AnimateKeyframes } from "react-simple-animate";
 import '../css/style.css';
 
 
+
 export default function Sliding() {
   const [data, setData] = useState([[]]);
   const [rows, setRows] = useState(10);
@@ -11,23 +12,18 @@ export default function Sliding() {
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
   const [width, setWidth] = useState(5);
-
   //Player coordinates and input
   const [playerRow, setPlayerRow] = useState(0);
   const [playerCol, setPlayerCol] = useState(0);
-
   //Animation states
   const [animate, setAnimate] = useState(true);
   const [animateStart, setAnimateStart] = useState({});
   const [animateEnd, setAnimateEnd] = useState({});
   const [subAnimateStart, setSubAnimateStart] = useState({});
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
-
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
-  const [animationCallback, setAnimationCallback] = useState(() => () => {});
-
-
+  const [animationCallback, setAnimationCallback] = useState(() => () => { });
   const forward = () => {
     setAnimate(true);
     // setAnimateStart({ transform: "translateX(0%)" });
@@ -39,11 +35,10 @@ export default function Sliding() {
       //setLeft((col) => col + 1);
       setPlayerCol((col) => col + 1);
       setAnimate(false);
-      setAnimationCallback(() => () => {});
+      setAnimationCallback(() => () => { });
       setAnimateDuration(0.0);
     });
   };
-
   const backward = () => {
     if (playerCol <= 0) return;
     setAnimate(true);
@@ -56,11 +51,10 @@ export default function Sliding() {
       // setLeft((col) => col - 1);
       setPlayerCol((col) => col - 1);
       setAnimate(false);
-      setAnimationCallback(() => () => {});
+      setAnimationCallback(() => () => { });
       setAnimateDuration(0.0);
     });
   };
-
   useEffect(() => {
     function cell(row, col) {
       let trap = undefined;
@@ -119,7 +113,6 @@ export default function Sliding() {
       }
     }
   };
-
   return (
     <div>
       {/* <Knob getter={rows} setter={setRows} text="Row" />
@@ -129,9 +122,41 @@ export default function Sliding() {
       <Knob getter={height} setter={setHeight} text="Height" />
       <Knob getter={width} setter={setWidth} text="Width" />
       <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
-
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
+
+      {/* <div onKeyDown={handlePlayerMove} tabIndex={0}> */}
+        {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol" /> */}
+        {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
+        <Animate
+          play={animate}
+          duration={animateDuration}
+          start={animateStart}
+          end={animateEnd}
+          complete={animateStart}
+          easeType={animateEaseType}
+          onComplete={animationCallback}
+        >
+          <GridComponent
+            data={data}
+            bottom={bottom}
+            left={left}
+            height={height}
+            width={width}
+            playerRow={playerRow}
+            playerCol={playerCol}
+            animate={animate}
+            animateDuration={animateDuration}
+            animateEaseType={animateEaseType}
+            subAnimateStart={subAnimateStart}
+            subAnimateEnd={subAnimateEnd}
+            handlePlayerMove={handlePlayerMove}
+          />
+        </Animate>
+      </div>
+  );
+}
+
       <div onKeyDown={handlePlayerMove} tabIndex={0}>
 
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
@@ -171,6 +196,7 @@ function GridComponent({
   left,
   height,
   width,
+
   playerRow,
   playerCol,
   animate,
@@ -211,6 +237,7 @@ function GridComponent({
 
 function CellComponent({
   cell,
+
   playerRow,
   playerCol,
   animate,
@@ -218,7 +245,70 @@ function CellComponent({
   animateEaseType,
   subAnimateStart,
   subAnimateEnd,
+  handlePlayerMove
 }) {
+
+  return (
+    <div onKeyDown={handlePlayerMove} tabIndex={0}>
+      
+      <table border={0}>
+        <tbody>
+          {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
+            <tr key={`Row${1 * bottom + rowIdx}`}>
+              {dataRow.slice(left, left + width).map((cell, columnIdx) => (
+                <td key={`Col${1 * left + columnIdx}`}>
+                  <CellComponent
+                    cell={cell}
+                    playerRow={playerRow}
+                    playerCol={playerCol}
+                    animate={animate}
+                    animateDuration={animateDuration}
+                    animateEaseType={animateEaseType}
+                    subAnimateStart={subAnimateStart}
+                    subAnimateEnd={subAnimateEnd}
+                  />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+  function CellComponent({
+    cell,
+    playerRow,
+    playerCol,
+    animate,
+    animateDuration,
+    animateEaseType,
+    subAnimateStart,
+    subAnimateEnd,
+  }) {
+    if (cell.row == playerRow && cell.col == playerCol)
+      return (
+        <Animate
+          play={animate}
+          duration={animateDuration}
+          start={subAnimateStart}
+          end={subAnimateEnd}
+          complete={subAnimateStart}
+          easeType={animateEaseType}
+        >
+          <img src="knight.png" alt="Character" />
+        </Animate>
+      );
+    else if (cell.trap) {
+      return (
+        <>
+          <img src="goblin.png" alt="Goblin Trap" />
+        </>
+      );
+    } else {
+      return "";
+    }
+  }
+
   if (cell.row == playerRow && cell.col == playerCol)
     return (
       <Animate
@@ -271,4 +361,29 @@ function Knob({ getter, setter, text }) {
 // }
 
 
+
+  function Knob({ getter, setter, text }) {
+    return (
+      <>
+        <button onClick={() => setter((n) => (n > 0 ? n - 1 : 0))}>--</button>
+        {text}: {getter}
+        {<button onClick={() => setter((n) => n + 1)}>++</button>}
+        <br />
+      </>
+    );
+  }
+  // export function Cell({ cellData, playerRow, playerCol }) {
+  //   const isPlayerCell = cellData.row === playerRow && cellData.col === playerCol;
+  //   return (
+  //     <div>
+  //       {isPlayerCell ? (
+  //         <img src="knight.png" alt="Character" />
+  //       ) : cellData.trap ? (
+  //         <img src="goblin.png" alt="Goblin Trap" />
+  //       ) : (
+  //         "" // Display empty space for cells without trap
+  //       )}
+  //     </div>
+  //   );
+  // }
 }
