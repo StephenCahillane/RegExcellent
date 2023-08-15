@@ -131,8 +131,8 @@ export default function Sliding() {
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
       <div onKeyDown={handlePlayerMove} tabIndex={0}>
 
-      <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
-      <button onClick={handleManualSlide}>Slide Manually</button>
+      {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
+      {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
       <div onKeyDown={handlePlayerMove} tabIndex={0}>
         <table border={0}>
           <tbody>

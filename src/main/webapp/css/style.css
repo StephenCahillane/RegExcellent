@@ -118,7 +118,7 @@ h2{
 }
 
 td {
-  height: 550px;
+  height: 600px;
   width: 1000px;
   vertical-align: bottom;
   
@@ -141,13 +141,13 @@ table {
 }
 
 .scroll {
-  height: 700px;
-  background-image: url(scroll2.png);
+  height: 500px;
+  background-image: url(scroll3.png);
   text-align: center;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 900px;
+  width: 800px;
   /* max-height: 50%; */
   /* border: solid black 2px; */
   display: flex;
