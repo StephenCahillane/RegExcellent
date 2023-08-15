@@ -23,6 +23,7 @@ export default function Sliding() {
   const [animateEnd, setAnimateEnd] = useState({});
   const [subAnimateStart, setSubAnimateStart] = useState({});
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
+  const [playerFacing, setPlayerFacing] = useState("");
 
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
@@ -34,7 +35,7 @@ export default function Sliding() {
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(-20%)" });
     setSubAnimateStart({ transform: "translateX(0%)" });
-    setSubAnimateEnd({ transform: "translateX(100%)" });
+    setSubAnimateEnd({ transform: "translateX(35%)" });
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       //setLeft((col) => col + 1);
@@ -51,7 +52,7 @@ export default function Sliding() {
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(20%)" });
     setSubAnimateStart({ transform: "translateX(0%)" });
-    setSubAnimateEnd({ transform: "translateX(-100%)" });
+    setSubAnimateEnd({ transform: "translateX(-35%)" });
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       // setLeft((col) => col - 1);
@@ -79,6 +80,7 @@ export default function Sliding() {
     if(e.key === "ArrowRight" && playerCol < columns){
       if(data[playerRow][playerCol + 1].trap){
         //alert("You've triggered a trap!");
+        setPlayerFacing("right");
         forward();
       } else {
         forward();
@@ -93,6 +95,7 @@ export default function Sliding() {
     if(e.key === "ArrowLeft" && playerCol > 0){
       if(data[playerRow][playerCol - 1].trap){
         //alert("You've triggered a trap!");
+        setPlayerFacing("left");
         backward();
       } else {
         backward();
@@ -157,6 +160,7 @@ export default function Sliding() {
             subAnimateStart={subAnimateStart}
             subAnimateEnd={subAnimateEnd}
             handlePlayerMove={handlePlayerMove}
+            playerFacing={playerFacing}
           />
         </Animate>
       </div>
@@ -177,7 +181,8 @@ function GridComponent({
   animateEaseType,
   subAnimateStart,
   subAnimateEnd,
-  handlePlayerMove
+  handlePlayerMove,
+  playerFacing
 }) {
   return (
     <div onKeyDown={handlePlayerMove} tabIndex={0}>
@@ -197,6 +202,7 @@ function GridComponent({
                       animateEaseType={animateEaseType}
                       subAnimateStart={subAnimateStart}
                       subAnimateEnd={subAnimateEnd}
+                      playerFacing={playerFacing}
                     />
                   </td>
                 ))}
@@ -217,6 +223,7 @@ function CellComponent({
   animateEaseType,
   subAnimateStart,
   subAnimateEnd,
+  playerFacing
 }) {
   if (cell.row == playerRow && cell.col == playerCol)
     return (
@@ -228,7 +235,14 @@ function CellComponent({
         complete={subAnimateStart}
         easeType={animateEaseType}
       >
-        <img src="knight.png" alt="Character" />
+      <div className="player">
+        <img className={
+          playerFacing === "right" ? "player-sprite-sheet pixel-art face-right" : 
+          playerFacing === "left" ? "player-sprite-sheet pixel-art face-left" :
+          "player-sprite-sheet pixel-art"
+          } src="images/player-sprite-sheet.png">
+          </img>
+      </div>
       </Animate>
     );
   else if(cell.trap){
