@@ -14,10 +14,11 @@ export default function Game(){
 
     return (
         <div>
-
-            <Sliding />
+            {/* <div className="border"> */}
+                <Sliding />
+            {/* </div> */}
             <br></br>
             <Question />
-        </div>
+         </div>
     );
 }
