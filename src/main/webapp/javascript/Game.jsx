@@ -14,7 +14,6 @@ export default function Game(){
 
     return (
         <div>
-            
 
             <Sliding />
             <br></br>
