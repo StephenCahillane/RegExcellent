@@ -79,7 +79,6 @@ export default function Sliding() {
     if(e.key === "ArrowRight" && playerCol < columns){
       if(data[playerRow][playerCol + 1].trap){
         alert("You've triggered a trap!");
-        forward();
       } else {
         forward();
       }
@@ -132,55 +131,9 @@ export default function Sliding() {
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
       <div onKeyDown={handlePlayerMove} tabIndex={0}>
 
-      <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
-      <button onClick={handleManualSlide}>Slide Manually</button>
-      <Animate
-        play={animate}
-        duration={animateDuration}
-        start={animateStart}
-        end={animateEnd}
-        complete={animateStart}
-        easeType={animateEaseType}
-        onComplete={animationCallback}
-      >
-        <GridComponent
-          data={data}
-          bottom={bottom}
-          left={left}
-          height={height}
-          width={width}
-          playerRow={playerRow}
-          playerCol={playerCol}
-          animate={animate}
-          animateDuration={animateDuration}
-          animateEaseType={animateEaseType}
-          subAnimateStart={subAnimateStart}
-          subAnimateEnd={subAnimateEnd}
-          handlePlayerMove={handlePlayerMove}
-        />
-      </Animate>
-    </div>
-  );
-}
-
-function GridComponent({
-  data,
-  bottom,
-  left,
-  height,
-  width,
-  playerRow,
-  playerCol,
-  animate,
-  animateDuration,
-  animateEaseType,
-  subAnimateStart,
-  subAnimateEnd,
-  handlePlayerMove
-}) {
-  return (
-    <div onKeyDown={handlePlayerMove} tabIndex={0}>
-      main
+      {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
+      {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
+      <div onKeyDown={handlePlayerMove} tabIndex={0}>
         <table border={0}>
           <tbody>
             {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
@@ -203,9 +156,9 @@ function GridComponent({
             ))}
           </tbody>
         </table>
-      </div>
+      </div></div></div>
   )
-}
+
 
 function CellComponent({
   cell,
@@ -271,4 +224,4 @@ function Knob({ getter, setter, text }) {
 // }
 
 
-
+}
