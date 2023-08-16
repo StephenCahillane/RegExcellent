@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
-import '../css/style.css';
 
+import '../css/style.css';
 
 export default function Sliding() {
   const [data, setData] = useState([[]]);
@@ -33,8 +33,10 @@ export default function Sliding() {
     setAnimate(true);
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(-20%)" });
+
     setSubAnimateStart({ transform: "translateX(0%)"});
     setSubAnimateEnd({ transform: "translateX(55%)"});
+
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       //setLeft((col) => col + 1);
@@ -50,7 +52,9 @@ export default function Sliding() {
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(20%)" });
     setSubAnimateStart({ transform: "translateX(0%)" });
+
     setSubAnimateEnd({ transform: "translateX(-55%)" });
+
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       // setLeft((col) => col - 1);
@@ -64,10 +68,11 @@ export default function Sliding() {
     function cell(row, col) {
       let trap = undefined;
       if (col % 3 === 0 && col != 0) {
-        trap = "trap" + Math.ceil(col / 3);
+        trap = Math.ceil(col / 3);
       }
       return { row: row, col: col, trap: trap };
     }
+
     setData(
       new Array(1)
         .fill(undefined)
@@ -79,6 +84,7 @@ export default function Sliding() {
 
   useEffect(() => {
     if(playerFacing === "left"){
+
       setPlayerClassName("player-sprite-sheet pixel-art face-left");
     } else {
       setPlayerClassName("player-sprite-sheet pixel-art face-right");
@@ -95,9 +101,8 @@ export default function Sliding() {
         setPlayerFacing("right");
         forward();
       }
-
       //Check if camera needs to move forward
-      if (playerCol == left + width - 1) {
+      if (playerCol == (left + width - 1)) {
         setLeft(playerCol + 1);
       }
     }
@@ -111,21 +116,19 @@ export default function Sliding() {
         setPlayerFacing("left");
         backward();
       }
-
       //Check if camera needs to move backward
       if (playerCol <= left) {
         setLeft(playerCol - width);
       }
     }
-  };
-
+  }
   const handleManualSlide = () => {
     if (left + width < columns) {
-      setLeft((left) => left + 1);
+      setLeft(left => left + 1);
     } else {
       setLeft(0);
       if (bottom + height < rows) {
-        setBottom((bottom) => bottom + 1);
+        setBottom(bottom => bottom + 1);
       } else {
         setBottom(0);
       }
@@ -146,6 +149,7 @@ export default function Sliding() {
 
         <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
         <button onClick={handleManualSlide}>Slide Manually</button>
+
         <Animate
           play={animate}
           duration={animateDuration}
@@ -195,6 +199,7 @@ function GridComponent({
 }) {
   return (
     <div onKeyDown={handlePlayerMove} tabIndex={0}>
+
         <table border={0}>
           <tbody>
             {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
@@ -245,20 +250,74 @@ function GridComponent({
         easeType={animateEaseType}
       >
         <div className="player">
+
+          {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
           <img className={playerClassName} src="images/knight-sprite.png"></img>
         </div>
       </Animate>
     );
-  else if(cell.trap){
-    return (
-    <>
-      <img className="goblin-img" src="goblin.png" alt="Goblin Trap" />
-    </>
+
+  else if (cell.trap) {
+   
+    return(
+      <Trap cell={cell} />
+
     );
-  } else {
-    return "";
+  }
+
+  else {
+    return <div></div>;
   }
 }
+
+
+
+function Trap({ cell }) {
+let trapImage;
+
+  switch (cell.trap) {
+    case 1:
+      trapImage = <img src="css/images/lockeddoor.png" alt="Trap 1" />;
+      break;
+    case 2:
+      trapImage = <img src="css/images/clipart-alligator-dancing-16.png" alt="Trap 2" />;
+      break;
+    case 3:
+      trapImage = <img src="css/images/spike trap.png" alt="Trap 3" />;
+      break;
+    case 4:
+      trapImage = <img src="css/images/mysticStew.png" alt="Trap 4" />;
+      break;
+    case 5:
+      trapImage = <img src="css/images/underground river.jpg" alt="Trap 5" />;
+      break;
+    case 6:
+      trapImage = <img src="css/images/switch-right_360.png" alt="Trap 6" />;
+      break;
+    case 7:
+      trapImage = <img src="css/images/bats/png" alt="Trap 7" />;
+      break;
+    case 8:
+      trapImage = <img src="css/images/bf5296e44b0cc8663c71fee6d67aa879.png" alt="Trap 8" />;
+      break;
+    case 9:
+      trapImage = <img src="css/images/Ancient_tablet_lost_city.png" alt="Trap 9" />;
+      break;
+    case 10:
+      trapImage = <img src="css/images/final door" alt="Trap 10" />;
+      break;
+
+  }
+  return (
+    <div className="trap">
+      {trapImage}
+    </div>
+  );
+};
+
+
+
+
 
 function Knob({ getter, setter, text }) {
   return (
@@ -270,4 +329,5 @@ function Knob({ getter, setter, text }) {
     </>
   );
 }
+
 
