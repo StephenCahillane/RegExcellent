@@ -51,8 +51,6 @@ body{
   background-color: #a0aecd;
 }
 
-img {
-
 /* img {
   max-width: 100%;
   height: auto;
@@ -167,7 +165,7 @@ td {
   vertical-align: bottom;
 }
 
-img {
+.goblin-img {
   width: 250px;
   height: 300px;
   margin: 0;

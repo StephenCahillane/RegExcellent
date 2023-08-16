@@ -34,7 +34,7 @@ export default function Sliding() {
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(-20%)" });
     setSubAnimateStart({ transform: "translateX(0%)"});
-    setSubAnimateEnd({ transform: "translateX(35%)"});
+    setSubAnimateEnd({ transform: "translateX(55%)"});
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       //setLeft((col) => col + 1);
@@ -50,7 +50,7 @@ export default function Sliding() {
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(20%)" });
     setSubAnimateStart({ transform: "translateX(0%)" });
-    setSubAnimateEnd({ transform: "translateX(-35%)" });
+    setSubAnimateEnd({ transform: "translateX(-55%)" });
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       // setLeft((col) => col - 1);
@@ -183,7 +183,6 @@ function GridComponent({
   left,
   height,
   width,
-
   playerRow,
   playerCol,
   animate,
@@ -246,7 +245,6 @@ function GridComponent({
         easeType={animateEaseType}
       >
         <div className="player">
-        {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
           <img className={playerClassName} src="images/knight-sprite.png"></img>
         </div>
       </Animate>
@@ -254,7 +252,7 @@ function GridComponent({
   else if(cell.trap){
     return (
     <>
-      <img src="goblin.png" alt="Goblin Trap" />
+      <img className="goblin-img" src="goblin.png" alt="Goblin Trap" />
     </>
     );
   } else {
