@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
 
+
 import '../css/style.css';
+
+
 export default function Sliding() {
   const [data, setData] = useState([[]]);
   const [rows, setRows] = useState(10);
@@ -10,26 +13,36 @@ export default function Sliding() {
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
   const [width, setWidth] = useState(5);
+
   //Player coordinates and details
   const [playerRow, setPlayerRow] = useState(0);
   const [playerCol, setPlayerCol] = useState(0);
   const [playerClassName, setPlayerClassName] = useState("player-sprite-sheet pixel-art face-right");
+
+  const [playerFacing, setPlayerFacing] = useState("");
+
+
   //Animation states
   const [animate, setAnimate] = useState(true);
   const [animateStart, setAnimateStart] = useState({});
   const [animateEnd, setAnimateEnd] = useState({});
   const [subAnimateStart, setSubAnimateStart] = useState({});
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
+
   const [playerFacing, setPlayerFacing] = useState("");
+
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
   const [animationCallback, setAnimationCallback] = useState(() => () => { });
+
   const forward = () => {
     setAnimate(true);
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(-20%)" });
-    setSubAnimateStart({ transform: "translateX(0%)" });
-    setSubAnimateEnd({ transform: "translateX(35%)" });
+
+    setSubAnimateStart({ transform: "translateX(0%)"});
+    setSubAnimateEnd({ transform: "translateX(55%)"});
+
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       //setLeft((col) => col + 1);
@@ -45,7 +58,9 @@ export default function Sliding() {
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(20%)" });
     setSubAnimateStart({ transform: "translateX(0%)" });
-    setSubAnimateEnd({ transform: "translateX(-35%)" });
+
+    setSubAnimateEnd({ transform: "translateX(-55%)" });
+
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       // setLeft((col) => col - 1);
@@ -63,19 +78,28 @@ export default function Sliding() {
       }
       return { row: row, col: col, trap: trap };
     }
-    setData(new Array(1).fill(undefined).map((_, row) => new Array(31).fill(undefined).map((_, col) => cell(row, col)
-    )))
-  }, [rows, columns])
+
+    setData(
+      new Array(1)
+        .fill(undefined)
+        .map((_, row) =>
+          new Array(31).fill(undefined).map((_, col) => cell(row, col))
+        )
+    );
+  }, [rows, columns]);
+
   useEffect(() => {
-    if (playerFacing === "left") {
+    if(playerFacing === "left"){
+
       setPlayerClassName("player-sprite-sheet pixel-art face-left");
     } else {
       setPlayerClassName("player-sprite-sheet pixel-art face-right");
     }
   }, [playerFacing])
+
   const handlePlayerMove = (e) => {
-    if (e.key === "ArrowRight" && playerCol < columns) {
-      if (data[playerRow][playerCol + 1].trap) {
+    if(e.key === "ArrowRight" && playerCol < columns){
+      if(data[playerRow][playerCol + 1].trap){
         //alert("You've triggered a trap!");
         setPlayerFacing("right");
         forward();
@@ -88,8 +112,9 @@ export default function Sliding() {
         setLeft(playerCol + 1);
       }
     }
-    if (e.key === "ArrowLeft" && playerCol > 0) {
-      if (data[playerRow][playerCol - 1].trap) {
+
+    if(e.key === "ArrowLeft" && playerCol > 0){
+      if(data[playerRow][playerCol - 1].trap){
         //alert("You've triggered a trap!");
         setPlayerFacing("left");
         backward();
@@ -126,9 +151,11 @@ export default function Sliding() {
       <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
-      <div onKeyDown={handlePlayerMove} tabIndex={0}>
-        {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
-        <button onClick={handleManualSlide}>Slide Manually</button> */}
+        <div onKeyDown={handlePlayerMove} tabIndex={0}>
+
+        <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
+        <button onClick={handleManualSlide}>Slide Manually</button>
+
         <Animate
           play={animate}
           duration={animateDuration}
@@ -159,6 +186,7 @@ export default function Sliding() {
     </div>
   );
 }
+
 function GridComponent({
   data,
   bottom,
@@ -177,47 +205,46 @@ function GridComponent({
 }) {
   return (
     <div onKeyDown={handlePlayerMove} tabIndex={0}>
-      main
-      <table border={0}>
-        <tbody>
-          {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
-            <tr key={`Row${1 * bottom + rowIdx}`}>
-              {dataRow.slice(left, left + width).map((cell, columnIdx) => (
-                <td key={`Col${1 * left + columnIdx}`}>
-                  <CellComponent
-                    cell={cell}
-                    playerRow={playerRow}
-                    playerCol={playerCol}
-                    animate={animate}
-                    animateDuration={animateDuration}
-                    animateEaseType={animateEaseType}
-                    subAnimateStart={subAnimateStart}
-                    subAnimateEnd={subAnimateEnd}
-                    playerClassName={playerClassName}
-                  />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
 
+        <table border={0}>
+          <tbody>
+            {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
+              <tr key={`Row${1 * bottom + rowIdx}`}>
+                {dataRow.slice(left, left + width).map((cell, columnIdx) => (
+                  <td key={`Col${1 * left + columnIdx}`}>
+                    <CellComponent
+                      cell={cell}
+                      playerRow={playerRow}
+                      playerCol={playerCol}
+                      animate={animate}
+                      animateDuration={animateDuration}
+                      animateEaseType={animateEaseType}
+                      subAnimateStart={subAnimateStart}
+                      subAnimateEnd={subAnimateEnd}
+                      playerClassName={playerClassName}
+                    />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+  );}
 
-
-function CellComponent({
-  cell,
-  playerRow,
-  playerCol,
-  animate,
-  animateDuration,
-  animateEaseType,
-  subAnimateStart,
-  subAnimateEnd,
-  playerClassName
-}) {
+  
+  
+  function CellComponent({
+    cell,
+    playerRow,
+    playerCol,
+    animate,
+    animateDuration,
+    animateEaseType,
+    subAnimateStart,
+    subAnimateEnd,
+    playerClassName,
+  }) {
   if (cell.row == playerRow && cell.col == playerCol)
     return (
       <Animate
@@ -229,6 +256,7 @@ function CellComponent({
         easeType={animateEaseType}
       >
         <div className="player">
+
           {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
           <img className={playerClassName} src="images/player-sprite-sheet.png"></img>
         </div>
@@ -236,9 +264,10 @@ function CellComponent({
     );
 
   else if (cell.trap) {
-    return (
+   
 
       <Trap cell={cell} />
+
     );
   }
 
@@ -306,17 +335,5 @@ function Knob({ getter, setter, text }) {
     </>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 

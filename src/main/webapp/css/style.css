@@ -51,12 +51,11 @@ body{
   background-color: #a0aecd;
 }
 
-img {
+/* img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
 }
-
 h1 {
   color: #000000;
 }
@@ -66,10 +65,48 @@ p {
   font-size: large;
 }
 
+
 h2{
     color: #000000;
     font-weight: bold;
 }
+
+td {
+  height: 550px;
+  width: 1000px;
+  vertical-align: bottom;
+  
+}
+
+/* img {
+  width: 250px;
+  height: 300px;
+  margin: 0;
+  vertical-align: bottom;
+} */
+
+table {
+  background-image: url("bg.png");
+  background-size: cover;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 20px;
+  border: solid black 5px;
+}
+
+.social {
+  height: 100px;
+  width: auto;
+}
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: ridge;
+  background-color: #a0aecd;
+}
+
 
 .question-text-box{
   background-color: #d2b48c;
@@ -128,7 +165,7 @@ td {
   vertical-align: bottom;
 }
 
-img {
+.goblin-img {
   width: 250px;
   height: 300px;
   margin: 0;
@@ -196,6 +233,44 @@ table {
   /* padding: 20px; */
   margin-top: 10px;
   font-family: fantasy;
+}
+
+:root {
+  --pixel-size: 4;
+}
+
+.player{
+  height: calc(64px * var(--pixel-size));
+  width: calc(62px * var(--pixel-size));
+  overflow: hidden;
+  position: relative;
+} 
+
+.player-sprite-sheet{
+  animation: walk 1.5s steps(9) infinite;
+  width: calc(578px * var(--pixel-size));
+  position: absolute;
+}
+
+.pixel-art{
+  image-rendering: pixelated;
+}
+
+.face-right{
+  top: calc(-448px * var(--pixel-size));
+}
+
+.face-left{
+  top: calc(-320px * var(--pixel-size));
+}
+
+@keyframes walk{
+  from {
+    transform: translate3d(0px,0,0)
+  } 
+  to {
+    transform: translate3d(-100%,0,0)
+  }
 }
 
 .border {
