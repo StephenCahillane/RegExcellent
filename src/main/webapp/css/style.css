@@ -34,25 +34,39 @@ nav a:hover{
 }
 
 body{
-  background-image: url(images/background.png);
+  background-image: url(castle.jpg);
   margin: 0px;
 }
+
+.social {
+  height: 100px;
+  width: auto;
+}
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: ridge;
+  background-color: #a0aecd;
+}
+
+img {
 
 /* img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-} */
-
+}
 h1 {
   color: #000000;
 }
 
 p {
   color: #000000;
-
   font-size: large;
 }
+
 
 h2{
     color: #000000;
@@ -94,6 +108,7 @@ table {
   border-style: ridge;
   background-color: #a0aecd;
 }
+
 
 .question-text-box{
   background-color: #d2b48c;
@@ -144,12 +159,42 @@ table {
 .menu-container{
   display: flex;
   justify-content: space-around;
+}
+
+td {
+  height: 500px;
+  width: 1000px;
+  vertical-align: bottom;
+}
+
+img {
+  width: 250px;
+  height: 300px;
+  margin: 0;
+  vertical-align: bottom;
+}
+
+table {
+  background-image: url("bg.png");
+  background-size: cover;
+  background-position: bottom;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 20px;
+
+  border: solid black 5px;
+
   
 }
 
+/* .border{
+  background-image: url("border.png");
+  background-size: cover;
+} */
+
 .scroll {
-  height: 700px;
-  background-image: url(scroll2.png);
+  height: 300px;
+  background-image: url(scroll3.png);
   text-align: center;
   background-size: cover;
   background-position: center;
@@ -163,8 +208,8 @@ table {
 }
 
 .scroll button{
-  width: 150px;
-  height: 50px;
+  max-width: 100px;
+  max-height: 40px;
   background-color: red;
   font-family: fantasy;
   margin-left: auto;
@@ -172,9 +217,8 @@ table {
   margin-top: auto;
 }
 
-
 .scroll p {
-  width: 50%;
+  width: 80%;
   align-items: center;
   /* margin: auto; */
   /* margin-top: 10%; */
@@ -183,12 +227,13 @@ table {
   margin-right: auto;
   margin-top: 0;
   font-family: fantasy;
+  font-size: 15px;
   /* height: 100%; */
 }
 
 .scroll h3 {
   /* padding: 20px; */
-  margin-top: 125px;
+  margin-top: 10px;
   font-family: fantasy;
 }
 
@@ -228,4 +273,53 @@ table {
   to {
     transform: translate3d(-100%,0,0)
   }
+}
+
+.border {
+  background-size: cover;
+  height: 650px;
+  width: 1100px;
+  background-image: url(frame.png);
+  margin-top: 15px;
+  margin-left: 95px;
+  margin-right: 95px;
+}
+
+
+.backgroundBottom {
+  width: 60%;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url(wood2.png);
+  background-size: cover;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid black 4px;
+}
+
+.quill {
+  max-width: 180px;
+  /* min-width: 149px; */
+  width: 120px;
+  min-height: 150px;
+  height: 180px;
+  max-height: 250px;
+  background-image: url(quill.png);
+  background-size: cover;
+  margin-left: 10%;
+}
+
+.ink {
+  max-width: 250px;
+  width: 230px;
+  min-width: 230px;
+  height: 210px;
+  max-height: 220px;
+  background-image: url(ink.png);
+  background-size: cover;
+  margin-right: 10%;
 }
