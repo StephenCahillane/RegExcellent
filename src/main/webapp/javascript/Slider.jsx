@@ -3,7 +3,6 @@ import { Animate, AnimateKeyframes } from "react-simple-animate";
 import '../css/style.css';
 
 
-
 export default function Sliding() {
   const [data, setData] = useState([[]]);
   const [rows, setRows] = useState(10);
@@ -12,24 +11,30 @@ export default function Sliding() {
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
   const [width, setWidth] = useState(5);
-  //Player coordinates and input
+
+  //Player coordinates and details
   const [playerRow, setPlayerRow] = useState(0);
   const [playerCol, setPlayerCol] = useState(0);
+  const [playerClassName, setPlayerClassName] = useState("player-sprite-sheet pixel-art face-right");
+  const [playerFacing, setPlayerFacing] = useState("");
+
   //Animation states
   const [animate, setAnimate] = useState(true);
   const [animateStart, setAnimateStart] = useState({});
   const [animateEnd, setAnimateEnd] = useState({});
   const [subAnimateStart, setSubAnimateStart] = useState({});
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
+
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
   const [animationCallback, setAnimationCallback] = useState(() => () => { });
+
   const forward = () => {
     setAnimate(true);
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(-20%)" });
-    setSubAnimateStart({ transform: "translateX(0%)" });
-    setSubAnimateEnd({ transform: "translateX(100%)" });
+    setSubAnimateStart({ transform: "translateX(0%)"});
+    setSubAnimateEnd({ transform: "translateX(55%)"});
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       //setLeft((col) => col + 1);
@@ -45,7 +50,7 @@ export default function Sliding() {
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(20%)" });
     setSubAnimateStart({ transform: "translateX(0%)" });
-    setSubAnimateEnd({ transform: "translateX(-100%)" });
+    setSubAnimateEnd({ transform: "translateX(-55%)" });
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       // setLeft((col) => col - 1);
@@ -72,11 +77,22 @@ export default function Sliding() {
     );
   }, [rows, columns]);
 
+  useEffect(() => {
+    if(playerFacing === "left"){
+      setPlayerClassName("player-sprite-sheet pixel-art face-left");
+    } else {
+      setPlayerClassName("player-sprite-sheet pixel-art face-right");
+    }
+  }, [playerFacing])
+
   const handlePlayerMove = (e) => {
-    if (e.key === "ArrowRight" && playerCol < columns) {
-      if (data[playerRow][playerCol + 1].trap) {
-        alert("You've triggered a trap!");
+    if(e.key === "ArrowRight" && playerCol < columns){
+      if(data[playerRow][playerCol + 1].trap){
+        //alert("You've triggered a trap!");
+        setPlayerFacing("right");
+        forward();
       } else {
+        setPlayerFacing("right");
         forward();
       }
 
@@ -86,11 +102,13 @@ export default function Sliding() {
       }
     }
 
-    if (e.key === "ArrowLeft" && playerCol > 0) {
-      if (data[playerRow][playerCol - 1].trap) {
-        alert("You've triggered a trap!");
+    if(e.key === "ArrowLeft" && playerCol > 0){
+      if(data[playerRow][playerCol - 1].trap){
+        //alert("You've triggered a trap!");
+        setPlayerFacing("left");
         backward();
       } else {
+        setPlayerFacing("left");
         backward();
       }
 
@@ -124,10 +142,10 @@ export default function Sliding() {
       <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
+        <div onKeyDown={handlePlayerMove} tabIndex={0}>
 
-      {/* <div onKeyDown={handlePlayerMove} tabIndex={0}> */}
-        {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol" /> */}
-        {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
+        <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
+        <button onClick={handleManualSlide}>Slide Manually</button>
         <Animate
           play={animate}
           duration={animateDuration}
@@ -151,42 +169,11 @@ export default function Sliding() {
             subAnimateStart={subAnimateStart}
             subAnimateEnd={subAnimateEnd}
             handlePlayerMove={handlePlayerMove}
+            playerClassName={playerClassName}
           />
         </Animate>
       </div>
-  );
-}
-
-      <div onKeyDown={handlePlayerMove} tabIndex={0}>
-
-      <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
-      <button onClick={handleManualSlide}>Slide Manually</button>
-      <Animate
-        play={animate}
-        duration={animateDuration}
-        start={animateStart}
-        end={animateEnd}
-        complete={animateStart}
-        easeType={animateEaseType}
-        onComplete={animationCallback}
-      >
-        <GridComponent
-          data={data}
-          bottom={bottom}
-          left={left}
-          height={height}
-          width={width}
-          playerRow={playerRow}
-          playerCol={playerCol}
-          animate={animate}
-          animateDuration={animateDuration}
-          animateEaseType={animateEaseType}
-          subAnimateStart={subAnimateStart}
-          subAnimateEnd={subAnimateEnd}
-          handlePlayerMove={handlePlayerMove}
-        />
-      </Animate>
-    </div></div>
+    </div>
   );
 }
 
@@ -196,7 +183,6 @@ function GridComponent({
   left,
   height,
   width,
-
   playerRow,
   playerCol,
   animate,
@@ -204,11 +190,11 @@ function GridComponent({
   animateEaseType,
   subAnimateStart,
   subAnimateEnd,
-  handlePlayerMove
+  handlePlayerMove,
+  playerClassName
 }) {
   return (
     <div onKeyDown={handlePlayerMove} tabIndex={0}>
-      main
         <table border={0}>
           <tbody>
             {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
@@ -224,6 +210,7 @@ function GridComponent({
                       animateEaseType={animateEaseType}
                       subAnimateStart={subAnimateStart}
                       subAnimateEnd={subAnimateEnd}
+                      playerClassName={playerClassName}
                     />
                   </td>
                 ))}
@@ -231,50 +218,11 @@ function GridComponent({
             ))}
           </tbody>
         </table>
-      </div></div></div>
-  )
+      </div>
+  );}
 
-
-function CellComponent({
-  cell,
-
-  playerRow,
-  playerCol,
-  animate,
-  animateDuration,
-  animateEaseType,
-  subAnimateStart,
-  subAnimateEnd,
-  handlePlayerMove
-}) {
-
-  return (
-    <div onKeyDown={handlePlayerMove} tabIndex={0}>
-      
-      <table border={0}>
-        <tbody>
-          {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
-            <tr key={`Row${1 * bottom + rowIdx}`}>
-              {dataRow.slice(left, left + width).map((cell, columnIdx) => (
-                <td key={`Col${1 * left + columnIdx}`}>
-                  <CellComponent
-                    cell={cell}
-                    playerRow={playerRow}
-                    playerCol={playerCol}
-                    animate={animate}
-                    animateDuration={animateDuration}
-                    animateEaseType={animateEaseType}
-                    subAnimateStart={subAnimateStart}
-                    subAnimateEnd={subAnimateEnd}
-                  />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
+  
+  
   function CellComponent({
     cell,
     playerRow,
@@ -284,31 +232,8 @@ function CellComponent({
     animateEaseType,
     subAnimateStart,
     subAnimateEnd,
+    playerClassName,
   }) {
-    if (cell.row == playerRow && cell.col == playerCol)
-      return (
-        <Animate
-          play={animate}
-          duration={animateDuration}
-          start={subAnimateStart}
-          end={subAnimateEnd}
-          complete={subAnimateStart}
-          easeType={animateEaseType}
-        >
-          <img src="knight.png" alt="Character" />
-        </Animate>
-      );
-    else if (cell.trap) {
-      return (
-        <>
-          <img src="goblin.png" alt="Goblin Trap" />
-        </>
-      );
-    } else {
-      return "";
-    }
-  }
-
   if (cell.row == playerRow && cell.col == playerCol)
     return (
       <Animate
@@ -319,13 +244,15 @@ function CellComponent({
         complete={subAnimateStart}
         easeType={animateEaseType}
       >
-        <img src="knight.png" alt="Character" />
+        <div className="player">
+          <img className={playerClassName} src="images/knight-sprite.png"></img>
+        </div>
       </Animate>
     );
   else if(cell.trap){
     return (
     <>
-      <img src="goblin.png" alt="Goblin Trap" />
+      <img className="goblin-img" src="goblin.png" alt="Goblin Trap" />
     </>
     );
   } else {
@@ -344,46 +271,3 @@ function Knob({ getter, setter, text }) {
   );
 }
 
-// export function Cell({ cellData, playerRow, playerCol }) {
-//   const isPlayerCell = cellData.row === playerRow && cellData.col === playerCol;
-
-//   return (
-//     <div>
-//       {isPlayerCell ? (
-//         <img src="knight.png" alt="Character" />
-//       ) : cellData.trap ? (
-//         <img src="goblin.png" alt="Goblin Trap" />
-//       ) : (
-//         "" // Display empty space for cells without trap
-//       )}
-//     </div>
-//   );
-// }
-
-
-
-  function Knob({ getter, setter, text }) {
-    return (
-      <>
-        <button onClick={() => setter((n) => (n > 0 ? n - 1 : 0))}>--</button>
-        {text}: {getter}
-        {<button onClick={() => setter((n) => n + 1)}>++</button>}
-        <br />
-      </>
-    );
-  }
-  // export function Cell({ cellData, playerRow, playerCol }) {
-  //   const isPlayerCell = cellData.row === playerRow && cellData.col === playerCol;
-  //   return (
-  //     <div>
-  //       {isPlayerCell ? (
-  //         <img src="knight.png" alt="Character" />
-  //       ) : cellData.trap ? (
-  //         <img src="goblin.png" alt="Goblin Trap" />
-  //       ) : (
-  //         "" // Display empty space for cells without trap
-  //       )}
-  //     </div>
-  //   );
-  // }
-}
