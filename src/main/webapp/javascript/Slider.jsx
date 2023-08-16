@@ -29,7 +29,6 @@ export default function Sliding() {
   const [subAnimateStart, setSubAnimateStart] = useState({});
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
 
-  const [playerFacing, setPlayerFacing] = useState("");
 
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
@@ -153,8 +152,8 @@ export default function Sliding() {
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
         <div onKeyDown={handlePlayerMove} tabIndex={0}>
 
-        <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
-        <button onClick={handleManualSlide}>Slide Manually</button>
+        {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
+        <button onClick={handleManualSlide}>Slide Manually</button> */}
 
         <Animate
           play={animate}
@@ -258,16 +257,15 @@ function GridComponent({
         <div className="player">
 
           {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
-          <img className={playerClassName} src="images/player-sprite-sheet.png"></img>
+          <img className={playerClassName} src="images/knight-sprite.png"></img>
         </div>
       </Animate>
     );
 
   else if (cell.trap) {
-   
 
+   return(
       <Trap cell={cell} />
-
     );
   }
 
@@ -275,8 +273,6 @@ function GridComponent({
     return <div></div>;
   }
 }
-
-
 
 function Trap({ cell }) {
 let trapImage;
