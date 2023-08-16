@@ -3,11 +3,20 @@ import { Animate, AnimateKeyframes } from "react-simple-animate";
 import styled from 'styled-components';
 import '../css/style.css';
 
-const PlayerImage = styled img<{ $direction?: boolean; }>`
-  animation: moveSpriteSheet 2s steps(9) infinite;
-  width: calc(576px * var(--pixel-size));
-  position: absolute;
-`;
+// const PlayerDiv = styled.div`
+//   height: calc(64px * 4);
+//   width: calc(64px * 4);
+//   overflow: hidden;
+//   position: relative;
+// `;
+
+// const PlayerImage = styled.img`
+//   animation: moveSpriteSheet 2s steps(9) infinite;
+//   width: calc(576px * 4);
+//   position: absolute;
+//   image-rendering: pixelated;
+//   top: ${(props) => props.playerFacing === "right" ? '-576px' : props.playerFacing === "left" ? '-192px' : '-576px'}
+// `;
 
 
 export default function Sliding() {
@@ -20,9 +29,10 @@ export default function Sliding() {
   const [height, setHeight] = useState(5);
   const [width, setWidth] = useState(5);
 
-  //Player coordinates and input
+  //Player coordinates and details
   const [playerRow, setPlayerRow] = useState(0);
   const [playerCol, setPlayerCol] = useState(0);
+  const [playerClassName, setPlayerClassName] = useState("player-sprite-sheet pixel-art face-right");
 
   //Animation states
   const [animate, setAnimate] = useState(true);
@@ -83,6 +93,14 @@ export default function Sliding() {
     )))
   }, [rows, columns])
 
+  useEffect(() => {
+    if(playerFacing === "left"){
+      setPlayerClassName("player-sprite-sheet pixel-art face-left")
+    } else {
+      setPlayerClassName("player-sprite-sheet pixel-art face-right")
+    }
+  }, [playerFacing])
+
   const handlePlayerMove = (e) => {
     if(e.key === "ArrowRight" && playerCol < columns){
       if(data[playerRow][playerCol + 1].trap){
@@ -90,6 +108,7 @@ export default function Sliding() {
         setPlayerFacing("right");
         forward();
       } else {
+        setPlayerFacing("right");
         forward();
       }
       
@@ -105,6 +124,7 @@ export default function Sliding() {
         setPlayerFacing("left");
         backward();
       } else {
+        setPlayerFacing("left");
         backward();
       }
       
@@ -167,7 +187,7 @@ export default function Sliding() {
             subAnimateStart={subAnimateStart}
             subAnimateEnd={subAnimateEnd}
             handlePlayerMove={handlePlayerMove}
-            playerFacing={playerFacing}
+            playerClassName={playerClassName}
           />
         </Animate>
       </div>
@@ -189,7 +209,7 @@ function GridComponent({
   subAnimateStart,
   subAnimateEnd,
   handlePlayerMove,
-  playerFacing
+  playerClassName
 }) {
   return (
     <div onKeyDown={handlePlayerMove} tabIndex={0}>
@@ -209,7 +229,7 @@ function GridComponent({
                       animateEaseType={animateEaseType}
                       subAnimateStart={subAnimateStart}
                       subAnimateEnd={subAnimateEnd}
-                      playerFacing={playerFacing}
+                      playerClassName={playerClassName}
                     />
                   </td>
                 ))}
@@ -230,7 +250,7 @@ function CellComponent({
   animateEaseType,
   subAnimateStart,
   subAnimateEnd,
-  playerFacing
+  playerClassName
 }) {
   if (cell.row == playerRow && cell.col == playerCol)
     return (
@@ -242,14 +262,10 @@ function CellComponent({
         complete={subAnimateStart}
         easeType={animateEaseType}
       >
-      <div className="player">
-        <img className={
-          playerFacing === "right" ? "player-sprite-sheet pixel-art face-right" : 
-          playerFacing === "left" ? "player-sprite-sheet pixel-art face-left" :
-          "player-sprite-sheet pixel-art"
-          } src="images/player-sprite-sheet.png">
-          </img>
-      </div>
+        <div className="player">
+        {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
+          <img className={playerClassName} src="images/player-sprite-sheet.png"></img>
+        </div>
       </Animate>
     );
   else if(cell.trap){

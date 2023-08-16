@@ -201,7 +201,7 @@ table {
   width: calc(64px * var(--pixel-size));
   overflow: hidden;
   position: relative;
-}
+} 
 
 .player-sprite-sheet{
   animation: moveSpriteSheet 2s steps(9) infinite;
