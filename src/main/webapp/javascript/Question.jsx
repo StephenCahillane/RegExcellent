@@ -69,7 +69,7 @@ export default function Question() {
                     <input name="answer" type="text" placeholder="Answer" onChange={(event) => setAnswer(event.target.value)}></input>
                     <button onClick={handleSubmit}>Submit Answer</button>
                 </div>
-                <button onClick={next}>Next</button>
+                {/* <button onClick={next}>Next</button> */}
                 
             </div>
                 <div className='ink'></div>
