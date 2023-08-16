@@ -142,8 +142,16 @@ table {
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 20px;
+
   border: solid black 5px;
+
+  
 }
+
+/* .border{
+  background-image: url("border.png");
+  background-size: cover;
+} */
 
 .scroll {
   height: 300px;
