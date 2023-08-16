@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import useSound from 'use-sound';
-import "../css/style.css";
 import sound from "../../resources/static/sounds/sinister.mp3" 
-export default function Menu(){
-    const [isActive, setIsActive] = useState(true);
+import "../css/style.css";
+
+export default function Menu({ isActive }){
+    
     const [playSound] = useSound(sound);
-    const toggleActive = () => {
-        setIsActive((current) => !current);
-    }
 
     useEffect(()=>{
         playSound();
@@ -19,15 +17,23 @@ export default function Menu(){
         return (
             <div on={playSound}>
                 <h1 className="menu-header">RegQuest</h1>
-                <div className="btn-container">
-                    <Link to="/Maze" >
-                        <button className="menu-btn" onClick={toggleActive}>Begin Quest</button>
-                    </Link>
-                        <button className="menu-btn" onClick={toggleActive}>What is a regular expression?</button>
-                    <Link to="/About">
-                        <button className="menu-btn" onClick={toggleActive}>About the Game</button>
-                    </Link>
-                    <button className="menu-btn" onClick={toggleActive}>Quit</button>
+                <div className="menu-container">
+                    <div>
+                        <img src="images/animated-candle.gif"></img>
+                    </div>
+                    <div className="btn-container">
+                        <Link to="/Game" >
+                            <button className="menu-btn" >Begin Quest</button>
+                        </Link>
+                            <button className="menu-btn" >What is a regular expression?</button>
+                        <Link to="/About">
+                            <button className="menu-btn" >About the Game</button>
+                        </Link>
+                        <button className="menu-btn" >Quit</button>
+                    </div>
+                    <div>
+                        <img src="images/animated-candle.gif"></img>
+                    </div>
                 </div>
                 {/* <button onClick={playSound}>Play Sound</button> */}
 
