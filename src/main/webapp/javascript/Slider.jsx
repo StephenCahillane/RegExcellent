@@ -1,23 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
-import styled from 'styled-components';
 import '../css/style.css';
-
-// const PlayerDiv = styled.div`
-//   height: calc(64px * 4);
-//   width: calc(64px * 4);
-//   overflow: hidden;
-//   position: relative;
-// `;
-
-// const PlayerImage = styled.img`
-//   animation: moveSpriteSheet 2s steps(9) infinite;
-//   width: calc(576px * 4);
-//   position: absolute;
-//   image-rendering: pixelated;
-//   top: ${(props) => props.playerFacing === "right" ? '-576px' : props.playerFacing === "left" ? '-192px' : '-576px'}
-// `;
-
 
 export default function Sliding() {
 
@@ -51,8 +34,8 @@ export default function Sliding() {
     setAnimate(true);
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(-20%)" });
-    setSubAnimateStart({ transform: "translateX(0%)" });
-    setSubAnimateEnd({ transform: "translateX(35%)" });
+    setSubAnimateStart({ transform: "translateX(0%)"});
+    setSubAnimateEnd({ transform: "translateX(35%)"});
     setAnimateDuration(0.5);
     setAnimationCallback(() => () => {
       //setLeft((col) => col + 1);
@@ -95,9 +78,9 @@ export default function Sliding() {
 
   useEffect(() => {
     if(playerFacing === "left"){
-      setPlayerClassName("player-sprite-sheet pixel-art face-left")
+      setPlayerClassName("player-sprite-sheet pixel-art face-left");
     } else {
-      setPlayerClassName("player-sprite-sheet pixel-art face-right")
+      setPlayerClassName("player-sprite-sheet pixel-art face-right");
     }
   }, [playerFacing])
 
@@ -290,23 +273,3 @@ function Knob({ getter, setter, text }) {
     </>
   );
 }
-
-
-// export function Cell({ cellData, playerRow, playerCol }) {
-//   const isPlayerCell = cellData.row === playerRow && cellData.col === playerCol;
-
-//   return (
-//     <div>
-//       {isPlayerCell ? (
-//         <img src="knight.png" alt="Character" />
-//       ) : cellData.trap ? (
-//         <img src="goblin.png" alt="Goblin Trap" />
-//       ) : (
-//         "" // Display empty space for cells without trap
-//       )}
-//     </div>
-//   );
-// }
-
-
-
