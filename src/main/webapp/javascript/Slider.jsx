@@ -247,7 +247,7 @@ function CellComponent({
       >
         <div className="player">
         {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
-          <img className={playerClassName} src="images/player-sprite-sheet.png"></img>
+          <img className={playerClassName} src="images/knight-sprite.png"></img>
         </div>
       </Animate>
     );

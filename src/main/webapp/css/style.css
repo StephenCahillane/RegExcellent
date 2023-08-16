@@ -198,14 +198,14 @@ table {
 
 .player{
   height: calc(64px * var(--pixel-size));
-  width: calc(64px * var(--pixel-size));
+  width: calc(62px * var(--pixel-size));
   overflow: hidden;
   position: relative;
 } 
 
 .player-sprite-sheet{
-  animation: moveSpriteSheet 2s steps(9) infinite;
-  width: calc(576px * var(--pixel-size));
+  animation: walk 1.5s steps(9) infinite;
+  width: calc(578px * var(--pixel-size));
   position: absolute;
 }
 
@@ -214,14 +214,14 @@ table {
 }
 
 .face-right{
-  top: calc(-192px * var(--pixel-size));
+  top: calc(-448px * var(--pixel-size));
 }
 
 .face-left{
-  top: calc(-64px * var(--pixel-size));
+  top: calc(-320px * var(--pixel-size));
 }
 
-@keyframes moveSpriteSheet{
+@keyframes walk{
   from {
     transform: translate3d(0px,0,0)
   } 
