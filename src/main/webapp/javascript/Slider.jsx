@@ -147,8 +147,8 @@ export default function Sliding() {
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
         <div onKeyDown={handlePlayerMove} tabIndex={0}>
 
-        <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
-        <button onClick={handleManualSlide}>Slide Manually</button>
+        {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
+        <button onClick={handleManualSlide}>Slide Manually</button> */}
 
         <Animate
           play={animate}
@@ -258,10 +258,8 @@ function GridComponent({
     );
 
   else if (cell.trap) {
-   
     return(
       <Trap cell={cell} />
-
     );
   }
 
@@ -269,8 +267,6 @@ function GridComponent({
     return <div></div>;
   }
 }
-
-
 
 function Trap({ cell }) {
 let trapImage;
