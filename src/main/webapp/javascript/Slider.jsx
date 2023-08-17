@@ -184,7 +184,7 @@ export default function Sliding() {
 
       </div>
       <br></br>
-      <Question index={trapID}/>
+      <Question onTrapSpace={setOnTrapSpace} index={trapID}/>
     </div>
   );
 }
@@ -317,6 +317,7 @@ let trapImage;
     </div>
   );
 };
+
 
 function Knob({ getter, setter, text }) {
   return (
