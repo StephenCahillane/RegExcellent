@@ -5,14 +5,12 @@ import Question from "./Question.jsx";
 
 
 export default function Game(){
-
     return (
         <div>
             {/* <div className="border"> */}
             <Sliding />
             {/* </div> */}
             <br></br>
-            <Question />
         </div>
     );
 }
