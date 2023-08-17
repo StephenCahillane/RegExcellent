@@ -2,11 +2,10 @@ nav {
   display: flex;
   font-size: 1.4em;
   font-family: 'Bungee Spice', cursive;
-  background-color: #3e332c;
+  background-color: #3E332C;
   margin: 0;
   padding: 0;
 }
-
 nav a{
   text-decoration: none;
   margin-top: 0.5em;
@@ -14,7 +13,6 @@ nav a{
   margin-left: 1em;
   margin-right: 1em;
 }
-
 nav a:hover{
   animation-name: bounce;
   animation-timing-function: ease;
@@ -22,7 +20,6 @@ nav a:hover{
   animation-iteration-count: infinite;
   transform-origin: bottom;
 }
-
 @keyframes bounce{
   0%   { transform: scale(1,1)      translateY(0); }
   10%  { transform: scale(1.1,.9)   translateY(0); }
@@ -32,25 +29,21 @@ nav a:hover{
   64%  { transform: scale(1,1)      translateY(0); }
   100% { transform: scale(1,1)      translateY(0); }
 }
-
 body{
   background-image: url(castle.jpg);
   margin: 0px;
 }
-
 .social {
   height: 100px;
   width: auto;
 }
-
 .container1 {
   display: flex;
   flex-direction: column;
   align-items: center;
   border-style: ridge;
-  background-color: #a0aecd;
+  background-color: #A0AECD;
 }
-
 /* img {
   max-width: 100%;
   height: auto;
@@ -59,32 +52,25 @@ body{
 h1 {
   color: #000000;
 }
-
 p {
   color: #000000;
   font-size: large;
 }
-
-
 h2{
     color: #000000;
     font-weight: bold;
 }
-
 td {
   height: 550px;
   width: 1000px;
   vertical-align: bottom;
-  
 }
-
 /* img {
   width: 250px;
   height: 300px;
   margin: 0;
   vertical-align: bottom;
 } */
-
 table {
   background-image: url("bg.png");
   background-size: cover;
@@ -93,29 +79,24 @@ table {
   margin-top: 20px;
   border: solid black 5px;
 }
-
 .social {
   height: 100px;
   width: auto;
 }
-
 .container1 {
   display: flex;
   flex-direction: column;
   align-items: center;
   border-style: ridge;
-  background-color: #a0aecd;
+  background-color: #A0AECD;
 }
-
-
 .question-text-box{
-  background-color: #d2b48c;
+  background-color: #D2B48C;
   border-radius: 20px;
   margin-left: 15%;
   margin-right: 15%;
   padding: 2em;
 }
-
 .menu-header{
   font-size: 4em;
   font-family: 'Bungee Spice', cursive;
@@ -125,20 +106,17 @@ table {
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
 }
-
 @keyframes float{
   0% {transform: translate(0, 0px);}
   50% {transform: translate(0, 15px);}
   100% {transform: translate(0, -0px);}
 }
-
 .btn-container{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
-
 .menu-btn{
   min-width: 5em;
   border-radius: 20px;
@@ -147,31 +125,26 @@ table {
   margin-top: 2em;
   margin-bottom: 2em;
   font-size: 1.25em;
-  background-color: #e4d3b5;
+  background-color: #E4D3B5;
 }
-
 .menu-btn:hover{
-  background-color: #cbb38a;
+  background-color: #CBB38A;
 }
-
 .menu-container{
   display: flex;
   justify-content: space-around;
 }
-
 td {
   height: 500px;
   width: 1000px;
   vertical-align: bottom;
 }
-
 .goblin-img {
   width: 250px;
   height: 300px;
   margin: 0;
   vertical-align: bottom;
 }
-
 table {
   background-image: url("bg.png");
   background-size: cover;
@@ -179,17 +152,12 @@ table {
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 20px;
-
   border: solid black 5px;
-
-  
 }
-
 /* .border{
   background-image: url("border.png");
   background-size: cover;
 } */
-
 .scroll {
   height: 300px;
   background-image: url(scroll3.png);
@@ -204,7 +172,6 @@ table {
   flex-direction: column;
   margin: auto;
 }
-
 .scroll button{
   max-width: 100px;
   max-height: 40px;
@@ -214,7 +181,6 @@ table {
   margin-right: auto;
   margin-top: auto;
 }
-
 .scroll p {
   width: 80%;
   align-items: center;
@@ -228,51 +194,42 @@ table {
   font-size: 15px;
   /* height: 100%; */
 }
-
 .scroll h3 {
   /* padding: 20px; */
   margin-top: 10px;
   font-family: fantasy;
 }
-
 :root {
   --pixel-size: 4;
 }
-
 .player{
   height: calc(64px * var(--pixel-size));
   width: calc(62px * var(--pixel-size));
   overflow: hidden;
   position: relative;
-} 
-
+}
 .player-sprite-sheet{
   animation: walk 1.5s steps(9) infinite;
   width: calc(578px * var(--pixel-size));
   position: absolute;
 }
-
 .pixel-art{
   image-rendering: pixelated;
 }
-
 .face-right{
   top: calc(-448px * var(--pixel-size));
 }
-
 .face-left{
   top: calc(-320px * var(--pixel-size));
 }
-
 @keyframes walk{
   from {
     transform: translate3d(0px,0,0)
-  } 
+  }
   to {
     transform: translate3d(-100%,0,0)
   }
 }
-
 .border {
   background-size: cover;
   height: 650px;
@@ -282,8 +239,6 @@ table {
   margin-left: 95px;
   margin-right: 95px;
 }
-
-
 .backgroundBottom {
   width: 60%;
   height: 300px;
@@ -298,7 +253,6 @@ table {
   margin-right: auto;
   border: solid black 4px;
 }
-
 .quill {
   max-width: 180px;
   /* min-width: 149px; */
@@ -310,7 +264,6 @@ table {
   background-size: cover;
   margin-left: 10%;
 }
-
 .ink {
   max-width: 250px;
   width: 230px;
