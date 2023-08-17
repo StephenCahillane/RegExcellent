@@ -11,7 +11,6 @@ export default function Game(){
             <Sliding />
             {/* </div> */}
             <br></br>
-            
-         </div>
+        </div>
     );
 }
