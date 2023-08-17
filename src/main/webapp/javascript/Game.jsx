@@ -6,14 +6,13 @@ import Question from "./Question.jsx";
 
 export default function Game(){
 
-
     return (
         <div>
             {/* <div className="border"> */}
-                <Sliding />
+            <Sliding />
             {/* </div> */}
             <br></br>
             <Question />
-         </div>
+        </div>
     );
 }
