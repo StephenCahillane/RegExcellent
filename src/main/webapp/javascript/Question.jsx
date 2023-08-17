@@ -51,7 +51,7 @@ export default function Question({ index, setOnTrapSpace }) {
   
         const isMatching = passwords.every((password) => candidate.test(password));
         if(isMatching){
-          setOnTrapSpace(false);
+            setOnTrapSpace(false);
         }
         console.log("Answer matches:", isMatching);
   
