@@ -4,6 +4,7 @@ import Question from './Question'
 
 import '../css/style.css';
 
+
 export default function Sliding() {
   const [data, setData] = useState([[]]);
   const [rows, setRows] = useState(10);
@@ -12,6 +13,7 @@ export default function Sliding() {
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
   const [width, setWidth] = useState(5);
+
 
   //Player coordinates and details
   const [playerRow, setPlayerRow] = useState(0);
@@ -43,7 +45,6 @@ export default function Sliding() {
         }}, [playerCol]
       )
 
-
   const forward = () => {
     setAnimate(true);
     // setAnimateStart({ transform: "translateX(0%)" });
@@ -61,6 +62,7 @@ export default function Sliding() {
       setAnimateDuration(0.0);
     });
   };
+
   const backward = () => {
     if (playerCol <= 0) return;
     setAnimate(true);
@@ -311,6 +313,7 @@ let trapImage;
       break;
 
   }
+
   return (
     <div className="trap">
       {trapImage}
