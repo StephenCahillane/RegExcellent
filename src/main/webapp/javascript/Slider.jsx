@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
-
-
+import Question from './Question'
 import '../css/style.css';
-
 
 export default function Sliding() {
   const [data, setData] = useState([[]]);
   const [rows, setRows] = useState(10);
-  const [columns, setColumns] = useState(10);
+  const [columns, setColumns] = useState(35);
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
@@ -21,18 +19,27 @@ export default function Sliding() {
 
   const [playerFacing, setPlayerFacing] = useState("");
 
-
   //Animation states
   const [animate, setAnimate] = useState(true);
   const [animateStart, setAnimateStart] = useState({});
   const [animateEnd, setAnimateEnd] = useState({});
   const [subAnimateStart, setSubAnimateStart] = useState({});
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
-
-
+  const [trapID, setTrapID] = useState(undefined);
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
   const [animationCallback, setAnimationCallback] = useState(() => () => { });
+
+
+  useEffect(() => {
+       if (playerCol % 3 == 0 && playerCol != 0) setTrapID((playerCol / 3)-1);
+       else setTrapID(undefined)}, [playerCol]
+      )
+
+
+
+
+
 
   const forward = () => {
     setAnimate(true);
@@ -181,7 +188,10 @@ export default function Sliding() {
             playerClassName={playerClassName}
           />
         </Animate>
+
       </div>
+      <br></br>
+      <Question index={trapID}/>
     </div>
   );
 }
@@ -231,8 +241,6 @@ function GridComponent({
       </div>
   );}
 
-  
-  
   function CellComponent({
     cell,
     playerRow,
@@ -273,6 +281,7 @@ function GridComponent({
     return <div></div>;
   }
 }
+
 
 function Trap({ cell }) {
 let trapImage;
@@ -316,10 +325,6 @@ let trapImage;
     </div>
   );
 };
-
-
-
-
 
 function Knob({ getter, setter, text }) {
   return (
