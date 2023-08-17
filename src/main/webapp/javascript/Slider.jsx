@@ -288,13 +288,13 @@ let trapImage;
 
   switch (cell.trap) {
     case 1:
-      trapImage = <img src="css/images/lockeddoor.png" alt="Trap 1" />;
+      trapImage = <img src="css/images/spike trap.png" alt="Trap 1" />;
       break;
     case 2:
       trapImage = <img src="css/images/clipart-alligator-dancing-16.png" alt="Trap 2" />;
       break;
     case 3:
-      trapImage = <img src="css/images/spike trap.png" alt="Trap 3" />;
+      trapImage = <img src="css/images/lockeddoor.png" alt="Trap 3" />;
       break;
     case 4:
       trapImage = <img src="css/images/mysticStew.png" alt="Trap 4" />;
@@ -306,7 +306,7 @@ let trapImage;
       trapImage = <img src="css/images/switch-right_360.png" alt="Trap 6" />;
       break;
     case 7:
-      trapImage = <img src="css/images/bats/png" alt="Trap 7" />;
+      trapImage = <img src="css/images/bats.png" alt="Trap 7" />;
       break;
     case 8:
       trapImage = <img src="css/images/bf5296e44b0cc8663c71fee6d67aa879.png" alt="Trap 8" />;
@@ -315,7 +315,7 @@ let trapImage;
       trapImage = <img src="css/images/Ancient_tablet_lost_city.png" alt="Trap 9" />;
       break;
     case 10:
-      trapImage = <img src="css/images/final door" alt="Trap 10" />;
+      trapImage = <img src="css/images/final door.png" alt="Trap 10" />;
       break;
 
   }
