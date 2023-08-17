@@ -26,6 +26,7 @@ export default function Sliding() {
   const [subAnimateStart, setSubAnimateStart] = useState({});
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
   const [trapID, setTrapID] = useState(undefined);
+  const [onTrapSpace, setOnTrapSpace] = useState(false);
 
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
@@ -33,13 +34,14 @@ export default function Sliding() {
 
 
   useEffect(() => {
-        if (playerCol % 3 == 0 && playerCol != 0) setTrapID((playerCol / 3)-1);
-        else setTrapID(undefined)}, [playerCol]
+        if (playerCol % 3 == 0 && playerCol != 0) {
+          setTrapID((playerCol / 3)-1)
+          setOnTrapSpace(true);
+        } else { 
+          setTrapID(undefined)
+          setOnTrapSpace(false);
+        }}, [playerCol]
       )
-
-
-
-
 
 
   const forward = () => {
@@ -90,7 +92,7 @@ export default function Sliding() {
       new Array(1)
         .fill(undefined)
         .map((_, row) =>
-          new Array(61).fill(undefined).map((_, col) => cell(row, col))
+          new Array(31).fill(undefined).map((_, col) => cell(row, col))
         )
     );
   }, [rows, columns]);
@@ -105,31 +107,20 @@ export default function Sliding() {
   }, [playerFacing])
 
   const handlePlayerMove = (e) => {
-    if(e.key === "ArrowRight" && playerCol < columns){
-      if(data[playerRow][playerCol + 1].trap){
-        //alert("You've triggered a trap!");
-        console.log(columns);
-        setPlayerFacing("right");
-        forward();
-      } else {
-        setPlayerFacing("right");
-        forward();
-      }
+    if(e.key === "ArrowRight" && playerCol < columns && !onTrapSpace){
+      setPlayerFacing("right");
+      forward();
+
       //Check if camera needs to move forward
       if (playerCol == (left + width - 1)) {
         setLeft(playerCol + 1);
       }
     }
 
-    if(e.key === "ArrowLeft" && playerCol > 1){
-      if(data[playerRow][playerCol - 1].trap){
-        //alert("You've triggered a trap!");
+    if(e.key === "ArrowLeft" && playerCol > 1 && !onTrapSpace){
         setPlayerFacing("left");
         backward();
-      } else {
-        setPlayerFacing("left");
-        backward();
-      }
+
       //Check if camera needs to move backward
       if (playerCol <= left) {
         setLeft(playerCol - width);
