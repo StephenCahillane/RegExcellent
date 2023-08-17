@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import '../css/style.css';
 
 
-export default function Question() {
+export default function Question({ index }) {
 
     const [answer, setAnswer] = useState("");
     const [trapID, setTrapID] = useState(0);
     const [entityData, setEntityData] = useState([]);
     const endpoint = "/api/questions";
 
-    const [index, setIndex] = useState(0);
+    // const [index, setIndex] = useState(0);
 
     useEffect(() => {
         // Define an async function to fetch the data
