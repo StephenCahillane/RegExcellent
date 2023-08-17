@@ -6,7 +6,7 @@ import '../css/style.css';
 export default function Sliding() {
   const [data, setData] = useState([[]]);
   const [rows, setRows] = useState(10);
-  const [columns, setColumns] = useState(10);
+  const [columns, setColumns] = useState(30);
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
@@ -77,7 +77,7 @@ export default function Sliding() {
       new Array(1)
         .fill(undefined)
         .map((_, row) =>
-          new Array(31).fill(undefined).map((_, col) => cell(row, col))
+          new Array(61).fill(undefined).map((_, col) => cell(row, col))
         )
     );
   }, [rows, columns]);
@@ -95,6 +95,7 @@ export default function Sliding() {
     if(e.key === "ArrowRight" && playerCol < columns){
       if(data[playerRow][playerCol + 1].trap){
         //alert("You've triggered a trap!");
+        console.log(columns);
         setPlayerFacing("right");
         forward();
       } else {
@@ -107,7 +108,7 @@ export default function Sliding() {
       }
     }
 
-    if(e.key === "ArrowLeft" && playerCol > 0){
+    if(e.key === "ArrowLeft" && playerCol > 1){
       if(data[playerRow][playerCol - 1].trap){
         //alert("You've triggered a trap!");
         setPlayerFacing("left");
@@ -250,11 +251,11 @@ function GridComponent({
         easeType={animateEaseType}
       >
         <div className="player">
-
           {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
           <img className={playerClassName} src="images/knight-sprite.png"></img>
         </div>
       </Animate>
+      
     );
 
   else if (cell.trap) {
