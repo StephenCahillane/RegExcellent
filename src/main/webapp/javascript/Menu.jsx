@@ -10,7 +10,7 @@ export default function Menu({ isActive }){
             <div>
                 <h1 className="menu-header">RegQuest</h1>
                 <div className="menu-container">
-                    <div>
+                    <div className="candle-bg">
                         <img src="images/animated-candle.gif"></img>
                     </div>
                     <div className="btn-container">
@@ -23,7 +23,7 @@ export default function Menu({ isActive }){
                         </Link>
                         <button className="menu-btn" >Quit</button>
                     </div>
-                    <div>
+                    <div className="candle-bg">
                         <img src="images/animated-candle.gif"></img>
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
-
-import "../css/style.css";
+import Question from './Question'
+import '../css/style.css';
 
 export default function Sliding() {
   const [data, setData] = useState([[]]);
   const [rows, setRows] = useState(10);
-  const [columns, setColumns] = useState(10);
+  const [columns, setColumns] = useState(35);
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
@@ -27,10 +27,21 @@ export default function Sliding() {
   const [animateEnd, setAnimateEnd] = useState({});
   const [subAnimateStart, setSubAnimateStart] = useState({});
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
-
+  const [trapID, setTrapID] = useState(undefined);
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
   const [animationCallback, setAnimationCallback] = useState(() => () => {});
+
+
+  useEffect(() => {
+       if (playerCol % 3 == 0 && playerCol != 0) setTrapID((playerCol / 3)-1);
+       else setTrapID(undefined)}, [playerCol]
+      )
+
+
+
+
+
 
   const forward = () => {
     setAnimate(true);
@@ -147,9 +158,10 @@ export default function Sliding() {
       <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
       <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
       {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
-      <div onKeyDown={handlePlayerMove} tabIndex={0}>
-        <Knob getter={playerCol} setter={setPlayerCol} text="playerCol" />
-        <button onClick={handleManualSlide}>Slide Manually</button>
+        <div onKeyDown={handlePlayerMove} tabIndex={0}>
+
+        {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
+        <button onClick={handleManualSlide}>Slide Manually</button> */}
 
         <Animate
           play={animate}
@@ -177,7 +189,10 @@ export default function Sliding() {
             playerClassName={playerClassName}
           />
         </Animate>
+
       </div>
+      <br></br>
+      <Question index={trapID}/>
     </div>
   );
 }
@@ -227,17 +242,18 @@ function GridComponent({
   );
 }
 
-function CellComponent({
-  cell,
-  playerRow,
-  playerCol,
-  animate,
-  animateDuration,
-  animateEaseType,
-  subAnimateStart,
-  subAnimateEnd,
-  playerClassName,
-}) {
+
+  function CellComponent({
+    cell,
+    playerRow,
+    playerCol,
+    animate,
+    animateDuration,
+    animateEaseType,
+    subAnimateStart,
+    subAnimateEnd,
+    playerClassName,
+  }) {
   if (cell.row == playerRow && cell.col == playerCol)
     return (
       <Animate
@@ -250,16 +266,18 @@ function CellComponent({
       >
         <div className="player">
           {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
-          <img
-            className={playerClassName}
-            src="images/knight-sprite.png"
-          ></img>
+          <img className={playerClassName} src="images/knight-sprite.png"></img>
         </div>
       </Animate>
     );
   else if (cell.trap) {
-    return <Trap cell={cell} />;
-  } else {
+
+   return(
+      <Trap cell={cell} />
+    );
+  }
+
+  else {
     return <div></div>;
   }
 }
@@ -308,8 +326,12 @@ function Trap({ cell }) {
       trapImage = <img src="css/images/final door" alt="Trap 10" />;
       break;
   }
-  return <div className="trap">{trapImage}</div>;
-}
+  return (
+    <div className="trap">
+      {trapImage}
+    </div>
+  );
+};
 
 function Knob({ getter, setter, text }) {
   return (

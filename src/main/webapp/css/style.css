@@ -29,9 +29,13 @@ nav a:hover{
   64%  { transform: scale(1,1)      translateY(0); }
   100% { transform: scale(1,1)      translateY(0); }
 }
-body{
+
+body {
   background-image: url(castle.jpg);
   margin: 0px;
+  background-repeat: repeat-y;
+  height: 100vh;
+  background-size: cover;
 }
 .social {
   height: 100px;
@@ -130,7 +134,19 @@ table {
 .menu-btn:hover{
   background-color: #CBB38A;
 }
-.menu-container{
+
+.menu-header {
+  background-color: rgba(0,0,0,0.6);
+  height: 150px;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-container {
   display: flex;
   justify-content: space-around;
 }
@@ -146,7 +162,7 @@ td {
   vertical-align: bottom;
 }
 table {
-  background-image: url("bg.png");
+  background-image: url(bg.png);
   background-size: cover;
   background-position: bottom;
   margin-left: 100px;
@@ -160,10 +176,10 @@ table {
 } */
 .scroll {
   height: 300px;
-  background-image: url(scroll3.png);
+  background-image: url(scroll4.png);
   text-align: center;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
   width: 900px;
   /* max-height: 50%; */
@@ -182,7 +198,7 @@ table {
   margin-top: auto;
 }
 .scroll p {
-  width: 80%;
+  width: 60%;
   align-items: center;
   /* margin: auto; */
   /* margin-top: 10%; */
@@ -261,16 +277,43 @@ table {
   height: 180px;
   max-height: 250px;
   background-image: url(quill.png);
-  background-size: cover;
-  margin-left: 10%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 5%;
 }
 .ink {
   max-width: 250px;
-  width: 230px;
-  min-width: 230px;
+  width: 180px;
+  min-width: 150px;
   height: 210px;
   max-height: 220px;
-  background-image: url(ink.png);
-  background-size: cover;
-  margin-right: 10%;
+  background-image: url(ink2.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 5%;
+}
+
+.trap img {
+  height: 25em;
+  width: 15em;
+}
+
+.trap {
+  height: 100%;
+  width: 20em;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.candle-bg{
+  background-color: rgba(0,0,0,0.6);
+  height: 200px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
