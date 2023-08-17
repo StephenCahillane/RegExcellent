@@ -7,6 +7,10 @@ nav {
   padding: 0;
 }
 
+*:focus {
+  outline: none;
+}
+
 nav a{
   text-decoration: none;
   margin-top: 0.5em;

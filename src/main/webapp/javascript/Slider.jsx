@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
 import Question from './Question'
+
 import '../css/style.css';
 
 
@@ -18,7 +19,6 @@ export default function Sliding() {
   const [playerRow, setPlayerRow] = useState(0);
   const [playerCol, setPlayerCol] = useState(0);
   const [playerClassName, setPlayerClassName] = useState("player-sprite-sheet pixel-art face-right");
-
   const [playerFacing, setPlayerFacing] = useState("");
 
   //Animation states
@@ -28,14 +28,21 @@ export default function Sliding() {
   const [subAnimateStart, setSubAnimateStart] = useState({});
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
   const [trapID, setTrapID] = useState(undefined);
+  const [onTrapSpace, setOnTrapSpace] = useState(false);
+
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
   const [animationCallback, setAnimationCallback] = useState(() => () => { });
 
 
   useEffect(() => {
-       if (playerCol % 3 == 0 && playerCol != 0) setTrapID((playerCol / 3)-1);
-       else setTrapID(undefined)}, [playerCol]
+        if (playerCol % 3 == 0 && playerCol != 0) {
+          setTrapID((playerCol / 3)-1)
+          setOnTrapSpace(true);
+        } else { 
+          setTrapID(undefined)
+          setOnTrapSpace(false);
+        }}, [playerCol]
       )
 
   const forward = () => {
@@ -102,30 +109,20 @@ export default function Sliding() {
   }, [playerFacing])
 
   const handlePlayerMove = (e) => {
-    if(e.key === "ArrowRight" && playerCol < columns){
-      if(data[playerRow][playerCol + 1].trap){
-        //alert("You've triggered a trap!");
-        setPlayerFacing("right");
-        forward();
-      } else {
-        setPlayerFacing("right");
-        forward();
-      }
+    if(e.key === "ArrowRight" && playerCol < columns && !onTrapSpace){
+      setPlayerFacing("right");
+      forward();
+
       //Check if camera needs to move forward
       if (playerCol == (left + width - 1)) {
         setLeft(playerCol + 1);
       }
     }
 
-    if(e.key === "ArrowLeft" && playerCol > 0){
-      if(data[playerRow][playerCol - 1].trap){
-        //alert("You've triggered a trap!");
+    if(e.key === "ArrowLeft" && playerCol > 1 && !onTrapSpace){
         setPlayerFacing("left");
         backward();
-      } else {
-        setPlayerFacing("left");
-        backward();
-      }
+
       //Check if camera needs to move backward
       if (playerCol <= left) {
         setLeft(playerCol - width);
@@ -189,7 +186,7 @@ export default function Sliding() {
 
       </div>
       <br></br>
-      <Question index={trapID}/>
+      <Question onTrapSpace={setOnTrapSpace} index={trapID}/>
     </div>
   );
 }
@@ -261,16 +258,15 @@ function GridComponent({
         easeType={animateEaseType}
       >
         <div className="player">
-
           {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
           <img className={playerClassName} src="images/knight-sprite.png"></img>
         </div>
       </Animate>
+      
     );
 
   else if (cell.trap) {
-
-   return(
+    return(
       <Trap cell={cell} />
     );
   }
@@ -324,6 +320,7 @@ let trapImage;
     </div>
   );
 };
+
 
 function Knob({ getter, setter, text }) {
   return (
