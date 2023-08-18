@@ -2,62 +2,58 @@ import React, { useState, useEffect } from 'react';
 import '../css/style.css';
 
 
-export default function Question({ index, setOnTrapSpace }) {
+export default function Question({ index, setOnTrapSpace, onAnswerChecked }) {
 
     const [answer, setAnswer] = useState("");
     const [entityData, setEntityData] = useState([]);
     const endpoint = "/api/questions";
-  
-    // const [index, setIndex] = useState(0);
-  
+    
     useEffect(() => {
         // Define an async function to fetch the data
         const fetchData = async () => {
             try {
                 const response = await fetch(endpoint);
-  
+    
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-  
+    
                 const data = await response.json();
                 setEntityData(data._embedded.questionList);
-  
-  
+    
+    
             } catch (error) {
                 console.error('Error fetching entity:', error);
             }
         };
-  
-  
+    
+    
         fetchData();
     }, []);
-  
-    const next = () => {
-        setIndex((idx) => idx + 1);
-        
-    }
-  
+    
+    
+    
     const handleSubmit = () => {
-        const candidate = new RegExp("^(" + answer + ")$");
+        const candidate = new RegExp(answer);
         console.log(candidate);
-  
-        const passwords = entityData.matchWords;
-        console.log(JSON.stringify(entityData));
-  
-  
-        //column
+    
+        const passwords = entityData[index].matchWords;
+        console.log(JSON.stringify(entityData[index]));
+    
+    
+        
         console.log(passwords);
-  
+    
         const isMatching = passwords.every((password) => candidate.test(password));
+        console.log(isMatching);
         if(isMatching){
             setOnTrapSpace(false);
         }
-        console.log("Answer matches:", isMatching);
-  
+        onAnswerChecked(isMatching)
+    
     }
-  
-  
+    
+    
     return (
         <><div className='backgroundBottom'>
             <div className='quill'></div>
@@ -78,4 +74,4 @@ export default function Question({ index, setOnTrapSpace }) {
             </div>
         </>
     )
-  }
+    }
