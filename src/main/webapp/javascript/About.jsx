@@ -8,7 +8,7 @@ export default function About() {
     <div className="flex-container">
       <section className="container1">
         <h1>Team RegExcellent's Side Scroller Game!</h1>
-        <img src="/images/pixel.png" alt="Character Pic"></img>
+        <img className="logo" src="/images/knight-logo.png" alt="Character Pic"></img>
         <h1>About The Game</h1>
         <p>
           This project is a mini-game where you move through side scroller while solving
@@ -47,7 +47,7 @@ export default function About() {
             <img className="social" src="/images/Kai.jpg"></img>
           </a>
         </p>
-        <h4>Skills Used</h4>
+        <h2>Skills Used</h2>
         <p>
           Java with SpringBoot as well as HTML, CSS, JavaScript, and JSON. Also
           Git/Github, Agile workflow.
