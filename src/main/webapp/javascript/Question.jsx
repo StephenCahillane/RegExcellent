@@ -34,7 +34,7 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked }) {
     
     
     const handleSubmit = () => {
-        const candidate = new RegExp("^(" + answer + ")$");
+        const candidate = new RegExp(answer);
         console.log(candidate);
     
         const passwords = entityData[index].matchWords;
