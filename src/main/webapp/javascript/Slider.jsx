@@ -129,18 +129,15 @@ export default function Sliding() {
       }
     }
   }
-  const handleManualSlide = () => {
-    if (left + width < columns) {
-      setLeft(left => left + 1);
-    } else {
-      setLeft(0);
-      if (bottom + height < rows) {
-        setBottom(bottom => bottom + 1);
-      } else {
-        setBottom(0);
-      }
-    }
-  };
+
+  const [answerMatched, setAnswerMatched] = useState(false);
+  
+  const handleAnswerChecked = (isMatching) => {
+    setAnswerMatched(isMatching);
+}
+
+
+
   return (
     <div>
       {/* <Knob getter={rows} setter={setRows} text="Row" />
@@ -186,7 +183,7 @@ export default function Sliding() {
 
       </div>
       <br></br>
-      <Question onTrapSpace={setOnTrapSpace} index={trapID}/>
+      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID}/>
     </div>
   );
 }

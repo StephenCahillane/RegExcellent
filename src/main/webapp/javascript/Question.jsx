@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../css/style.css';
 
 
-export default function Question({ index, setOnTrapSpace }) {
+export default function Question({ index, setOnTrapSpace, onAnswerChecked }) {
 
     const [answer, setAnswer] = useState("");
     const [entityData, setEntityData] = useState([]);
@@ -33,27 +33,24 @@ export default function Question({ index, setOnTrapSpace }) {
         fetchData();
     }, []);
   
-    const next = () => {
-        setIndex((idx) => idx + 1);
-        
-    }
+    
   
     const handleSubmit = () => {
         const candidate = new RegExp("^(" + answer + ")$");
         console.log(candidate);
   
-        const passwords = entityData.matchWords;
-        console.log(JSON.stringify(entityData));
+        const passwords = entityData[0].matchWords;
+        console.log(JSON.stringify(entityData[0]));
   
   
-        //column
+        
         console.log(passwords);
   
         const isMatching = passwords.every((password) => candidate.test(password));
         if(isMatching){
             setOnTrapSpace(false);
         }
-        console.log("Answer matches:", isMatching);
+        onAnswerChecked(isMatching)
   
     }
   
