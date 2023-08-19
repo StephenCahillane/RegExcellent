@@ -45,59 +45,57 @@ export default function Form() {
 
 
     return (
-        <><form onSubmit={handleSubmit}>
-            <div className="backgroundForm">
+        <div className="form-container">
+            <form onSubmit={handleSubmit}>
+                    <input
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        name="name"
+                        id="name"
+                        type="text"
+                        placeholder="Trap name.."
+                    ></input>
 
-                <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    name="name"
-                    id="name"
-                    type="text"
-                    placeholder="Trap name.."
-                ></input>
+                    <input
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        name="description"
+                        id="description"
+                        type="text"
+                        placeholder="description"
+                    ></input>
 
-                <input
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    name="description"
-                    id="description"
-                    type="text"
-                    placeholder="description"
-                ></input>
+                    <input
+                        value={matchWords}
+                        onChange={(e) => setMatchWords(e.target.value.split(","))}
+                        name="matchWords"
+                        id="matchWords"
+                        type="text"
+                        placeholder="matchWords"
+                    ></input>
 
-                <input
-                    value={matchWords}
-                    onChange={(e) => setMatchWords(e.target.value.split(","))}
-                    name="matchWords"
-                    id="matchWords"
-                    type="text"
-                    placeholder="matchWords"
-                ></input>
+                    <input
+                        value={exclusionWords}
+                        onChange={(e) => setExclusionWords(e.target.value.split(","))}
+                        name="exclusionWords"
+                        id="exclusionWords"
+                        type="text"
+                        placeholder="exclusionWords"
+                    ></input>
 
-                <input
-                    value={exclusionWords}
-                    onChange={(e) => setExclusionWords(e.target.value.split(","))}
-                    name="exclusionWords"
-                    id="exclusionWords"
-                    type="text"
-                    placeholder="exclusionWords"
-                ></input>
-
-                <input
-                    value={hint}
-                    onChange={(e) => setHint(e.target.value)}
-                    name="hint"
-                    id="hint"
-                    type="text"
-                    placeholder="hint"
-                ></input>
+                    <input
+                        value={hint}
+                        onChange={(e) => setHint(e.target.value)}
+                        name="hint"
+                        id="hint"
+                        type="text"
+                        placeholder="hint"
+                    ></input>
 
 
-            <button type="submit">Submit Trap</button>
+                    <button type="submit">Submit Trap</button>
+                </form>
             </div>
-            </form>
-        </>
     )
 
 

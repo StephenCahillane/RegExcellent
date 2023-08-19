@@ -114,6 +114,27 @@ table {
   background-color: #a0aecd;
 }
 
+.form-container{
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 5%;
+}
+
+.form-container form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container form > input{
+  border-radius: 20px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  min-height: 2em;
+}
+
+.form-container form > button{
+  max-width: 8em;
+}
 
 .question-text-box{
   background-color: #d2b48c;
