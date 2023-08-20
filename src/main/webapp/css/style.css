@@ -70,12 +70,6 @@ td {
   width: 1000px;
   vertical-align: bottom;
 }
-/* img {
-  width: 250px;
-  height: 300px;
-  margin: 0;
-  vertical-align: bottom;
-} */
 table {
   background-image: url("bg.png");
   background-size: cover;
@@ -174,11 +168,6 @@ table {
   display: flex;
   justify-content: space-around;
 }
-td {
-  height: 500px;
-  width: 1000px;
-  vertical-align: bottom;
-}
 .goblin-img {
   width: 250px;
   height: 300px;
@@ -212,6 +201,15 @@ table {
   flex-direction: column;
   margin: auto;
 }
+
+#loading{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3E332C;
+  color: whitesmoke;
+}
+
 .scroll button{
   max-width: 100px;
   max-height: 40px;
