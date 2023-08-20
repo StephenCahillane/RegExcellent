@@ -155,6 +155,7 @@ table {
 
 .menu-header {
   background-color: rgba(0,0,0,0.6);
+  border-radius: 20px;
   height: 150px;
   width: 800px;
   margin-left: auto;
@@ -342,6 +343,7 @@ table {
 
 .candle-bg{
   background-color: rgba(0,0,0,0.6);
+  border-radius: 20px;
   height: 200px;
   width: 200px;
   display: flex;
