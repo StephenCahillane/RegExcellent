@@ -1,0 +1,350 @@
+nav {
+  display: flex;
+  font-size: 1.4em;
+  font-family: 'Bungee Spice', cursive;
+  background-color: #3E332C;
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+nav a{
+  text-decoration: none;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+nav a:hover{
+  animation-name: bounce;
+  animation-timing-function: ease;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  transform-origin: bottom;
+}
+@keyframes bounce{
+  0%   { transform: scale(1,1)      translateY(0); }
+  10%  { transform: scale(1.1,.9)   translateY(0); }
+  30%  { transform: scale(.9,1.1)   translateY(-8px); }
+  50%  { transform: scale(1.05,.95) translateY(0); }
+  57%  { transform: scale(1,1)      translateY(-5px); }
+  64%  { transform: scale(1,1)      translateY(0); }
+  100% { transform: scale(1,1)      translateY(0); }
+}
+
+body {
+  background-image: url(castle.jpg);
+  margin: 0px;
+  background-repeat: repeat-y;
+  height: 100vh;
+  background-size: cover;
+}
+.social {
+  height: 100px;
+  width: auto;
+}
+.logo{
+  max-width:auto;
+  height: 500px;
+  border-radius: 8px;
+  image-rendering: pixelated;
+}
+
+
+ h1 {
+  color: whitesmoke;
+}
+p {
+  color: whitesmoke;
+  font-size: large;
+}
+h2{
+    color:whitesmoke;
+    font-weight: bold;
+} 
+td {
+  height: 550px;
+  width: 1000px;
+  vertical-align: bottom;
+}
+table {
+  background-image: url("bg.png");
+  background-size: cover;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 20px;
+  border: solid black 5px;
+}
+.social {
+  height: 100px;
+  width: auto;
+}
+.container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: ridge;
+  
+}
+
+.form-container{
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 5%;
+}
+
+.form-container form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container form > input{
+  border-radius: 20px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  min-height: 2em;
+}
+
+.form-container form > button{
+  max-width: 8em;
+}
+
+.question-text-box{
+  background-color: #D2B48C;
+  border-radius: 20px;
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 2em;
+}
+.menu-header{
+  font-size: 4em;
+  font-family: 'Bungee Spice', cursive;
+  text-align: center;
+  animation-name: float;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+@keyframes float{
+  0% {transform: translate(0, 0px);}
+  50% {transform: translate(0, 15px);}
+  100% {transform: translate(0, -0px);}
+}
+.btn-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.menu-btn{
+  min-width: 5em;
+  border-radius: 20px;
+  padding: 1em;
+  font-family: 'Bungee Spice', cursive;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  font-size: 1.25em;
+  background-color: #E4D3B5;
+}
+.menu-btn:hover{
+  background-color: #CBB38A;
+}
+
+.menu-header {
+  background-color: rgba(0,0,0,0.6);
+  height: 150px;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-container {
+  display: flex;
+  justify-content: space-around;
+}
+.goblin-img {
+  width: 250px;
+  height: 300px;
+  margin: 0;
+  vertical-align: bottom;
+}
+table {
+  background-image: url(bg.png);
+  background-size: cover;
+  background-position: bottom;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 20px;
+  border: solid black 5px;
+}
+/* .border{
+  background-image: url("border.png");
+  background-size: cover;
+} */
+.scroll {
+  height: 300px;
+  background-image: url(scroll4.png);
+  text-align: center;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 900px;
+  /* max-height: 50%; */
+  /* border: solid black 2px; */
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+#loading{
+  display:flex;
+  position: fixed;
+  z-index: 999;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #2a2827;
+  color: whitesmoke;
+}
+
+.scroll button{
+  max-width: 100px;
+  max-height: 40px;
+  background-color: red;
+  font-family: fantasy;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+}
+.scroll p {
+  width: 60%;
+  align-items: center;
+  /* margin: auto; */
+  /* margin-top: 10%; */
+  /* margin-top: 10%; */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  font-family: fantasy;
+  font-size: 15px;
+  /* height: 100%; */
+}
+.scroll h3 {
+  /* padding: 20px; */
+  margin-top: 10px;
+  font-family: fantasy;
+}
+:root {
+  --pixel-size: 4;
+}
+.player{
+  height: calc(64px * var(--pixel-size));
+  width: calc(62px * var(--pixel-size));
+  overflow: hidden;
+  position: relative;
+}
+.player-sprite-sheet{
+  animation: walk 1.5s steps(9) infinite;
+  width: calc(578px * var(--pixel-size));
+  position: absolute;
+}
+.pixel-art{
+  image-rendering: pixelated;
+}
+.face-right{
+  top: calc(-448px * var(--pixel-size));
+}
+.face-left{
+  top: calc(-320px * var(--pixel-size));
+}
+@keyframes walk{
+  from {
+    transform: translate3d(0px,0,0)
+  }
+  to {
+    transform: translate3d(-100%,0,0)
+  }
+}
+.border {
+  background-size: cover;
+  height: 650px;
+  width: 1100px;
+  background-image: url(frame.png);
+  margin-top: 15px;
+  margin-left: 95px;
+  margin-right: 95px;
+}
+.backgroundBottom {
+  width: 60%;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url(wood2.png);
+  background-size: cover;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid black 4px;
+}
+.quill {
+  max-width: 180px;
+  /* min-width: 149px; */
+  width: 120px;
+  min-height: 150px;
+  height: 180px;
+  max-height: 250px;
+  background-image: url(quill.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 5%;
+}
+.ink {
+  max-width: 250px;
+  width: 180px;
+  min-width: 150px;
+  height: 210px;
+  max-height: 220px;
+  background-image: url(ink2.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 5%;
+}
+
+.trap img {
+  height: 25em;
+  width: 20em;
+}
+
+.trap {
+  height: 100%;
+  width: 20em;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.candle-bg{
+  background-color: rgba(0,0,0,0.6);
+  height: 200px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
