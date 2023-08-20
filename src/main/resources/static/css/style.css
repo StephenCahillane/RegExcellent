@@ -91,9 +91,12 @@ table {
 }
 
 .form-container{
+  padding: 1.5em;
+  border-radius: 20px;
   margin-left: 30%;
   margin-right: 30%;
   margin-top: 5%;
+  background-color: #4393d3;
 }
 
 .form-container form{
@@ -110,6 +113,8 @@ table {
 
 .form-container form > button{
   max-width: 8em;
+  padding: 0.5em;
+  border-radius: 20px;
 }
 
 .question-text-box{
