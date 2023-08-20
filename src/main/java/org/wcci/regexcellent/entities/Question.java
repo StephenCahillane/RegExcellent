@@ -21,7 +21,7 @@ public class Question {
 
     @Id
     @GeneratedValue
-    private long QuestionId;
+    private long questionId;
 
     private String name;
     
@@ -58,11 +58,11 @@ public class Question {
 
 
     public long getQuestionId() {
-        return QuestionId;
+        return questionId;
     }
 
-    public void setQuestionId(long QuestionId) {
-        this.QuestionId = QuestionId;
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
     }
 
     public String getName() {
