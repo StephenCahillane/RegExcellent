@@ -43,15 +43,6 @@ public class Question {
     public Question(){
     }
 
-
-    // public Question(String name, String description, String matchWordsString, String exclusionWordsString, String hint){
-    //     this.name = name;
-    //     this.description = description;
-    //     this.matchWords = matchWordsString;
-    //     this.exclusionWordsString = exclusionWordsString;
-    //     this.hint = hint;
-    // }
-
     public Question(String name) {
         this.name = name;
     }
@@ -104,41 +95,4 @@ public class Question {
     public void setExclusionWords(List<String> exclusionWords) {
         this.exclusionWords = exclusionWords;
     }
-
-    // public List<String> parseMatchWords(){
-    //     if(this.matchWords == null) return new ArrayList<>();
-    //     try{
-    //         return new ObjectMapper().readValue(this.matchWordsString, new TypeReference<List<String>>(){});
-    //     } catch (Exception e) {
-    //         logger.warn("Unable to parse match words " + this.matchWordsString);
-    //         return new ArrayList<String>();
-    //     }
-    // }
-
-    // public void saveMatchWords(List<String> matchWords){
-    //     try{
-    //         this.matchWordsString = new ObjectMapper().writeValueAsString(matchWords);
-    //     } catch (JsonProcessingException e) {
-    //         logger.warn("Unable to serialize match words: " + matchWords.toString());
-    //     }
-    // }
-
-    // public List<String> parseExclusionWords(){
-    //     if(this.exclusionWordsString == null) return new ArrayList<>();
-    //     try{
-    //         return new ObjectMapper().readValue(this.exclusionWordsString, new TypeReference<List<String>>(){});
-    //     } catch (Exception e) {
-    //         logger.warn("Unable to parse exclusion words " + this.exclusionWordsString);
-    //         return new ArrayList<String>();
-    //     }
-    // }
-
-    // public void saveExclusionWords(List<String> matchWords){
-    //     try{
-    //         this.exclusionWords = new ObjectMapper().writeValueAsString(matchWords);
-    //     } catch (JsonProcessingException e) {
-    //         logger.warn("Unable to serialize match words: " + matchWords.toString());
-    //     }
-    // }
-
 }
