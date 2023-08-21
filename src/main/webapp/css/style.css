@@ -318,3 +318,38 @@ table {
   justify-content: center;
   align-items: center;
 }
+
+.tutorialBox {
+  width: 50em;
+  height: 30em;
+  background-image: url(scroll4.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  top: 5.5em;
+  left: 27%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tutorialBox button {
+  background-color: red;
+  color: white;
+  
+  width: 9em;
+  height: 3.5em;
+
+}
+
+.tutorialText {
+  font-size: 18px;
+  max-width: 70%;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: black;
+  text-align: center;
+}

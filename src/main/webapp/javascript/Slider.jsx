@@ -32,18 +32,20 @@ export default function Sliding() {
 
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
-  const [animationCallback, setAnimationCallback] = useState(() => () => {});
+  const [animationCallback, setAnimationCallback] = useState(() => () => { });
 
 
   useEffect(() => {
-        if (playerCol % 3 == 0 && playerCol != 0) {
-          setTrapID((playerCol / 3)-1)
-          setOnTrapSpace(true);
-        } else { 
-          setTrapID(undefined)
-          setOnTrapSpace(false);
-        }}, [playerCol]
-      )
+    if (playerCol % 3 == 0 && playerCol != 0) {
+      setTrapID((playerCol / 3) - 1)
+      setOnTrapSpace(true);
+      setTutorial(true);
+    } else {
+      setTrapID(undefined)
+      setOnTrapSpace(false);
+    }
+  }, [playerCol]
+  )
 
   const forward = () => {
     setAnimate(true);
@@ -58,7 +60,7 @@ export default function Sliding() {
       //setLeft((col) => col + 1);
       setPlayerCol((col) => col + 1);
       setAnimate(false);
-      setAnimationCallback(() => () => {});
+      setAnimationCallback(() => () => { });
       setAnimateDuration(0.0);
     });
   };
@@ -77,7 +79,7 @@ export default function Sliding() {
       // setLeft((col) => col - 1);
       setPlayerCol((col) => col - 1);
       setAnimate(false);
-      setAnimationCallback(() => () => {});
+      setAnimationCallback(() => () => { });
       setAnimateDuration(0.0);
     });
   };
@@ -108,7 +110,7 @@ export default function Sliding() {
   }, [playerFacing]);
 
   const handlePlayerMove = (e) => {
-    if(e.key === "ArrowRight" && playerCol < columns && !onTrapSpace){
+    if (e.key === "ArrowRight" && playerCol < columns && !onTrapSpace) {
       setPlayerFacing("right");
       forward();
 
@@ -118,9 +120,9 @@ export default function Sliding() {
       }
     }
 
-    if(e.key === "ArrowLeft" && playerCol > 1 && !onTrapSpace){
-        setPlayerFacing("left");
-        backward();
+    if (e.key === "ArrowLeft" && playerCol > 1 && !onTrapSpace) {
+      setPlayerFacing("left");
+      backward();
 
       //Check if camera needs to move backward
       if (playerCol <= left) {
@@ -129,29 +131,67 @@ export default function Sliding() {
     }
   }
 
+  const [tutorial, setTutorial] = useState(true);
+  const [tutorialText, setTutorialText] = useState("Welcome to RegQuest, the ultimate adventure where you'll embark on a journey through tutorials and cunning traps to hone your regex matching skills. Your epic quest into the world of regular expressions starts here, and here's the twist: you'll need to use regular expressions to match the passwords that operate each trap. This means that not only will you learn about regular expressions, but you'll also put your knowledge to the test by crafting regex patterns to overcome obstacles and unlock your path to victory. Are you ready to embrace the challenge and emerge victorious?");
+
+
+  const handleTutorial = () => {
+    setTutorial(false)
+  }
+
+
+
+
   const [answerMatched, setAnswerMatched] = useState(false);
-  
+
   const handleAnswerChecked = (isMatching) => {
     setAnswerMatched(isMatching);
-}
+  }
 
+
+  const renderTutorialContent = () => {
+    switch (trapID) {
+      case 1:
+        setTutorialText("For this lesson, your goal is to match specific literal characters in a text. This is the foundation of regular expressions, and it will help you get comfortable with the basic syntax. Try to match exactly what you see in the text.")
+        break;
+      case 2:
+        setTutorialText("Square brackets [ ] allow you to match a single character from a set of characters you specify. Examples:[aeiou] matches any one of the lowercase vowels ('a,' 'e,' 'i,' 'o,' 'u').[0-9] matches any digit from 0 to 9.");
+        break;
+      case 3:
+        setTutorialText("The period character (.) in regular expressions is a special metacharacter that matches any single character. While the period character is powerful for matching any character, be mindful that it might match unintended characters.")
+        break;
+      case 4:
+        setTutorialText("Caret Inside Character Class: When the caret symbol (^) is used inside a character class (square brackets [ ]), it negates the character class, making it match any character that is not in the specified set. For example, [^0-9] matches any character that is not a digit.")
+        break;
+      case 5:
+        setTutorialText("Ranges in square brackets, like [a-z], are a powerful feature in regular expressions. They allow you to match any single character that falls within a specified range of characters.")
+        break;
+      case 6:
+        setTutorialText(" [^2-5] is a character class that matches any single character that is not in the range from '2' to '5'. It essentially excludes characters '2,' '3,' '4,' and '5.' Examples:[0-9] matches any digit from '0' to '9,' but [^0-9] matches any character that is not a digit.")
+        break;
+      case 7:
+        setTutorialText("[^] can be used to filter out or exclude specific characters from your text data. For example, you might want to find all characters that are not digits between '2' and '5' in a string.")
+        break;
+      case 8:
+        setTutorialText("The {} quantifier allows you to specify exactly how many times a character or group of characters should be repeated in a regular expression. Other Quantifiers: Besides {3} to specify an exact count, you can use other quantifiers like:* to match 0 or more occurrences (e.g., az*up matches 'aup,' 'azup,' and 'azzzup'). + to match 1 or more occurrences (e.g., az+up matches 'azup' and 'azzzup' but not 'aup').? to match 0 or 1 occurrence (e.g., colou?r matches 'color' and 'colour').")
+        break;
+      case 9:
+        setTutorialText("The + quantifier in a regular expression allows you to match one or more occurrences of the preceding character or group. In the pattern 'c+' it matches one or more 'c' characters in sequence. Examples: 'c+' matches 'c' (one 'c'), 'cc' (two 'c's), 'ccc' (three 'c's), and so on. It requires at least one 'c' to match. 'ca+b' matches 'cab,' 'caab,' 'caaab,' and so on because it looks for one or more 'a' characters followed by 'b'. Quantifier Comparison: * matches 0 or more occurrences (e.g., c* matches '', 'c', 'cc', ...). + matches 1 or more occurrences (e.g., c+ matches 'c', 'cc', 'ccc', ...). ? matches 0 or 1 occurrence (e.g., c? matches '', 'c').")
+        break;
+      case 10:
+        setTutorialText("The caret ^ and dollar sign $ are anchors in regular expressions that specify the position within a line of text. ^ Caret Anchor: It matches the start of a line. When you use ^ at the beginning of a regular expression, it signifies that the pattern must begin at the very start of a line. $ Dollar Sign Anchor: It matches the end of a line. When you use $ at the end of a regular expression, it signifies that the pattern must end at the very end of a line. Examples: Pattern: ^Hello Explanation: This pattern matches lines that start with the word 'Hello.' The caret ^ specifies that 'Hello' must appear at the very beginning of the line. Pattern: '\?$' Explanation: This pattern matches lines that end with a question mark ?. The dollar sign $ specifies that the question mark must appear at the very end of the line. Pattern: '^\d+$' Explanation: This pattern matches lines that contain only digits 0-9. The caret ^ and dollar sign $ together ensure that the entire line consists of digits.")
+        break;
+    }
+  };
 
 
   return (
     <div>
-      {/* <Knob getter={rows} setter={setRows} text="Row" />
-      <Knob getter={columns} setter={setColumns} text="Columns" />
-      <Knob getter={bottom} setter={setBottom} text="Bottom" />
-      <Knob getter={left} setter={setLeft} text="Left" />
-      <Knob getter={height} setter={setHeight} text="Height" />
-      <Knob getter={width} setter={setWidth} text="Width" />
-      <Knob getter={playerRow} setter={setPlayerRow} text="playerRow"/>
-      <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/> */}
-      {/* <button onClick={handleManualSlide}>Slide Manually</button> */}
-        <div onKeyDown={handlePlayerMove} tabIndex={0}>
 
-        {/* <Knob getter={playerCol} setter={setPlayerCol} text="playerCol"/>
-        <button onClick={handleManualSlide}>Slide Manually</button> */}
+
+      <div onKeyDown={handlePlayerMove} tabIndex={0}>
+
+
 
         <Animate
           play={animate}
@@ -163,6 +203,7 @@ export default function Sliding() {
           onComplete={animationCallback}
         >
           <GridComponent
+
             data={data}
             bottom={bottom}
             left={left}
@@ -177,12 +218,23 @@ export default function Sliding() {
             subAnimateEnd={subAnimateEnd}
             handlePlayerMove={handlePlayerMove}
             playerClassName={playerClassName}
+
           />
+          {tutorial && onTrapSpace && (<div className="tutorialBox">
+            <p className="tutorialText">
+              Welcome to RegQuest, the ultimate adventure where you'll embark on a journey through tutorials and cunning traps to hone your regex matching skills.
+              Your epic quest into the world of regular expressions starts here, and here's the twist:
+              you'll need to use regular expressions to match the passwords that operate each trap.
+              This means that not only will you learn about regular expressions, but you'll also put your knowledge to the test by crafting regex patterns to overcome obstacles and unlock your path to victory.
+              Are you ready to embrace the challenge and emerge victorious?
+            </p>
+            <button onClick={handleTutorial}>Close</button>
+          </div>)}
         </Animate>
 
       </div>
       <br></br>
-      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID}/>
+      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID} />
     </div>
   );
 }
@@ -233,17 +285,17 @@ function GridComponent({
 }
 
 
-  function CellComponent({
-    cell,
-    playerRow,
-    playerCol,
-    animate,
-    animateDuration,
-    animateEaseType,
-    subAnimateStart,
-    subAnimateEnd,
-    playerClassName,
-  }) {
+function CellComponent({
+  cell,
+  playerRow,
+  playerCol,
+  animate,
+  animateDuration,
+  animateEaseType,
+  subAnimateStart,
+  subAnimateEnd,
+  playerClassName,
+}) {
   if (cell.row == playerRow && cell.col == playerCol)
     return (
       <Animate
@@ -259,10 +311,10 @@ function GridComponent({
           <img className={playerClassName} src="images/knight-sprite.png"></img>
         </div>
       </Animate>
-      
+
     );
   else if (cell.trap) {
-    return(
+    return (
       <Trap cell={cell} />
     );
   }
