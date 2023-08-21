@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../css/style.css';
 
 
 export default function Question({ index, setOnTrapSpace, onAnswerChecked }) {
