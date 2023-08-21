@@ -54,15 +54,15 @@ body {
 }
 
 
- h1 {
+.container1 h1 {
   color: whitesmoke;
 }
-p {
+.container1 p {
   color: whitesmoke;
   font-size: large;
   max-width: 50%;
 }
-h2{
+.container1 h2{
     color:whitesmoke;
     font-weight: bold;
 } 
