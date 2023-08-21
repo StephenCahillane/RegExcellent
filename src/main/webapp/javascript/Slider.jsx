@@ -231,11 +231,7 @@ export default function Sliding() {
           />
           {tutorial && (<div className="tutorialBox">
             <p className="tutorialText">
-              Welcome to RegQuest, the ultimate adventure where you'll embark on a journey through tutorials and cunning traps to hone your regex matching skills.
-              Your epic quest into the world of regular expressions starts here, and here's the twist:
-              you'll need to use regular expressions to match the passwords that operate each trap.
-              This means that not only will you learn about regular expressions, but you'll also put your knowledge to the test by crafting regex patterns to overcome obstacles and unlock your path to victory.
-              Are you ready to embrace the challenge and emerge victorious?
+             {tutorialText}
             </p>
             <button onClick={handleTutorial}>Close</button>
           </div>)}
