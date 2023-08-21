@@ -57,14 +57,17 @@ body {
  h1 {
   color: whitesmoke;
 }
+
 p {
   color: whitesmoke;
   font-size: large;
 }
+
 h2{
     color:whitesmoke;
     font-weight: bold;
 } 
+
 td {
   height: 550px;
   width: 1000px;
@@ -198,6 +201,8 @@ table {
   margin-right: auto;
   margin-top: auto;
 }
+
+
 .scroll p {
   width: 60%;
   align-items: center;

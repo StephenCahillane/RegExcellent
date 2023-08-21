@@ -148,6 +148,7 @@ export default function Sliding() {
     setAnswerMatched(isMatching);
   }
 
+ 
 
   const renderTutorialContent = () => {
     switch (trapID) {
@@ -185,6 +186,14 @@ export default function Sliding() {
   };
 
 
+  useEffect(() => {
+    renderTutorialContent();
+  }, [playerCol, trapID]);
+
+
+
+
+
   return (
     <div>
 
@@ -220,7 +229,7 @@ export default function Sliding() {
             playerClassName={playerClassName}
 
           />
-          {tutorial && onTrapSpace && (<div className="tutorialBox">
+          {tutorial && (<div className="tutorialBox">
             <p className="tutorialText">
               Welcome to RegQuest, the ultimate adventure where you'll embark on a journey through tutorials and cunning traps to hone your regex matching skills.
               Your epic quest into the world of regular expressions starts here, and here's the twist:
