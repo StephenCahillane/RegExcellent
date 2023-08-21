@@ -1,14 +1,12 @@
 import React from "react";
 
-export default function HUD() {
+export default function HUD({lives, gems}) {
     return(
         <div className="hud">
             <h4>Sir Reginald</h4>
-            <h5>Shillings: 0</h5>
+            <h5>Gems: {gems}</h5>
             <div className="lives">
-                <img src="/images/heart.png"></img>
-                <img src="/images/heart.png"></img>
-                <img src="/images/heart.png"></img>
+                {new Array(lives).fill(undefined).map((index) => <img key={index} src="/images/heart.png"></img>)}
             </div>
         </div>
     );

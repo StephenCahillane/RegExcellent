@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-export default function Question({ index, setOnTrapSpace, onAnswerChecked }) {
+export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives, setLives, gems, setGems }) {
 
     const [answer, setAnswer] = useState("");
     const [entityData, setEntityData] = useState([]);
@@ -39,14 +39,15 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked }) {
         const passwords = entityData[index].matchWords;
         console.log(JSON.stringify(entityData[index]));
     
-    
-        
         console.log(passwords);
     
         const isMatching = passwords.every((password) => candidate.test(password));
         console.log(isMatching);
         if(isMatching){
             setOnTrapSpace(false);
+            setGems(gems + 10);
+        } else if(!isMatching){
+            setLives(lives - 1);
         }
         onAnswerChecked(isMatching)
     

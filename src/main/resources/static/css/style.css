@@ -209,7 +209,7 @@ table {
 }
 
 .hud{
-  max-width: 10em;
+  width: 10em;
   max-height: 6em;
   padding: 0.5em;
   border-radius: 10px;
