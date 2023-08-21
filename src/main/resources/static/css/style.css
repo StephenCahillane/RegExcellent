@@ -57,7 +57,7 @@ body {
  h1 {
   color: whitesmoke;
 }
-p {
+.container1 p {
   color: whitesmoke;
   font-size: large;
 }
@@ -206,6 +206,29 @@ table {
   display: flex;
   flex-direction: column;
   margin: auto;
+}
+
+.hud{
+  max-width: 10em;
+  max-height: 6em;
+  padding: 0.5em;
+  border-radius: 10px;
+  margin-left: 5%;
+  font-family: 'Bungee Spice', cursive;
+}
+
+.hud h4, h5{
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
+}
+
+.lives{
+  display: flex;
+}
+
+.lives img{
+  max-width: 3em;
+  max-height: 3em;
 }
 
 #loading{

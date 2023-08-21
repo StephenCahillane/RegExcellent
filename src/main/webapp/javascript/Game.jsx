@@ -1,5 +1,6 @@
 import React from "react";
-import Sliding from './Slider.jsx'
+import Sliding from './Slider.jsx';
+
 
 import Question from "./Question.jsx";
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
 import Question from './Question'
+import HUD from './HUD.jsx';
 
 
 export default function Sliding() {
@@ -207,6 +208,7 @@ function GridComponent({
         <tbody>
           {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
             <tr key={`Row${1 * bottom + rowIdx}`}>
+            <HUD />
               {dataRow.slice(left, left + width).map((cell, columnIdx) => (
                 <td key={`Col${1 * left + columnIdx}`}>
                   <CellComponent
