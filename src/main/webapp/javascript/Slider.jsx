@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
 import Question from './Question'
 
-import '../css/style.css';
-
 
 export default function Sliding() {
   const [data, setData] = useState([[]]);
