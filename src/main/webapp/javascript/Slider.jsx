@@ -125,33 +125,13 @@ export default function Sliding() {
     }
   }, 100)
 
-  const anything = () => {
-    if (moveInterval) {
-      console.log("clearing interval");
-      clearInterval(moveInterval);
-    }
-
+  useEffect(() => {
     if (playerFacing === "left") {
       setPlayerClassName("player-sprite-sheet pixel-art face-left");
     } else {
       setPlayerClassName("player-sprite-sheet pixel-art face-right");
     }
-
-    if (isMoving) {
-      setMoveInterval(
-        setInterval(() => {
-          console.log("running new interval");
-          if (playerFacing === "right" && playerCol < columns && !onTrapSpace) {
-            forward();
-          }
-
-          if (playerFacing === "left" && playerCol > 0 && !onTrapSpace) {
-            backward();
-          }
-        }, 500)
-      );
-    }
-  }
+  }, [playerFacing])
 
   const handlePlayerMove = (e) => {
     if (e.key === "ArrowRight" && playerCol < columns && !onTrapSpace) {
