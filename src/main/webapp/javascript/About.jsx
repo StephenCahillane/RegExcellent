@@ -13,13 +13,19 @@ export default function About() {
           This project is a mini-game where you move through side scroller while solving
           regular expression questions. These questions are prompted when
           encountering a trap space,so be careful! Simply let your character move 
-          and when you encounter a trap answer the question.
+          and when you encounter a trap answer the question. We implemented the viewport by using a basic
+          column and row format. We then filled each cell with data such as the column the player is currently in,
+          and trap cells that we populated with trapID's. These trap ID's are linked with specific pictures and questions 
+          that will prompt when encountering teh trap cell. We used ReactSimple Animate to implement animations of the knight 
+          walking in place, as well as CSS animate to make the movement between cells fluid.
         </p>
         <h1>About our Team</h1>
         <p>
-          We have worked together ove the course of the last three week in order
+          We have worked together over the course of the last three week in order
           to deliver this project. Through these last three weeks we have
-          learned the value of working as a team and effective communication.
+          learned the value of working as a team and effective communication. Learned how to effectively 
+          "divide & conquer" making it much easier to get a large scale project done. The use of a SCRUM board 
+          was key to our organization efforts , which enabled us to have a cohesive story for each feature we wanted to add.
           Here are a few links to our individual portfolio pages!
         </p>
         <h2>Mckeon Campbell</h2>
@@ -49,7 +55,7 @@ export default function About() {
         <h2>Skills Used</h2>
         <p>
           Java with SpringBoot as well as HTML, CSS, JavaScript, and JSON. Also
-          Git/Github, Agile workflow.
+          Git/Github, Agile workflow, ReactSimple Animate, as well as CSS animate.
         </p>
       </section>
     </div>

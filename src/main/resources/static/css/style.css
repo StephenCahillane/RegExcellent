@@ -54,16 +54,16 @@ body {
 }
 
 
- h1 {
+ .container h1 {
   color: whitesmoke;
 }
 
-p {
-  color: black;
+.container1 p {
+  color: whitesmoke;
   font-size: large;
+  max-width: 50%;
 }
-
-h2{
+.container h2{
     color:whitesmoke;
     font-weight: bold;
 } 
@@ -86,11 +86,14 @@ table {
   width: auto;
 }
 .container1 {
-  display: flex;
   flex-direction: column;
   align-items: center;
   border-style: ridge;
-  
+  background-color: rgb(189, 122, 34);
+  background-image: url("Aboutbg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
 }
 
 .form-container{
