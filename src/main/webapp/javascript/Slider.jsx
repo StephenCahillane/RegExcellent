@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import Question from './Question'
+import HUD from './hud.jsx';
 
 
 export default function Sliding() {
@@ -16,6 +18,8 @@ export default function Sliding() {
   //Player coordinates and details
   const [playerRow, setPlayerRow] = useState(0);
   const [playerCol, setPlayerCol] = useState(0);
+  const [lives, setLives] = useState(3);
+  const [gems, setGems] = useState(0);
   const [playerClassName, setPlayerClassName] = useState("player-sprite-sheet pixel-art face-right");
   const [playerFacing, setPlayerFacing] = useState("");
 
@@ -31,6 +35,8 @@ export default function Sliding() {
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
   const [animationCallback, setAnimationCallback] = useState(() => () => { });
+
+  const navigate = useNavigate();
 
 
 
@@ -51,7 +57,16 @@ export default function Sliding() {
       setTrapID(undefined)
       setOnTrapSpace(false);
     }
-  }, [playerCol]
+
+    if(lives < 1){
+      if(confirm("You've run out of lives! Would you like to retry your quest?")){
+        setPlayerCol(0);
+        setLives(3);
+      } else {
+        navigate("/");
+      }
+    }
+  }, [playerCol, lives]
   )
 
   const forward = () => {
@@ -234,19 +249,20 @@ export default function Sliding() {
             subAnimateEnd={subAnimateEnd}
             handlePlayerMove={handlePlayerMove}
             playerClassName={playerClassName}
+            lives={lives}
+            gems={gems}
+            />
 
-          />
           {tutorial && (<div className="tutorialBox">
             <p className="tutorialText">
-             {tutorialText}
+              {tutorialText}
             </p>
             <button onClick={handleTutorial}>Close</button>
           </div>)}
         </Animate>
-
       </div>
       <br></br>
-      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID} />
+      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID} lives={lives} setLives={setLives} gems={gems} setGems={setGems}/>
     </div>
   );
 }
@@ -266,6 +282,8 @@ function GridComponent({
   subAnimateEnd,
   handlePlayerMove,
   playerClassName,
+  lives,
+  gems
 }) {
   return (
     <div onKeyDown={handlePlayerMove} tabIndex={0}>
@@ -273,6 +291,7 @@ function GridComponent({
         <tbody>
           {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
             <tr key={`Row${1 * bottom + rowIdx}`}>
+            <HUD lives={lives} gems={gems}/>
               {dataRow.slice(left, left + width).map((cell, columnIdx) => (
                 <td key={`Col${1 * left + columnIdx}`}>
                   <CellComponent
