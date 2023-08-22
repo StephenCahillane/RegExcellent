@@ -14,7 +14,6 @@ export default function Sliding() {
   const [height, setHeight] = useState(5);
   const [width, setWidth] = useState(5);
 
-
   //Player coordinates and details
   const [playerRow, setPlayerRow] = useState(0);
   const [playerCol, setPlayerCol] = useState(0);
@@ -31,11 +30,9 @@ export default function Sliding() {
   const [subAnimateEnd, setSubAnimateEnd] = useState({});
   const [trapID, setTrapID] = useState(undefined);
   const [onTrapSpace, setOnTrapSpace] = useState(false);
-
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
   const [animationCallback, setAnimationCallback] = useState(() => () => { });
-
   const navigate = useNavigate();
 
 
@@ -147,13 +144,9 @@ export default function Sliding() {
   const [tutorial, setTutorial] = useState(true);
   const [tutorialText, setTutorialText] = useState("Welcome to RegQuest, the ultimate adventure where you'll embark on a journey through tutorials and cunning traps to hone your regex matching skills. Your epic quest into the world of regular expressions starts here, and here's the twist: you'll need to use regular expressions to match the passwords that operate each trap. This means that not only will you learn about regular expressions, but you'll also put your knowledge to the test by crafting regex patterns to overcome obstacles and unlock your path to victory. Are you ready to embrace the challenge and emerge victorious?");
 
-
   const handleTutorial = () => {
     setTutorial(false)
   }
-
-
-
 
   const [answerMatched, setAnswerMatched] = useState(false);
 
@@ -162,11 +155,11 @@ export default function Sliding() {
   }
 
  
-
   const renderTutorialContent = () => {
     switch (trapID) {
       case 0:
         setTutorialText("For this lesson, your goal is to match specific literal characters in a text. This is the foundation of regular expressions, and it will help you get comfortable with the basic syntax. Try to match exactly what you see in the text.<br>  Example: <br> <code> CAN => CAN <br> GET => GET <br> PUT => PUT <code>");
+        
         break;
       case 1:
         setTutorialText("Square brackets <code> [ ]</code> allow you to match a character from a set of characters you specify. <br> Example: <br> <code> [aeiou] </code> matches any one of the lowercase vowels ('a,' 'e,' 'i,' 'o,' 'u') <br> <code> [0-9] </code> matches any digit from 0 to 9."
@@ -181,7 +174,6 @@ export default function Sliding() {
         break;
       case 4:
         setTutorialText("Ranges in square brackets, like <code>[a-z] </code>, are a powerful feature in regular expressions. They allow you to match any single character that falls within a specified range of characters. <br> Example: <br> <code>[a-z]</code> matches any lowercase letter. <br> <code>[0-9]</code> matches any digit from 0 through 9 inclusive. <br> <code> [A-W] </code> matches any character from A through W inclusive.")
-        ("Ranges in square brackets, like <code>[a-z]</code>, are a powerful feature in regular expressions. They allow you to match any single character that falls within a specified range of characters.")
         break;
       case 5:
         setTutorialText(" <code> [^2-5]</code> is a character class that matches any single character that is not in the range from '2' to '5'. It essentially excludes characters '2,' '3,' '4,' and '5.' <br> Example: <br> <code>[0-9]</code> matches any digit from '0' to '9,' <br> <code> [^0-9]</code> matches any character that is not a digit.")
@@ -201,13 +193,14 @@ export default function Sliding() {
     }
   };
 
+  
+
+
 
   useEffect(() => {
     renderTutorialContent();
+    
   }, [playerCol, trapID]);
-
-
-
 
 
   return (
@@ -215,8 +208,6 @@ export default function Sliding() {
 
 
       <div onKeyDown={handlePlayerMove} tabIndex={0}>
-
-
 
         <Animate
           play={animate}
@@ -256,7 +247,7 @@ export default function Sliding() {
         </Animate>
       </div>
       <br></br>
-      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID} lives={lives} setLives={setLives} gems={gems} setGems={setGems}/>
+      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID} lives={lives} setLives={setLives} gems={gems} setGems={setGems} playerCol = {playerCol}/>
     </div>
   );
 }
