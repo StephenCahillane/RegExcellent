@@ -3,7 +3,7 @@ import { Animate, AnimateKeyframes } from "react-simple-animate";
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Question from './Question'
 import HUD from './hud.jsx';
-
+import Parser from 'html-react-parser';
 
 export default function Sliding() {
   const [data, setData] = useState([[]]);
@@ -166,34 +166,37 @@ export default function Sliding() {
   const renderTutorialContent = () => {
     switch (trapID) {
       case 0:
-        setTutorialText("For this lesson, your goal is to match specific literal characters in a text. This is the foundation of regular expressions, and it will help you get comfortable with the basic syntax. Try to match exactly what you see in the text.")
+        setTutorialText("For this lesson, your goal is to match specific literal characters in a text. This is the foundation of regular expressions, and it will help you get comfortable with the basic syntax. Try to match exactly what you see in the text.<br>  Example: <br> <code> CAN => CAN <br> GET => GET <br> PUT => PUT <code>");
         break;
       case 1:
-        setTutorialText("Square brackets [ ] allow you to match a single character from a set of characters you specify. Examples:[aeiou] matches any one of the lowercase vowels ('a,' 'e,' 'i,' 'o,' 'u').[0-9] matches any digit from 0 to 9.");
+        setTutorialText("Square brackets <code> [ ]</code> allow you to match a character from a set of characters you specify. <br> Example: <br> <code> [aeiou] </code> matches any one of the lowercase vowels ('a,' 'e,' 'i,' 'o,' 'u') <br> <code> [0-9] </code> matches any digit from 0 to 9."
+        );
         break;
       case 2:
-        setTutorialText("The period character (.) in regular expressions is a special metacharacter that matches any single character. While the period character is powerful for matching any character, be mindful that it might match unintended characters.")
+        setTutorialText("The period character <code> (.) </code> in regular expressions is a special metacharacter that matches any single character. While the period character is powerful for matching any character, be mindful that it might match unintended characters. <br> Example: <br> <code> (.)</code> matches any single character <br> <code> ( ...)</code> matches any three characters.")
         break;
       case 3:
-        setTutorialText("Caret Inside Character Class: When the caret symbol (^) is used inside a character class (square brackets [ ]), it negates the character class, making it match any character that is not in the specified set. For example, [^0-9] matches any character that is not a digit.")
+        setTutorialText("When the caret symbol <code> (^)</code> is used inside a character class (square brackets [ ]), it negates the character class, making it match any character that is not in the specified set. <br> Example: <br> <code>[^0-9]</code> matches any character that is not a digit. <br> <code> [^a-z] </code> matches any character that is not a lowercase letter. <br> <code> [^A-D] </code> matches any character that is not A to D inclusive.")
+        ("Caret Inside Character Class: When the caret symbol <code>(^)</code> is used inside a character class (square brackets <code> [ ]</code>), it negates the character class, making it match any character that is not in the specified set. For example, <code>[^0-9]</code> matches any character that is not a digit.")
         break;
       case 4:
-        setTutorialText("Ranges in square brackets, like [a-z], are a powerful feature in regular expressions. They allow you to match any single character that falls within a specified range of characters.")
+        setTutorialText("Ranges in square brackets, like <code>[a-z] </code>, are a powerful feature in regular expressions. They allow you to match any single character that falls within a specified range of characters. <br> Example: <br> <code>[a-z]</code> matches any lowercase letter. <br> <code>[0-9]</code> matches any digit from 0 through 9 inclusive. <br> <code> [A-W] </code> matches any character from A through W inclusive.")
+        ("Ranges in square brackets, like <code>[a-z]</code>, are a powerful feature in regular expressions. They allow you to match any single character that falls within a specified range of characters.")
         break;
       case 5:
-        setTutorialText(" [^2-5] is a character class that matches any single character that is not in the range from '2' to '5'. It essentially excludes characters '2,' '3,' '4,' and '5.' Examples:[0-9] matches any digit from '0' to '9,' but [^0-9] matches any character that is not a digit.")
+        setTutorialText(" <code> [^2-5]</code> is a character class that matches any single character that is not in the range from '2' to '5'. It essentially excludes characters '2,' '3,' '4,' and '5.' <br> Example: <br> <code>[0-9]</code> matches any digit from '0' to '9,' <br> <code> [^0-9]</code> matches any character that is not a digit.")
         break;
       case 6:
-        setTutorialText("[^] can be used to filter out or exclude specific characters from your text data. For example, you might want to find all characters that are not digits between '2' and '5' in a string.")
+        setTutorialText("<code>[^]</code> can also be used to filter out or exclude specific characters from your text data. For example, you might want to find all characters that are not digits between '2' and '5' in a string. <code>[^2-5]</code> would match every other character in the string that wasn't 2 - 5 inclusive.")
         break;
       case 7:
-        setTutorialText("The {} quantifier allows you to specify exactly how many times a character or group of characters should be repeated in a regular expression. Other Quantifiers: Besides {3} to specify an exact count, you can use other quantifiers like:* to match 0 or more occurrences (e.g., az*up matches 'aup,' 'azup,' and 'azzzup'). + to match 1 or more occurrences (e.g., az+up matches 'azup' and 'azzzup' but not 'aup').? to match 0 or 1 occurrence (e.g., colou?r matches 'color' and 'colour').")
+        setTutorialText("The <code>{}</code> quantifier allows you to specify exactly how many times a character or group of characters should be repeated in a regular expression. Other Quantifiers: Besides <code>{3}</code> to specify an exact count, you can use other quantifiers like: <code>(*)</code> to match 0 or more occurrences (Example: <code>az*up</code> matches 'aup,' 'azup,' and 'azzzup'). <br>  <code>(+)</code> to match 1 or more occurrences (Example:<code>az+up</code> matches 'azup' and 'azzzup' but not 'aup'). <br> <code>(?)</code> to match 0 or 1 occurrence (Example: <code>colou?r</code> matches 'color' and 'colour').")
         break;
       case 8:
-        setTutorialText("The + quantifier in a regular expression allows you to match one or more occurrences of the preceding character or group. In the pattern 'c+' it matches one or more 'c' characters in sequence. Examples: 'c+' matches 'c' (one 'c'), 'cc' (two 'c's), 'ccc' (three 'c's), and so on. It requires at least one 'c' to match. 'ca+b' matches 'cab,' 'caab,' 'caaab,' and so on because it looks for one or more 'a' characters followed by 'b'. Quantifier Comparison: * matches 0 or more occurrences (e.g., c* matches '', 'c', 'cc', ...). + matches 1 or more occurrences (e.g., c+ matches 'c', 'cc', 'ccc', ...). ? matches 0 or 1 occurrence (e.g., c? matches '', 'c').")
+        setTutorialText("The <code>+</code> quantifier in a regular expression allows you to match one or more occurrences of the preceding character or group. In the pattern <code>'c+'</code> matches one or more 'c' characters in sequence. <br> Example: <br>  <code>'c+'</code> matches 'c' (one 'c'), <br>  <code>'cc'</code> matches (two 'c's), <br>  <code> 'ccc'</code> matches (three 'c's) <br> It requires at least one 'c' to match.  <code>'ca+b'</code> matches 'cab,' 'caab,' 'caaab,' and so on because it looks for one or more 'a' characters followed by 'b'. )' ('The <code>+</code> quantifier in a regular expression allows you to match one or more occurrences of the preceding character or group. In the pattern <code>'c+'</code> it matches one or more 'c' characters in sequence. Examples: <code> 'c+'</code> matches 'c' (one 'c'), 'cc' (two 'c's), 'ccc' (three 'c's), and so on. It requires at least one 'c' to match. <code>'ca+b'</code> matches 'cab,' 'caab,' 'caaab,' and so on because it looks for one or more 'a' characters followed by 'b'.<br> Quantifier Comparison: <code>*</code> matches 0 or more occurrences (e.g., <code>c*</code> matches '', 'c', 'cc', ...). <code>+</code> matches 1 or more occurrences (e.g., <code>c+</code> matches 'c', 'cc', 'ccc', ...). <code>?</code> matches 0 or 1 occurrence (e.g., <code>c?</code> matches '', 'c').")
         break;
       case 9:
-        setTutorialText("The caret ^ and dollar sign $ are anchors in regular expressions that specify the position within a line of text. ^ Caret Anchor: It matches the start of a line. When you use ^ at the beginning of a regular expression, it signifies that the pattern must begin at the very start of a line. $ Dollar Sign Anchor: It matches the end of a line. When you use $ at the end of a regular expression, it signifies that the pattern must end at the very end of a line. Examples: Pattern: ^Hello Explanation: This pattern matches lines that start with the word 'Hello.' The caret ^ specifies that 'Hello' must appear at the very beginning of the line. Pattern: '\?$' Explanation: This pattern matches lines that end with a question mark ?. The dollar sign $ specifies that the question mark must appear at the very end of the line. Pattern: '^\d+$' Explanation: This pattern matches lines that contain only digits 0-9. The caret ^ and dollar sign $ together ensure that the entire line consists of digits.")
+        setTutorialText("The caret <code>^</code> and dollar sign <code>$</code> are anchors in regular expressions that specify the position within a line of text. <code>(^)</code> Caret Anchor matches the start of a line. When you use <code>^</code> at the beginning of a regular expression, it signifies that the pattern must begin at the very start of a line. <code>($)</code> Dollar Sign Anchor matches the end of a line. When you use <code>$</code> at the end of a regular expression, it signifies that the pattern must end at the very end of a line. <br> Example: <br> <code>(^Hello World)</code> matches 'Hello'. <br>  <code>'\?$'</code> this matches lines that end with a question mark '?'. The dollar sign <code> $</code> specifies that the question mark must appear at the very end of the line. <br> <code>^\d+$</code>  matches lines that contain only digits 0-9. The caret <code>^</code> and dollar sign <code>$</code> together ensure that the entire line consists of digits. (<code>\d</code> matches any digit 0 -9)")
         break;
     }
   };
@@ -246,7 +249,7 @@ export default function Sliding() {
 
           {tutorial && (<div className="tutorialBox">
             <p className="tutorialText">
-              {tutorialText}
+              {Parser(tutorialText)}
             </p>
             <button onClick={handleTutorial}>Close</button>
           </div>)}
