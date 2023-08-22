@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import Question from './Question'
 import HUD from './hud.jsx';
 
@@ -35,6 +36,8 @@ export default function Sliding() {
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
   const [animationCallback, setAnimationCallback] = useState(() => () => { });
 
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (playerCol % 3 == 0 && playerCol != 0) {
@@ -45,7 +48,16 @@ export default function Sliding() {
       setTrapID(undefined)
       setOnTrapSpace(false);
     }
-  }, [playerCol]
+
+    if(lives < 1){
+      if(confirm("You've run out of lives! Would you like to retry your quest?")){
+        setPlayerCol(0);
+        setLives(3);
+      } else {
+        navigate("/");
+      }
+    }
+  }, [playerCol, lives]
   )
 
   const forward = () => {
