@@ -33,6 +33,15 @@ export default function Sliding() {
   const [animationCallback, setAnimationCallback] = useState(() => () => { });
 
 
+
+ 
+
+  
+    
+  
+
+
+
   useEffect(() => {
     if (playerCol % 3 == 0 && playerCol != 0) {
       setTrapID((playerCol / 3) - 1)
