@@ -113,10 +113,12 @@ export default function Sliding() {
     if(isMoving){
       if (playerFacing === "right" && playerCol < columns && !onTrapSpace) {
         forward();
+        console.log("moving forward");
       }
 
       if (playerFacing === "left" && playerCol > 0 && !onTrapSpace) {
         backward();
+        console.log("moving backward");
       }
     }
   }, 100)
@@ -172,7 +174,7 @@ export default function Sliding() {
   };
 
   const stopMoving = (e) => {
-    if (e.key === "ArrowRight" && e.key === "ArrowLeft") setIsMoving(false);
+    setIsMoving(false);
   };
 
   const [tutorial, setTutorial] = useState(true);
