@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives, setLives, gems, setGems, setIsMatching }) {
+export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives, setLives, gems, setGems, playerCol}) {
 
     const [answer, setAnswer] = useState("");
     const [entityData, setEntityData] = useState([]);
@@ -31,8 +31,14 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
         fetchData();
     }, []);
     
-    
-    
+
+    useEffect(() => {
+    if (index == undefined){
+        setIsMatching(false);
+    }
+}, [playerCol])
+
+
     const handleSubmit = () => {
         const candidate = new RegExp(answer);
         
@@ -70,6 +76,7 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
                 <div>
                     <input name="answer" type="text" placeholder="Answer" onChange={(event) => setAnswer(event.target.value)}></input>
                     <button className={isMatching ? "matching" : "nonmatching"} onClick={handleSubmit}>Submit Answer</button>
+                    <h1>{JSON.stringify(index)}</h1>
                 </div>
                 {/* <button onClick={next}>Next</button> */}
                 

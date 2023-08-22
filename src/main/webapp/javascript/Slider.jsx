@@ -247,7 +247,7 @@ export default function Sliding() {
         </Animate>
       </div>
       <br></br>
-      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID} lives={lives} setLives={setLives} gems={gems} setGems={setGems}/>
+      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID} lives={lives} setLives={setLives} gems={gems} setGems={setGems} playerCol = {playerCol}/>
     </div>
   );
 }
