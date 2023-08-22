@@ -48,7 +48,9 @@ export default function Sliding() {
       setTrapID(undefined)
       setOnTrapSpace(false);
     }
+  }, [playerCol])
 
+  useEffect(() => {
     if(lives < 1){
       if(confirm("You've run out of lives! Would you like to retry your quest?")){
         setPlayerCol(0);
@@ -57,8 +59,7 @@ export default function Sliding() {
         navigate("/");
       }
     }
-  }, [playerCol, lives]
-  )
+  }, [lives])
 
   const forward = () => {
     setAnimate(true);
