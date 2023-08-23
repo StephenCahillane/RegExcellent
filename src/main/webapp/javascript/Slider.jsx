@@ -40,8 +40,8 @@ export default function Sliding() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (playerCol % 3 == 0 && playerCol != 0) {
-      setTrapID(playerCol / 3 - 1);
+    if (playerCol % 6 == 0 && playerCol != 0 && playerCol != left) {
+      setTrapID(playerCol / 6 - 1);
       setOnTrapSpace(true);
       setTutorial(true);
     } else {
@@ -100,8 +100,8 @@ export default function Sliding() {
   useEffect(() => {
     function cell(row, col) {
       let trap = undefined;
-      if (col % 3 === 0 && col != 0) {
-        trap = Math.ceil(col / 3);
+      if (col % 6 === 0 && col != 0 && col != left) {
+        trap = Math.ceil(col / 6);
       }
       return { row: row, col: col, trap: trap };
     }
