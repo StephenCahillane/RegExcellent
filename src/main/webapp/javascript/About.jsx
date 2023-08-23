@@ -24,8 +24,8 @@ export default function About() {
           then filled each cell with data such as the column the player is
           currently in, and trap cells that we populated with trapID's. These
           trap ID's are linked with specific pictures and questions that will
-          prompt when encountering the trap cell. We used ReactSimple Animate to
-          implement animations of the knight walking in place, as well as CSS
+          prompt when encountering the trap cell. We used CSS Animate to
+          implement animations of the knight walking in place, as well as ReactSimple
           animate to make the movement between cells fluid.
         </p>
         <h2>About our Team</h2>
