@@ -40,8 +40,8 @@ export default function Sliding() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (playerCol % 3 == 0 && playerCol != 0) {
-      setTrapID(playerCol / 3 - 1);
+    if (playerCol % 6 === 0 && playerCol != 0 && playerCol != left) {
+      setTrapID(playerCol / 6 - 1);
       setOnTrapSpace(true);
       setTutorial(true);
     } else {
@@ -100,8 +100,8 @@ export default function Sliding() {
   useEffect(() => {
     function cell(row, col) {
       let trap = undefined;
-      if (col % 3 === 0 && col != 0) {
-        trap = Math.ceil(col / 3);
+      if (col % 6 === 0 && col != 0 && col != left) {
+        trap = Math.ceil(col / 6);
       }
       return { row: row, col: col, trap: trap };
     }
@@ -188,7 +188,7 @@ export default function Sliding() {
         break;
       case 3:
         setTutorialText("When the caret symbol <code> (^)</code> is used inside a character class (square brackets [ ]), it negates the character class, making it match any character that is not in the specified set. <br> Example: <br> <code>[^0-9]</code> matches any character that is not a digit. <br> <code> [^a-z] </code> matches any character that is not a lowercase letter. <br> <code> [^A-D] </code> matches any character that is not A to D inclusive.")
-        ("Caret Inside Character Class: When the caret symbol <code>(^)</code> is used inside a character class (square brackets <code> [ ]</code>), it negates the character class, making it match any character that is not in the specified set. For example, <code>[^0-9]</code> matches any character that is not a digit.")
+        // ("Caret Inside Character Class: When the caret symbol <code>(^)</code> is used inside a character class (square brackets <code> [ ]</code>), it negates the character class, making it match any character that is not in the specified set. For example, <code>[^0-9]</code> matches any character that is not a digit.")
         break;
       case 4:
         setTutorialText("Ranges in square brackets, like <code>[a-z] </code>, are a powerful feature in regular expressions. They allow you to match any single character that falls within a specified range of characters. <br> Example: <br> <code>[a-z]</code> matches any lowercase letter. <br> <code>[0-9]</code> matches any digit from 0 through 9 inclusive. <br> <code> [A-W] </code> matches any character from A through W inclusive.")
@@ -276,8 +276,6 @@ function GridComponent({
   animateEaseType,
   subAnimateStart,
   subAnimateEnd,
-  handlePlayerMove,
-  stopMoving,
   playerClassName,
   lives,
   gems,
