@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import useSound from 'use-sound';
 import sound from "../../resources/static/sounds/sinister.mp3" 
 import "../css/style.css";
+=======
+
+
+>>>>>>> origin/main
 
 export default function Menu({ isActive }){
     
@@ -18,7 +23,7 @@ export default function Menu({ isActive }){
             <div on={playSound}>
                 <h1 className="menu-header">RegQuest</h1>
                 <div className="menu-container">
-                    <div>
+                    <div className="candle-bg">
                         <img src="images/animated-candle.gif"></img>
                     </div>
                     <div className="btn-container">
@@ -31,7 +36,7 @@ export default function Menu({ isActive }){
                         </Link>
                         <button className="menu-btn" >Quit</button>
                     </div>
-                    <div>
+                    <div className="candle-bg">
                         <img src="images/animated-candle.gif"></img>
                     </div>
                 </div>

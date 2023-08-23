@@ -45,59 +45,63 @@ export default function Form() {
 
 
     return (
-        <><form onSubmit={handleSubmit}>
-            <div className="backgroundForm">
+        <div className="form-container">
+            <h3>Add new trap:</h3>
+            <form onSubmit={handleSubmit}>
+                    <label for="name">Trap name: </label>
+                    <input
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        name="name"
+                        id="name"
+                        type="text"
+                        placeholder="Add a trap name..."
+                    ></input>
 
-                <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    name="name"
-                    id="name"
-                    type="text"
-                    placeholder="Trap name.."
-                ></input>
+                    <label for="description">Description: </label>
+                    <input
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        name="description"
+                        id="description"
+                        type="text"
+                        placeholder="Add a description..."
+                    ></input>
 
-                <input
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    name="description"
-                    id="description"
-                    type="text"
-                    placeholder="description"
-                ></input>
+                    <label for="matchWords">Matching Words: </label>
+                    <input
+                        value={matchWords}
+                        onChange={(e) => setMatchWords(e.target.value.split(","))}
+                        name="matchWords"
+                        id="matchWords"
+                        type="text"
+                        placeholder="Add matching words..."
+                    ></input>
 
-                <input
-                    value={matchWords}
-                    onChange={(e) => setMatchWords(e.target.value.split(","))}
-                    name="matchWords"
-                    id="matchWords"
-                    type="text"
-                    placeholder="matchWords"
-                ></input>
+                    <label for="exclusionWords">Exclusion Words: </label>
+                    <input
+                        value={exclusionWords}
+                        onChange={(e) => setExclusionWords(e.target.value.split(","))}
+                        name="exclusionWords"
+                        id="exclusionWords"
+                        type="text"
+                        placeholder="Add exclusion words..."
+                    ></input>
 
-                <input
-                    value={exclusionWords}
-                    onChange={(e) => setExclusionWords(e.target.value.split(","))}
-                    name="exclusionWords"
-                    id="exclusionWords"
-                    type="text"
-                    placeholder="exclusionWords"
-                ></input>
-
-                <input
-                    value={hint}
-                    onChange={(e) => setHint(e.target.value)}
-                    name="hint"
-                    id="hint"
-                    type="text"
-                    placeholder="hint"
-                ></input>
+                    <label for="hint">Hint: </label>
+                    <input
+                        value={hint}
+                        onChange={(e) => setHint(e.target.value)}
+                        name="hint"
+                        id="hint"
+                        type="text"
+                        placeholder="Add a hint..."
+                    ></input>
 
 
-            <button type="submit">Submit Trap</button>
+                    <button type="submit">Submit Trap</button>
+                </form>
             </div>
-            </form>
-        </>
     )
 
 

@@ -69,14 +69,11 @@ public class QuestionRestController {
 
     @PutMapping("/api/questions/{question_id}")
     public EntityModel<Question> updateQuestion(
-            @PathVariable final long question_id, // the name of the parameter (organicDog_id) must match
-                                                    // "{organicDog_id}" in
-                                                    // the line above
+            @PathVariable final long question_id, 
             @RequestBody final Question question) {
-        // Update the organicDog if that is the right thing to do
+        
         final Question databaseQuestion = questionService.updateQuestion(question, question_id);
 
-        // Return the modified database organicDog
         return EntityModel.of(databaseQuestion,
                 linkTo(methodOn(QuestionRestController.class).getQuestion(question.getQuestionId())).withSelfRel());
     }
