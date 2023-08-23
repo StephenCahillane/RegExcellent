@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Animate, AnimateKeyframes } from "react-simple-animate";
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Question from './Question'
 import HUD from './hud.jsx';
 import Parser from 'html-react-parser';
+import useInterval from "./UseInterval";
 
 export default function Sliding() {
   const [data, setData] = useState([[]]);
@@ -21,9 +22,11 @@ export default function Sliding() {
   const [gems, setGems] = useState(0);
   const [playerClassName, setPlayerClassName] = useState("player-sprite-sheet pixel-art face-right");
   const [playerFacing, setPlayerFacing] = useState("");
+  const [isMoving, setIsMoving] = useState(false);
+  const [moveInterval, setMoveInterval] = useState(undefined);
 
   //Animation states
-  const [animate, setAnimate] = useState(true);
+  const [animate, setAnimate] = useState(false);
   const [animateStart, setAnimateStart] = useState({});
   const [animateEnd, setAnimateEnd] = useState({});
   const [subAnimateStart, setSubAnimateStart] = useState({});
@@ -32,30 +35,31 @@ export default function Sliding() {
   const [onTrapSpace, setOnTrapSpace] = useState(false);
   const [animateDuration, setAnimateDuration] = useState(2);
   const [animateEaseType, setAnimateEaseType] = useState("ease-in-out");
-  const [animationCallback, setAnimationCallback] = useState(() => () => { });
-  const navigate = useNavigate();
+  const [animationCallback, setAnimationCallback] = useState(() => () => {});
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (playerCol % 3 == 0 && playerCol != 0) {
-      setTrapID((playerCol / 3) - 1)
+      setTrapID(playerCol / 3 - 1);
       setOnTrapSpace(true);
       setTutorial(true);
     } else {
-      setTrapID(undefined)
+      setTrapID(undefined);
       setOnTrapSpace(false);
     }
+  }, [playerCol]);
 
-    if(lives < 1){
-      if(confirm("You've run out of lives! Would you like to retry your quest?")){
+  useEffect(() => {
+    if (lives < 1) {
+      if (confirm("You've run out of lives! Would you like to retry your quest?")) {
         setPlayerCol(0);
         setLives(3);
       } else {
         navigate("/");
       }
     }
-  }, [playerCol, lives]
-  )
+  }, [lives]);
 
   const forward = () => {
     setAnimate(true);
@@ -70,7 +74,7 @@ export default function Sliding() {
       //setLeft((col) => col + 1);
       setPlayerCol((col) => col + 1);
       setAnimate(false);
-      setAnimationCallback(() => () => { });
+      setAnimationCallback(() => () => {});
       setAnimateDuration(0.0);
     });
   };
@@ -89,7 +93,7 @@ export default function Sliding() {
       // setLeft((col) => col - 1);
       setPlayerCol((col) => col - 1);
       setAnimate(false);
-      setAnimationCallback(() => () => { });
+      setAnimationCallback(() => () => {});
       setAnimateDuration(0.0);
     });
   };
@@ -102,14 +106,23 @@ export default function Sliding() {
       return { row: row, col: col, trap: trap };
     }
 
-    setData(
-      new Array(1)
-        .fill(undefined)
-        .map((_, row) =>
-          new Array(31).fill(undefined).map((_, col) => cell(row, col))
-        )
-    );
+    setData(new Array(1).fill(undefined).map((_, row) => new Array(31).fill(undefined).map((_, col) => cell(row, col))));
   }, [rows, columns]);
+
+  useInterval(() => {
+    if(animate) return;
+    if(isMoving){
+      if (playerFacing === "right" && playerCol < columns && !onTrapSpace) {
+        forward();
+        console.log("moving forward");
+      }
+
+      if (playerFacing === "left" && playerCol > 0 && !onTrapSpace) {
+        backward();
+        console.log("moving backward");
+      }
+    }
+  }, 100)
 
   useEffect(() => {
     if (playerFacing === "left") {
@@ -117,12 +130,12 @@ export default function Sliding() {
     } else {
       setPlayerClassName("player-sprite-sheet pixel-art face-right");
     }
-  }, [playerFacing]);
+  }, [playerFacing])
 
   const handlePlayerMove = (e) => {
     if (e.key === "ArrowRight" && playerCol < columns && !onTrapSpace) {
       setPlayerFacing("right");
-      forward();
+      setIsMoving(true);
 
       //Check if camera needs to move forward
       if (playerCol == left + width - 1) {
@@ -130,18 +143,23 @@ export default function Sliding() {
       }
     }
 
-    if (e.key === "ArrowLeft" && playerCol > 1 && !onTrapSpace) {
+    if (e.key === "ArrowLeft" && playerCol > 0 && !onTrapSpace) {
       setPlayerFacing("left");
-      backward();
+      setIsMoving(true);
 
       //Check if camera needs to move backward
       if (playerCol <= left) {
         setLeft(playerCol - width);
       }
     }
-  }
+  };
+
+  const stopMoving = (e) => {
+    setIsMoving(false);
+  };
 
   const [tutorial, setTutorial] = useState(true);
+
   const [tutorialText, setTutorialText] = useState("Welcome to RegQuest, the ultimate adventure where you'll embark on a journey through tutorials and cunning traps to hone your regex matching skills. Your epic quest into the world of regular expressions starts here, and here's the twist: you'll need to use regular expressions to match the passwords that operate each trap. This means that not only will you learn about regular expressions, but you'll also put your knowledge to the test by crafting regex patterns to overcome obstacles and unlock your path to victory. Are you ready to embrace the challenge and emerge victorious?");
 
   const handleTutorial = () => {
@@ -152,9 +170,9 @@ export default function Sliding() {
 
   const handleAnswerChecked = (isMatching) => {
     setAnswerMatched(isMatching);
-  }
+  };
 
- 
+
   const renderTutorialContent = () => {
     switch (trapID) {
       case 0:
@@ -193,10 +211,6 @@ export default function Sliding() {
     }
   };
 
-  
-
-
-
   useEffect(() => {
     renderTutorialContent();
     
@@ -205,10 +219,7 @@ export default function Sliding() {
 
   return (
     <div>
-
-
-      <div onKeyDown={handlePlayerMove} tabIndex={0}>
-
+      <div onKeyDown={handlePlayerMove} onKeyUp={stopMoving} tabIndex={0}>
         <Animate
           play={animate}
           duration={animateDuration}
@@ -219,7 +230,6 @@ export default function Sliding() {
           onComplete={animationCallback}
         >
           <GridComponent
-
             data={data}
             bottom={bottom}
             left={left}
@@ -236,7 +246,8 @@ export default function Sliding() {
             playerClassName={playerClassName}
             lives={lives}
             gems={gems}
-            />
+          />
+
 
           {tutorial && (<div className="tutorialBox">
             <p className="tutorialText">
@@ -247,7 +258,7 @@ export default function Sliding() {
         </Animate>
       </div>
       <br></br>
-      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID} lives={lives} setLives={setLives} gems={gems} setGems={setGems} playerCol = {playerCol}/>
+      <Question setOnTrapSpace={setOnTrapSpace} onAnswerChecked={handleAnswerChecked} index={trapID} lives={lives} setLives={setLives} gems={gems} setGems={setGems} playerCol={playerCol}/>
     </div>
   );
 }
@@ -266,17 +277,18 @@ function GridComponent({
   subAnimateStart,
   subAnimateEnd,
   handlePlayerMove,
+  stopMoving,
   playerClassName,
   lives,
-  gems
+  gems,
 }) {
   return (
-    <div onKeyDown={handlePlayerMove} tabIndex={0}>
+    <div tabIndex={0}>
       <table border={0}>
         <tbody>
           {data.slice(bottom, bottom + height).map((dataRow, rowIdx) => (
             <tr key={`Row${1 * bottom + rowIdx}`}>
-            <HUD lives={lives} gems={gems}/>
+            <HUD lives={lives} gems={gems} />
               {dataRow.slice(left, left + width).map((cell, columnIdx) => (
                 <td key={`Col${1 * left + columnIdx}`}>
                   <CellComponent
@@ -300,42 +312,18 @@ function GridComponent({
   );
 }
 
-
-function CellComponent({
-  cell,
-  playerRow,
-  playerCol,
-  animate,
-  animateDuration,
-  animateEaseType,
-  subAnimateStart,
-  subAnimateEnd,
-  playerClassName,
-}) {
+function CellComponent({ cell, playerRow, playerCol, animate, animateDuration, animateEaseType, subAnimateStart, subAnimateEnd, playerClassName }) {
   if (cell.row == playerRow && cell.col == playerCol)
     return (
-      <Animate
-        play={animate}
-        duration={animateDuration}
-        start={subAnimateStart}
-        end={subAnimateEnd}
-        complete={subAnimateStart}
-        easeType={animateEaseType}
-      >
+      <Animate play={animate} duration={animateDuration} start={subAnimateStart} end={subAnimateEnd} complete={subAnimateStart} easeType={animateEaseType}>
         <div className="player">
-          {/* <PlayerImage src="images/player-sprite-sheet.png" playerFacing={playerFacing}></PlayerImage> */}
           <img className={playerClassName} src="images/knight-sprite.png"></img>
         </div>
       </Animate>
-
     );
   else if (cell.trap) {
-    return (
-      <Trap cell={cell} />
-    );
-  }
-
-  else {
+    return <Trap cell={cell} />;
+  } else {
     return <div></div>;
   }
 }
@@ -348,9 +336,7 @@ function Trap({ cell }) {
       trapImage = <img src="css/images/spike trap.png" alt="Trap 1" />;
       break;
     case 2:
-      trapImage = (
-        <img src="css/images/clipart-alligator-dancing-16.png" alt="Trap 2" />
-      );
+      trapImage = <img src="css/images/clipart-alligator-dancing-16.png" alt="Trap 2" />;
       break;
     case 3:
       trapImage = <img src="css/images/lockeddoor.png" alt="Trap 3" />;
@@ -368,30 +354,18 @@ function Trap({ cell }) {
       trapImage = <img src="css/images/bats.png" alt="Trap 7" />;
       break;
     case 8:
-      trapImage = (
-        <img
-          src="css/images/bf5296e44b0cc8663c71fee6d67aa879.png"
-          alt="Trap 8"
-        />
-      );
+      trapImage = <img src="css/images/bf5296e44b0cc8663c71fee6d67aa879.png" alt="Trap 8" />;
       break;
     case 9:
-      trapImage = (
-        <img src="css/images/Ancient_tablet_lost_city.png" alt="Trap 9" />
-      );
+      trapImage = <img src="css/images/Ancient_tablet_lost_city.png" alt="Trap 9" />;
       break;
     case 10:
       trapImage = <img src="css/images/final door.png" alt="Trap 10" />;
       break;
   }
 
-  return (
-    <div className="trap">
-      {trapImage}
-    </div>
-  );
-};
-
+  return <div className="trap">{trapImage}</div>;
+}
 
 function Knob({ getter, setter, text }) {
   return (
