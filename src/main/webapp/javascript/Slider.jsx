@@ -40,7 +40,7 @@ export default function Sliding() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (playerCol % 6 == 0 && playerCol != 0 && playerCol != left) {
+    if (playerCol % 6 === 0 && playerCol != 0 && playerCol != left) {
       setTrapID(playerCol / 6 - 1);
       setOnTrapSpace(true);
       setTutorial(true);
