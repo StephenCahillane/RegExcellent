@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 
-export default function Question({ index, setOnTrapSpace, onAnswerChecked }) {
+export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives, setLives, gems, setGems, playerCol}) {
 
     const [answer, setAnswer] = useState("");
     const [entityData, setEntityData] = useState([]);
     const endpoint = "/api/questions";
-    
+    const [isMatching, setIsMatching] = useState(undefined);
+
     useEffect(() => {
         // Define an async function to fetch the data
         const fetchData = async () => {
@@ -30,28 +31,38 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked }) {
         fetchData();
     }, []);
     
-    
-    
+
+    useEffect(() => {
+    if (index == undefined){
+        setIsMatching(false);
+    }
+}, [playerCol])
+
+
     const handleSubmit = () => {
         const candidate = new RegExp(answer);
-        console.log(candidate);
+        
     
         const passwords = entityData[index].matchWords;
         console.log(JSON.stringify(entityData[index]));
     
-    
         
-        console.log(passwords);
-    
-        const isMatching = passwords.every((password) => candidate.test(password));
-        console.log(isMatching);
-        if(isMatching){
+        
+        const passwordMatches = passwords.every((password) => candidate.test(password))
+        setIsMatching(passwordMatches)
+        
+        if(passwordMatches){
             setOnTrapSpace(false);
+            setGems(gems + 10);
+            
+
+        } else if(!passwordMatches){
+            setLives(lives - 1);
         }
-        onAnswerChecked(isMatching)
+        onAnswerChecked(passwordMatches)
+
     
     }
-    
     
     return (
         <><div className='backgroundBottom'>
@@ -64,7 +75,8 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked }) {
                 
                 <div>
                     <input name="answer" type="text" placeholder="Answer" onChange={(event) => setAnswer(event.target.value)}></input>
-                    <button onClick={handleSubmit}>Submit Answer</button>
+                    <button className={isMatching ? "matching" : "nonmatching"} onClick={handleSubmit}>Submit Answer</button>
+                    <h1>{JSON.stringify(index)}</h1>
                 </div>
                 {/* <button onClick={next}>Next</button> */}
                 

@@ -217,10 +217,7 @@ table {
   margin-top: 20px;
   border: solid black 5px;
 }
-/* .border{
-  background-image: url("border.png");
-  background-size: cover;
-} */
+
 .scroll {
   height: 300px;
   background-image: url(scroll4.png);
@@ -234,6 +231,29 @@ table {
   display: flex;
   flex-direction: column;
   margin: auto;
+}
+
+.hud{
+  width: 10em;
+  max-height: 6em;
+  padding: 0.5em;
+  border-radius: 10px;
+  margin-left: 5%;
+  font-family: 'Bungee Spice', cursive;
+}
+
+.hud h4, h5{
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
+}
+
+.lives{
+  display: flex;
+}
+
+.lives img{
+  max-width: 3em;
+  max-height: 3em;
 }
 
 #loading{
@@ -253,29 +273,18 @@ table {
   color: whitesmoke;
 }
 
-.scroll button{
-  max-width: 100px;
-  max-height: 40px;
-  background-color: red;
-  font-family: fantasy;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-}
+
 
 
 .scroll p {
   width: 60%;
   align-items: center;
-  /* margin: auto; */
-  /* margin-top: 10%; */
-  /* margin-top: 10%; */
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   font-family: fantasy;
   font-size: 15px;
-  /* height: 100%; */
+  
 }
 .scroll h3 {
   /* padding: 20px; */
@@ -420,3 +429,26 @@ table {
   color: black;
   text-align: center;
 }
+
+code {
+  color: red;
+  font-weight: bolder;
+  font-size: 17px;
+  font-family: monospace;
+}
+
+.matching {
+    max-width: 100px;
+    max-height: 40px;
+    background-color: green;
+    font-family: fantasy;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+  }
+  
+
+.nonmatching {
+  background-color: red;
+}
+
