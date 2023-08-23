@@ -49,6 +49,8 @@ export default function Sliding() {
     }
   }, [playerCol]);
 
+
+  //If the user runs out of lives, provide the option to give up gems for more lives
   useEffect(() => {
     if (lives < 1) {
       if(gems >= 10){
@@ -100,7 +102,6 @@ export default function Sliding() {
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(20%)" });
     setSubAnimateStart({ transform: "translateX(0%)" });
-
     setSubAnimateEnd({ transform: "translateX(-55%)" });
 
     setAnimateDuration(0.5);
