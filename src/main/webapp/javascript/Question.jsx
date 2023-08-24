@@ -7,6 +7,7 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
     const [entityData, setEntityData] = useState([]);
     const endpoint = "/api/questions";
     const [isMatching, setIsMatching] = useState(undefined);
+    const [candidate, setCandidate] = useState(new RegExp(answer));
 
     useEffect(() => {
         // Define an async function to fetch the data
@@ -40,13 +41,10 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
 
 
     const handleSubmit = () => {
-        const candidate = new RegExp(answer);
-        
+        setCandidate(new RegExp(answer));
         
         const passwords = entityData[index].matchWords;
         console.log(JSON.stringify(entityData[index]));
-        
-        
         
         const passwordMatches = passwords.every((password) => candidate.test(password))
         setIsMatching(passwordMatches)
@@ -72,6 +70,12 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
                 <h3>{entityData[index]?.name}</h3>
                 <p>{entityData[index]?.description}</p>
                 <p>{entityData[index]?.hint}</p>
+
+                <div>
+                    {entityData[index]?.matchWords?.map((matchWord) => {
+                        <WordMatcher string={matchWord} answer={answer} candidate={candidate} setCandidate={setCandidate}/>
+                    })}
+                </div>
                 
                 <div>
                     <input name="answer" type="text" placeholder="Answer" onChange={(event) => setAnswer(event.target.value)}></input>
@@ -84,4 +88,25 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
             </div>
         </>
     )
+    }
+
+    function WordMatcher({string, candidate, setCandidate, answer}){
+        const [match, setMatch] = useState(string.match(candidate)[0]);
+        const [matchLength, setMatchLength] = useState(match.length);
+        const [index, setIndex] = useState(match.index);
+
+        useEffect(() => {
+            setCandidate(new RegExp(answer));
+            setMatch(string.match(candidate)[0]);
+            setMatchLength(match.length);
+            setIndex(match.index);
+            console.log(candidate);
+            console.log(match);
+        }, [answer])
+
+        return (
+            <div>
+                <p><span>{string.substring(0, index)}</span><span className="matching-text">{string.substring(index, index+matchLength)}</span><span>{string.substring(index+matchLength)}</span></p>
+            </div>
+        );
     }

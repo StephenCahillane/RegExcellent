@@ -445,6 +445,10 @@ code {
     outline: none;
     border: none;
   }
+
+  .matching-text{
+    color: green;
+  }
   
 
   .nonmatching {
