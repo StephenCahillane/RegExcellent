@@ -7,7 +7,6 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
     const [entityData, setEntityData] = useState([]);
     const endpoint = "/api/questions";
     const [isMatching, setIsMatching] = useState(undefined);
-    const [candidate, setCandidate] = useState(new RegExp(answer));
 
     useEffect(() => {
         // Define an async function to fetch the data
@@ -41,7 +40,7 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
 
 
     const handleSubmit = () => {
-        setCandidate(new RegExp(answer));
+        const candidate = new RegExp(answer);
         
         const passwords = entityData[index].matchWords;
         console.log(JSON.stringify(entityData[index]));
@@ -92,12 +91,17 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
         const [match, setMatch] = useState(undefined);
         const index = match?.index || 0;
         const matchLength = match?.length || 0;
+        let candidate;
 
         useEffect(() => {
-            const candidate = new RegExp(answer);
-            const perhapsMatch = matchWord.match(candidate);
-            if(perhapsMatch) setMatch(matchWord.match(candidate)[0]);
-            else setMatch({index:0, length:0})
+            try {
+                candidate = new RegExp(answer);
+                const perhapsMatch = matchWord.match(candidate);
+                if(perhapsMatch) setMatch(matchWord.match(candidate)[0]);
+                else setMatch({index:0, length:0})
+            } catch (error) {
+                console.log("error");
+            }
             console.log(candidate);
             console.log(match);
         }, [answer, matchWord])
