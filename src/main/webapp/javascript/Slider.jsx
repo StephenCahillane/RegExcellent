@@ -9,7 +9,7 @@ import useInterval from "./UseInterval";
 export default function Sliding() {
   const [data, setData] = useState([[]]);
   const [rows, setRows] = useState(10);
-  const [columns, setColumns] = useState(35);
+  const [columns, setColumns] = useState(65);
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
   const [height, setHeight] = useState(5);
@@ -122,7 +122,7 @@ export default function Sliding() {
       return { row: row, col: col, trap: trap };
     }
 
-    setData(new Array(1).fill(undefined).map((_, row) => new Array(31).fill(undefined).map((_, col) => cell(row, col))));
+    setData(new Array(1).fill(undefined).map((_, row) => new Array(66).fill(undefined).map((_, col) => cell(row, col))));
   }, [rows, columns]);
 
   useInterval(() => {
