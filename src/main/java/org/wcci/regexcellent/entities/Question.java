@@ -28,15 +28,53 @@ public class Question {
 
     @Column(length=65535)
     private String description;
+    @Column(length=65535)
+    private String description2;
 
+
+    public String getDescription2() {
+        return description2;
+    }
+
+    public void setDescription2(String description2) {
+        this.description2 = description2;
+    }
 
     @Column(length=65535)
     @Convert(converter = StringListConverter.class)
     private List<String> matchWords;
-    
+
+    @Column(length=65535)
+    @Convert(converter = StringListConverter.class)
+    private List<String> matchWords2;
+    @Column(length=65535)
+    @Convert(converter = StringListConverter.class)
+    public List<String> getMatchWords2() {
+        return matchWords2;
+    }
+
+    public void setMatchWords2(List<String> matchWords2) {
+        this.matchWords2 = matchWords2;
+    }
+
     @Convert(converter = StringListConverter.class)
     @Column(length=65535)
     private List<String> exclusionWords;
+    @Column(length=65535)
+    @Convert(converter = StringListConverter.class)
+    private List <String> exclusionWords2;
+
+
+
+
+    
+    public List<String> getExclusionWords2() {
+        return exclusionWords2;
+    }
+
+    public void setExclusionWords2(List<String> exclusionWords2) {
+        this.exclusionWords2 = exclusionWords2;
+    }
 
     private String hint;
 
