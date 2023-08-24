@@ -76,7 +76,6 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
                 <div>
                     <input name="answer" type="text" placeholder="Answer" onChange={(event) => setAnswer(event.target.value)}></input>
                     <button className={isMatching ? "matching" : "nonmatching"} onClick={handleSubmit}>Submit Answer</button>
-                    <h1>{JSON.stringify(index)}</h1>
                 </div>
                 {/* <button onClick={next}>Next</button> */}
                 
