@@ -72,8 +72,9 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
                 <p>{entityData[index]?.hint}</p>
 
                 <div>
-                    {entityData[index]?.matchWords?.map((matchWord) => {
-                        <WordMatcher string={matchWord} answer={answer} candidate={candidate} setCandidate={setCandidate}/>
+                    <code>{JSON.stringify(entityData[index]?.matchWords)}</code>
+                    {entityData[index]?.matchWords.map((matchWord) => {
+                        <WordMatcher key={matchWord} matchWord={matchWord} answer={answer} candidate={candidate} setCandidate={setCandidate}/>
                     })}
                 </div>
                 
@@ -90,23 +91,21 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
     )
     }
 
-    function WordMatcher({string, candidate, setCandidate, answer}){
-        const [match, setMatch] = useState(string.match(candidate)[0]);
-        const [matchLength, setMatchLength] = useState(match.length);
-        const [index, setIndex] = useState(match.index);
+    function WordMatcher({matchWord, candidate, setCandidate, answer}){
+        const [match, setMatch] = useState(undefined);
+        const index = match?.index || 0;
+        const matchLength = match?.length || 0;
 
         useEffect(() => {
             setCandidate(new RegExp(answer));
-            setMatch(string.match(candidate)[0]);
-            setMatchLength(match.length);
-            setIndex(match.index);
+            setMatch(matchWord.match(candidate)[0]);
             console.log(candidate);
             console.log(match);
-        }, [answer])
+        }, [answer, matchWord])
 
         return (
             <div>
-                <p><span>{string.substring(0, index)}</span><span className="matching-text">{string.substring(index, index+matchLength)}</span><span>{string.substring(index+matchLength)}</span></p>
+                <p><span>{matchWord.substring(0, index)}</span><span className="matching-text">{matchWord.substring(index, index+matchLength)}</span><span>{matchWord.substring(index+matchLength)}</span></p>
             </div>
         );
     }
