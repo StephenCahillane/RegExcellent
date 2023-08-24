@@ -42,11 +42,8 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
     const handleSubmit = () => {
         const candidate = new RegExp(answer);
         
-        
         const passwords = entityData[index].matchWords;
         console.log(JSON.stringify(entityData[index]));
-        
-        
         
         const passwordMatches = passwords.every((password) => candidate.test(password))
         setIsMatching(passwordMatches)
@@ -60,8 +57,6 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
             setLives(lives - 1);
         }
         onAnswerChecked(passwordMatches)
-
-    
     }
     
     return (
@@ -72,11 +67,16 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
                 <h3>{entityData[index]?.name}</h3>
                 <p>{entityData[index]?.description}</p>
                 <p>{entityData[index]?.hint}</p>
+
+                <div>
+                    {entityData[index]?.matchWords.map((matchWord) => 
+                        <WordMatcher key={matchWord} matchWord={matchWord} answer={answer} />
+                    )}
+                </div>
                 
                 <div>
                     <input name="answer" type="text" placeholder="Answer" onChange={(event) => setAnswer(event.target.value)}></input>
                     <button className={isMatching ? "matching" : "nonmatching"} onClick={handleSubmit}>Submit Answer</button>
-                    <h1>{JSON.stringify(index)}</h1>
                 </div>
                 {/* <button onClick={next}>Next</button> */}
                 
@@ -85,4 +85,30 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
             </div>
         </>
     )
+    }
+
+    function WordMatcher({matchWord, answer}){
+        const [match, setMatch] = useState(undefined);
+        const index = match?.index || 0;
+        const matchLength = match?.length || 0;
+        let candidate;
+
+        useEffect(() => {
+            try {
+                candidate = new RegExp(answer);
+                const perhapsMatch = matchWord.match(candidate);
+                if(perhapsMatch) setMatch(matchWord.match(candidate)[0]);
+                else setMatch({index:0, length:0})
+            } catch (error) {
+                console.log("error");
+            }
+            console.log(candidate);
+            console.log(match);
+        }, [answer, matchWord])
+
+        return (
+            <div>
+                <p><span>{matchWord.substring(0, index)}</span><span className="matching-text">{matchWord.substring(index, index+matchLength)}</span><span>{matchWord.substring(index+matchLength)}</span></p>
+            </div>
+        );
     }

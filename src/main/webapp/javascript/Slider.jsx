@@ -130,12 +130,10 @@ export default function Sliding() {
     if(isMoving){
       if (playerFacing === "right" && playerCol < columns && !onTrapSpace) {
         forward();
-        console.log("moving forward");
       }
 
       if (playerFacing === "left" && playerCol > 0 && !onTrapSpace) {
         backward();
-        console.log("moving backward");
       }
     }
   }, 100)

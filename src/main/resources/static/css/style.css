@@ -435,30 +435,38 @@ code {
 }
 
 .matching {
-    max-width: 100px;
-    height: 50px;
+    height: 2em;
     background-color: green;
-    font-family: fantasy;
+    font-family: 'Luminari', fantasy;
+    font-size: 0.85em;
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;
+    outline: none;
+    border: none;
+  }
+
+  .matching-text{
+    color: green;
   }
   
 
   .nonmatching {
-    max-width: 100px;
-    height: 50px;
+    height: 2em;
     background-color: red;
-    font-family: fantasy;
+    font-family: 'Luminari', fantasy;
+    font-size: 0.85em;
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;
+    outline: none;
+    border: none;
   }
 
   .backgroundBottom input {
-    height: 50px;
-    font-family: fantasy;
-    font-size: 20px;
+    height: 2em;
+    font-family: 'Luminari', fantasy;
+    font-size: 0.85em;
     outline: none;
     border: none;
   }
