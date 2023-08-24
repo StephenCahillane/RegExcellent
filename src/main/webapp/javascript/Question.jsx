@@ -58,8 +58,6 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
             setLives(lives - 1);
         }
         onAnswerChecked(passwordMatches)
-
-    
     }
     
     return (
@@ -72,10 +70,9 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
                 <p>{entityData[index]?.hint}</p>
 
                 <div>
-                    <code>{JSON.stringify(entityData[index]?.matchWords)}</code>
-                    {entityData[index]?.matchWords.map((matchWord) => {
+                    {entityData[index]?.matchWords.map((matchWord) => 
                         <WordMatcher key={matchWord} matchWord={matchWord} answer={answer} candidate={candidate} setCandidate={setCandidate}/>
-                    })}
+                    )}
                 </div>
                 
                 <div>
