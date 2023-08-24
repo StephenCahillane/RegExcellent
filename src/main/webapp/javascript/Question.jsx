@@ -71,7 +71,7 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
 
                 <div>
                     {entityData[index]?.matchWords.map((matchWord) => 
-                        <WordMatcher key={matchWord} matchWord={matchWord} answer={answer} candidate={candidate} setCandidate={setCandidate}/>
+                        <WordMatcher key={matchWord} matchWord={matchWord} answer={answer} />
                     )}
                 </div>
                 
@@ -88,19 +88,19 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
     )
     }
 
-    function WordMatcher({matchWord, candidate, setCandidate, answer}){
+    function WordMatcher({matchWord, answer}){
         const [match, setMatch] = useState(undefined);
         const index = match?.index || 0;
         const matchLength = match?.length || 0;
 
         useEffect(() => {
-            setCandidate(new RegExp(answer));
+            const candidate = new RegExp(answer);
             const perhapsMatch = matchWord.match(candidate);
             if(perhapsMatch) setMatch(matchWord.match(candidate)[0]);
             else setMatch({index:0, length:0})
             console.log(candidate);
             console.log(match);
-        }, [answer, matchWord, candidate])
+        }, [answer, matchWord])
 
         return (
             <div>
