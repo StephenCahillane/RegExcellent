@@ -23,7 +23,6 @@ export default function Sliding() {
   const [playerClassName, setPlayerClassName] = useState("player-sprite-sheet pixel-art face-right");
   const [playerFacing, setPlayerFacing] = useState("");
   const [isMoving, setIsMoving] = useState(false);
-  const [moveInterval, setMoveInterval] = useState(undefined);
 
   //Animation states
   const [animate, setAnimate] = useState(false);
@@ -50,9 +49,27 @@ export default function Sliding() {
     }
   }, [playerCol]);
 
+
+  //If the user runs out of lives, provide the option to give up gems for more lives
   useEffect(() => {
     if (lives < 1) {
-      if (confirm("You've run out of lives! Would you like to retry your quest?")) {
+      if(gems >= 10){
+        if(confirm("You've run out of lives but you have some gems to spare! Would you like to exchange them for more lives?")){
+          if(gems >= 30){
+            setLives(3);
+            setGems(gems - 30);
+          } else if (gems >= 20){
+            setLives(2);
+            setGems(gems - 20);
+          } else {
+            setLives(1);
+            setGems(gems - 10);
+          }
+        } else {
+          setPlayerCol(0);
+          setLives(3);
+        }
+      } else if (confirm("You've run out of lives! Would you like to retry your quest?")) {
         setPlayerCol(0);
         setLives(3);
       } else {
@@ -85,7 +102,6 @@ export default function Sliding() {
     // setAnimateStart({ transform: "translateX(0%)" });
     // setAnimateEnd({ transform: "translateX(20%)" });
     setSubAnimateStart({ transform: "translateX(0%)" });
-
     setSubAnimateEnd({ transform: "translateX(-55%)" });
 
     setAnimateDuration(0.5);
