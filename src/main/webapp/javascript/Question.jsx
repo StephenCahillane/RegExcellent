@@ -95,10 +95,12 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
 
         useEffect(() => {
             setCandidate(new RegExp(answer));
-            setMatch(matchWord.match(candidate)[0]);
+            const perhapsMatch = matchWord.match(candidate);
+            if(perhapsMatch) setMatch(matchWord.match(candidate)[0]);
+            else setMatch({index:0, length:0})
             console.log(candidate);
             console.log(match);
-        }, [answer, matchWord])
+        }, [answer, matchWord, candidate])
 
         return (
             <div>
