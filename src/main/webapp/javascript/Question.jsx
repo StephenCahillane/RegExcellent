@@ -42,10 +42,10 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
     const handleSubmit = () => {
         const candidate = new RegExp(answer);
         
-    
+        
         const passwords = entityData[index].matchWords;
         console.log(JSON.stringify(entityData[index]));
-    
+        
         
         
         const passwordMatches = passwords.every((password) => candidate.test(password))
