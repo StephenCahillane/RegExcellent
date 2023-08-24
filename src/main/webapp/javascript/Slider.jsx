@@ -172,7 +172,7 @@ export default function Sliding() {
     setAnswerMatched(isMatching);
   };
 
-
+  
   const renderTutorialContent = () => {
     switch (trapID) {
       case 0:
