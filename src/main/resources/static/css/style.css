@@ -280,14 +280,14 @@ table {
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
-  font-family: fantasy;
-  font-size: 15px;
+  font-family: 'Luminari', fantasy;
+  font-size: 0.85em;
   
 }
 .scroll h3 {
   /* padding: 20px; */
   margin-top: 10px;
-  font-family: fantasy;
+  font-family: 'Luminari', fantasy;
 }
 :root {
   --pixel-size: 4;

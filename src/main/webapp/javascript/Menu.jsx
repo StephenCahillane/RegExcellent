@@ -17,7 +17,9 @@ export default function Menu({ isActive }){
                         <Link to="/Game" >
                             <button className="menu-btn" >Begin Quest</button>
                         </Link>
+                        <Link to="https://en.wikipedia.org/wiki/Regular_expression" target="_blank">
                             <button className="menu-btn" >What is a regular expression?</button>
+                        </Link>
                         <Link to="/About">
                             <button className="menu-btn" >About the Game</button>
                         </Link>
