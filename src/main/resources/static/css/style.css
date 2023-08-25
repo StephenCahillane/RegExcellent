@@ -448,6 +448,7 @@ code {
 
   .matching-text{
     color: green;
+    font-size: 1.5em;
   }
   
 
@@ -469,4 +470,9 @@ code {
     font-size: 0.85em;
     outline: none;
     border: none;
+  }
+
+  .matcher span {
+    font-size: 1.5em;
+    
   }
