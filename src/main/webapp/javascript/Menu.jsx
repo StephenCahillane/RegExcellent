@@ -23,7 +23,6 @@ export default function Menu({ isActive }){
                         <Link to="/About">
                             <button className="menu-btn" >About the Game</button>
                         </Link>
-                        <button className="menu-btn" >Quit</button>
                     </div>
                     <div className="candle-bg">
                         <img src="images/animated-candle.gif"></img>

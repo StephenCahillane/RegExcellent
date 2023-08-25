@@ -68,7 +68,7 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
                 <p>{entityData[index]?.description}</p>
                 <p>{entityData[index]?.hint}</p>
 
-                <div>
+                <div className="matchers-container">
                     {entityData[index]?.matchWords.map((matchWord) => 
                         <WordMatcher key={matchWord} matchWord={matchWord} answer={answer} />
                     )}
@@ -107,7 +107,7 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
         }, [answer, matchWord])
 
         return (
-            <div>
+            <div className="matcher-container">
                 <p className='matcher'><span>{matchWord.substring(0, index)}</span><span className="matching-text">{matchWord.substring(index, index+matchLength)}</span><span>{matchWord.substring(index+matchLength)}</span></p>
             </div>
         );

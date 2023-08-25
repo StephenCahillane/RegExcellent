@@ -35,7 +35,6 @@ function Layout() {
                     <Link to="/About">About</Link>
                     <Link to="/Game">Game</Link>
                     <Link to="/Form">Form</Link>
-                    <Link to="/Question">Question</Link>
                 </nav>
                 <Menu isActive={menuIsActive} />
                 <Outlet />
@@ -54,7 +53,6 @@ function Main() {
                             <Route path="About" element={<About />} />
                             <Route path="Game" element={<Game />} />
                             <Route path="Form" element={<Form />} />
-                            <Route path="Question" element={<Question />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>

@@ -22,11 +22,8 @@ export default function Form() {
         const data = {
             name: name,
             description: description,
-            description2: description2,
             matchWords: matchWords,
-            matchWords2: matchWords2,
             exclusionWords: exclusionWords,
-            exclusionWords2: exclusionWords2,
             hint: hint,
         };
 
@@ -74,19 +71,6 @@ export default function Form() {
                     placeholder="Add a description..."
                 ></input>
 
-
-                <label for="description2">Description2: </label>
-                <input
-                    value={description2}
-                    onChange={(e) => setDescription2(e.target.value)}
-                    name="description2"
-                    id="description2"
-                    type="text"
-                    placeholder="Add a description2..."
-                ></input>
-
-
-
                 <label for="matchWords">Matching Words: </label>
                 <input
                     value={matchWords}
@@ -97,16 +81,6 @@ export default function Form() {
                     placeholder="Add matching words..."
                 ></input>
 
-                <label for="matchWords2">Matching Words2: </label>
-                <input
-                    value={matchWords2}
-                    onChange={(e) => setMatchWords2(e.target.value.split(","))}
-                    name="matchWords2"
-                    id="matchWords2"
-                    type="text"
-                    placeholder="Add matching words2..."
-                ></input>
-
                 <label for="exclusionWords">Exclusion Words: </label>
                 <input
                     value={exclusionWords}
@@ -115,15 +89,6 @@ export default function Form() {
                     id="exclusionWords"
                     type="text"
                     placeholder="Add exclusion words..."
-                ></input>
-
-                <input
-                    value={exclusionWords2}
-                    onChange={(e) => setExclusionWords2(e.target.value.split(","))}
-                    name="exclusionWords2"
-                    id="exclusionWords2"
-                    type="text"
-                    placeholder="Add exclusion words2..."
                 ></input>
 
                 <label for="hint">Hint: </label>
