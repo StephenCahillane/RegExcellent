@@ -108,7 +108,7 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
 
         return (
             <div>
-                <p><span>{matchWord.substring(0, index)}</span><span className="matching-text">{matchWord.substring(index, index+matchLength)}</span><span>{matchWord.substring(index+matchLength)}</span></p>
+                <p className='matcher'><span>{matchWord.substring(0, index)}</span><span className="matching-text">{matchWord.substring(index, index+matchLength)}</span><span>{matchWord.substring(index+matchLength)}</span></p>
             </div>
         );
     }
