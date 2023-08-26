@@ -71,6 +71,7 @@ export default function Sliding() {
         }
       } else if (confirm("You've run out of lives! Would you like to retry your quest?")) {
         setPlayerCol(0);
+        setLeft(0);
         setLives(3);
       } else {
         navigate("/");
