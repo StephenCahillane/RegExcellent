@@ -102,8 +102,6 @@ export default function Question({ index, setOnTrapSpace, onAnswerChecked, lives
             } catch (error) {
                 console.log("error");
             }
-            console.log(candidate);
-            console.log(match);
         }, [answer, matchWord])
 
         return (
